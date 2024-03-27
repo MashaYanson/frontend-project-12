@@ -4,7 +4,6 @@
   "description": "real-time приложение на React/Redux, с использованием AJAX, REST, websockets, React (с хуками) + Redux",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
     "build": "npm run build --prefix frontend",
     "start": "start-server -s ./frontend/build",
     "test": "echo \"Error: no test specified\" && exit 1",
