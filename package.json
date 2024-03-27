@@ -4,7 +4,11 @@
   "description": "real-time приложение на React/Redux, с использованием AJAX, REST, websockets, React (с хуками) + Redux",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "npm run build --prefix frontend",
+    "start": "start-server -s ./frontend/build",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "postinstall": "cd frontend && npm ci"
   },
   "repository": {
     "type": "git",
@@ -18,5 +22,7 @@
   "homepage": "https://github.com/MashaYanson/frontend-project-12#readme",
   "dependencies": {
     "@hexlet/chat-server": "^2.0.3"
-  }
+  },
+  "proxy": "http://localhost:5001"
 }
+ 
