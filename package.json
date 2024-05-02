@@ -23,7 +23,7 @@
   "dependencies": {
     "@hexlet/chat-server": "^2.0.3",
     "axios": "^1.6.8",
-    "lorem-ipsum": "^2.0.8",
+    "lorem-ipsum": "^2.0.8"
   },
   "proxy": "http://localhost:5001"
 }

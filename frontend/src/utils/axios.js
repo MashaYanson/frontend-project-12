@@ -7,8 +7,9 @@ const instance = axios.create({
 
 // Добавление interceptor для запросов
 instance.interceptors.request.use((config) => {
-  const token = localStorage.getItem('token');
-  if (token) {
+  const userData = localStorage.getItem('user_data');
+  if (userData) {
+    const { token } = JSON.parse(userData);
     // eslint-disable-next-line no-param-reassign
     config.headers.Authorization = `Bearer ${token}`;
   }

@@ -5,11 +5,14 @@ import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { Alert } from 'react-bootstrap';
 import { useState } from 'react';
+import { useDispatch } from 'react-redux';
 import routes from '../routes';
+import { addUser } from '../store/userSlice';
 
 const LoginForm = () => {
   const navigate = useNavigate();
   const [invalid, setInvalid] = useState(false);
+  const dipatch = useDispatch();
   const formik = useFormik({
     initialValues: {
       username: '',
@@ -20,8 +23,8 @@ const LoginForm = () => {
         .then((res) => {
           console.log(res);
           setInvalid(false);
-          const { token } = res.data;
-          localStorage.setItem('token', token);
+          localStorage.setItem('user_data', JSON.stringify(res.data));
+          dipatch(addUser(res.data));
           navigate(routes.chatPagePath());
         })
         .catch(() => {
