@@ -1,13 +1,38 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import instance from '../utils/axios';
+import { addAllMessages } from '../store/messageSlice';
 
-const chatWindow = ({ channel }) => {
+const ChatWindow = ({ channel }) => {
   const { name } = channel;
+  const [message, setMessage] = useState('');
+  const userName = useSelector((state) => state.user.username);
+  const dispatch = useDispatch();
+  const messages = useSelector((state) => state.messages.data[channel.id] || []);
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const newMessage = { body: message, channelId: channel.id, username: userName };
+    instance.post('/messages', newMessage).then(() => {
+      setMessage('');
+    });
+  };
+
+  useEffect(() => {
+    instance.get('/messages').then((response) => {
+      console.log(response.data);
+      dispatch(addAllMessages({ channelId: channel.id, messages: response.data }));
+    });
+  }, []);
   return (
     <div className="d-flex flex-column h-100">
       <div className="bg-light mb-4 p-3 shadow-sm small">
         {name}
       </div>
-      <div className="flex-grow-1">messages</div>
+      <div className="flex-grow-1" />
+      <ul>
+        {messages.map((msg) => (<li key={msg.id}>{msg.body}</li>))}
+      </ul>
       <div>
         <form noValidate="" className="py-1 border rounded-2">
           <div className="input-group has-validation">
@@ -16,9 +41,10 @@ const chatWindow = ({ channel }) => {
               aria-label="Новое сообщение"
               placeholder="Введите сообщение..."
               className="border-0 p-0 ps-2 form-control"
-              value=""
+              value={message}
+              onChange={(e) => setMessage(e.target.value)}
             />
-            <button type="submit" disabled="" className="btn btn-group-vertical">
+            <button type="submit" disabled={message.length < 1} className="btn btn-group-vertical" onClick={handleSubmit}>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 16 16"
@@ -40,4 +66,4 @@ const chatWindow = ({ channel }) => {
   );
 };
 
-export default chatWindow;
+export default ChatWindow;

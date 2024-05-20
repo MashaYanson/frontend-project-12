@@ -67,7 +67,7 @@ const ChatPage = () => {
 
               </Col>
               <Col sm={8} className="h-100">
-                <ChatWindow channel={selectedChannel} />
+                {selectedChannel && <ChatWindow channel={selectedChannel} />}
               </Col>
             </Row>
           </div>
