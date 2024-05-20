@@ -29,11 +29,10 @@ const ChatWindow = ({ channel }) => {
       <div className="bg-light mb-4 p-3 shadow-sm small">
         {name}
       </div>
-      <div className="flex-grow-1" />
-      <ul>
-        {messages.map((msg) => (<li key={msg.id}>{msg.body}</li>))}
-      </ul>
-      <div>
+      <div className="chat-messages overflow-auto px-5">
+        {messages.map((msg) => (<div key={msg.id}>{msg.body}</div>))}
+      </div>
+      <div className="mt-auto px-5 py-3">
         <form noValidate="" className="py-1 border rounded-2">
           <div className="input-group has-validation">
             <input
