@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import instance from '../utils/axios';
 import { addAllMessages } from '../store/messageSlice';
+import getMessageCountText from '../utils/getMessageCountText';
 
 const ChatWindow = ({ channel }) => {
   const { name } = channel;
@@ -27,10 +28,25 @@ const ChatWindow = ({ channel }) => {
   return (
     <div className="d-flex flex-column h-100">
       <div className="bg-light mb-4 p-3 shadow-sm small">
-        {name}
+        <b>
+          #
+          {name}
+        </b>
+        <div>
+          {messages.length}
+          {' '}
+          {getMessageCountText(messages.length)}
+        </div>
       </div>
       <div className="chat-messages overflow-auto px-5">
-        {messages.map((msg) => (<div key={msg.id}>{msg.body}</div>))}
+        {messages.map((msg) => (
+          <div key={msg.id}>
+            <b>{msg.username}</b>
+            :
+            {' '}
+            {msg.body}
+          </div>
+        ))}
       </div>
       <div className="mt-auto px-5 py-3">
         <form noValidate="" className="py-1 border rounded-2">
