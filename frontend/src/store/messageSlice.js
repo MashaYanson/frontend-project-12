@@ -19,10 +19,14 @@ export const messageSlice = createSlice({
       const { channelId, messages } = action.payload;
       state.data[channelId] = messages;
     },
+    deleteChannelMessages: (state, action) => {
+      // state.data[action.payload] = [];
+      delete state.data[action.payload];
+    },
   },
 });
 
 // Action creators are generated for each case reducer function
-export const { addMessage, addAllMessages } = messageSlice.actions;
+export const { addMessage, addAllMessages, deleteChannelMessages } = messageSlice.actions;
 
 export default messageSlice.reducer;

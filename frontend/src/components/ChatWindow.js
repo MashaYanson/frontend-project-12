@@ -29,7 +29,7 @@ const ChatWindow = ({ channel }) => {
     <div className="d-flex flex-column h-100">
       <div className="bg-light mb-4 p-3 shadow-sm small">
         <b>
-          #
+          {'# '}
           {name}
         </b>
         <div>

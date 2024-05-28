@@ -1,16 +1,29 @@
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import { useFormik } from 'formik';
+import * as Yup from 'yup';
 
-// import { useState } from 'react';
+const ModalAddChannel = ({
+  show, onHide, existingChannelNames, onSubmitChannel,
+}) => {
+  const AddChannelSchema = Yup.object().shape({
+    name: Yup.string()
+      .min(3, 'От 3 до 20 символов')
+      .max(50, 'От 3 до 20 символов')
+      .test('unique', 'Имя канала должно быть уникальным', (value) => !existingChannelNames.includes(value)),
 
-const ModalAddChannel = ({ show, onHide }) => {
+  });
   const formik = useFormik({
     initialValues: {
       name: '',
     },
+    validationSchema: AddChannelSchema,
+
     onSubmit: (values) => {
-      alert(JSON.stringify(values, null, 2));
+      onSubmitChannel(values, () => {
+        formik.handleReset();
+        onHide();
+      });
     },
   });
   return (
@@ -21,14 +34,18 @@ const ModalAddChannel = ({ show, onHide }) => {
         </Modal.Header>
         <Modal.Body>
           <div>
+            {/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
+            <label htmlFor="name">Имя:</label>
             <input
               name="name"
               id="name"
-              className="mb-2 form-control"
+              className={`mb-2 form-control ${formik.touched.name && formik.errors.name ? 'is-invalid' : ''}`}
               onChange={formik.handleChange}
               value={formik.values.name}
             />
-            <div className="invalid-feedback" />
+            {formik.touched.name && formik.errors.name ? (
+              <div className="invalid-feedback">{formik.errors.name}</div>
+            ) : null}
           </div>
         </Modal.Body>
         <Modal.Footer>
