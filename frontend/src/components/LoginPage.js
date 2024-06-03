@@ -1,13 +1,13 @@
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import { useFormik } from 'formik';
-import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { Alert } from 'react-bootstrap';
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import routes from '../routes';
 import { addUser } from '../store/userSlice';
+import instance from '../utils/axios';
 
 const LoginForm = () => {
   const navigate = useNavigate();
@@ -19,7 +19,7 @@ const LoginForm = () => {
       password: '',
     },
     onSubmit: async (values) => {
-      axios.post(routes.ApiloginPath(), values)
+      instance.post('/login', values)
         .then((res) => {
           console.log(res);
           setInvalid(false);

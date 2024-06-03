@@ -11,6 +11,7 @@ import LoginPage from './components/LoginPage';
 import NotFoundPage from './components/NotFoundPage';
 import routes from './routes';
 import { addUser } from './store/userSlice';
+import SignupForm from './components/SignupPage';
 
 const router = createBrowserRouter([
   {
@@ -24,6 +25,10 @@ const router = createBrowserRouter([
   {
     path: routes.notFoundPage(),
     element: <NotFoundPage />,
+  },
+  {
+    path: routes.signupPagePath(),
+    element: <SignupForm />,
   },
 ]);
 

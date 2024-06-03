@@ -9,7 +9,7 @@ import Dropdown from 'react-bootstrap/Dropdown';
 import Button from 'react-bootstrap/Button';
 import instance from '../utils/axios';
 import {
-  addChannel, removeChannel, setChannel, updateChannels,
+  addChannel, editChannel, removeChannel, setChannel, updateChannels,
 } from '../store/channelSlice';
 import routes from '../routes';
 import ChatWindow from './ChatWindow';
@@ -18,12 +18,15 @@ import { addMessage, deleteChannelMessages } from '../store/messageSlice';
 import AddButton from './AddButton';
 import ModalAddChannel from './ModalAddChannel';
 import ModalRemoveChannel from './ModalRemoveChannel';
+import ModalChangeChannelName from './ModalChangeChannelName';
 
 const ChatPage = () => {
   const channelId = useSelector((state) => state.channels.channelId);
   const [showModal, setShowModal] = useState(false);
   const [showModalDelete, setShowModalDelete] = useState(false);
+  const [showModalChange, setShowModalChange] = useState(false);
   const handleCloseModal = () => setShowModal(false);
+  const handleCloseModalChange = () => setShowModalChange(false);
   const handleCloseDeleteModal = () => setShowModalDelete(false);
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -37,14 +40,30 @@ const ChatPage = () => {
   const handleDeleteChannelButton = (id) => {
     setShowModalDelete(id);
   };
+  const handleChangeChannelName = (id) => {
+    console.log(id);
+    setShowModalChange(id);
+  };
   const onSubmitChannel = (values, callBack) => {
     const newChannel = { name: values.name };
     instance.post('/channels', newChannel).then((res) => {
       dispatch(addChannel(res.data));
       dispatch(setChannel(res.data.id));
       callBack();
-      // dispatch(setChannel(index));
     });
+  };
+  const onSubmitChangeChannel = (values, callBack) => {
+    const editedChannel = { name: values.name };
+    instance.patch(`/channels/${values.id}`, editedChannel).then((res) => {
+      dispatch(editChannel(res.data));
+      callBack();
+    });
+    // instance.post('/channels', newChannel).then((res) => {
+    //   dispatch(addChannel(res.data));
+    //   dispatch(setChannel(res.data.id));
+    //   callBack();
+    //   // dispatch(setChannel(index));
+    // });
   };
   useEffect(() => {
     console.log('useEffect');
@@ -71,6 +90,7 @@ const ChatPage = () => {
       dispatch(deleteChannelMessages(payload.id));
     });
     socketIo.on('renameChannel', (payload) => {
+      dispatch(editChannel(payload));
       console.log(payload); // { id: 7, name: "new name channel", removable: true }
     });
   }, []);
@@ -83,7 +103,6 @@ const ChatPage = () => {
         <Container>
           <Navbar.Brand href="#home">Yanson Chat</Navbar.Brand>
           <button type="button" className="btn btn-primary">Выйти</button>
-
         </Container>
       </Navbar>
       <div className="h-100 p-5">
@@ -105,6 +124,7 @@ const ChatPage = () => {
                       {channel.removable ? (
                         <DropdownButton as={ButtonGroup} variant="light" title="" id="bg-nested-dropdown" className="rounded-0">
                           <Dropdown.Item onClick={() => handleDeleteChannelButton(channel.id)} eventKey="1">Удалить</Dropdown.Item>
+                          <Dropdown.Item onClick={() => handleChangeChannelName(channel.id)} eventKey="1">Переименовать</Dropdown.Item>
                         </DropdownButton>
                       ) : null }
                     </ButtonGroup>
@@ -127,6 +147,12 @@ const ChatPage = () => {
           <ModalRemoveChannel
             show={showModalDelete}
             onHide={handleCloseDeleteModal}
+          />
+          <ModalChangeChannelName
+            show={showModalChange}
+            onHide={handleCloseModalChange}
+            existingChannelNames={channels}
+            onSubmitChannel={onSubmitChangeChannel}
           />
         </div>
       </div>

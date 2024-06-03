@@ -3,7 +3,7 @@ import Modal from 'react-bootstrap/Modal';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 
-const ModalAddChannel = ({
+const ModalChangeChannelName = ({
   show, onHide, existingChannelNames, onSubmitChannel,
 }) => {
   const AddChannelSchema = Yup.object().shape({
@@ -20,7 +20,7 @@ const ModalAddChannel = ({
     validationSchema: AddChannelSchema,
 
     onSubmit: (values) => {
-      onSubmitChannel(values, () => {
+      onSubmitChannel({ ...values, id: show }, () => {
         formik.handleReset();
         onHide();
       });
@@ -30,7 +30,9 @@ const ModalAddChannel = ({
     <Modal show={show} onHide={onHide}>
       <form className="" onSubmit={formik.handleSubmit}>
         <Modal.Header closeButton>
-          <Modal.Title>Добавить канал</Modal.Title>
+          <Modal.Title>
+            Переименовать канал
+          </Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <div>
@@ -66,4 +68,4 @@ const ModalAddChannel = ({
 // const handleClose = () => setShow(false);
 // const handleShow = () => setShow(true);
 
-export default ModalAddChannel;
+export default ModalChangeChannelName;
