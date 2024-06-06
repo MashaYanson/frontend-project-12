@@ -5,12 +5,14 @@ import { useNavigate } from 'react-router-dom';
 import { Alert } from 'react-bootstrap';
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
+import { useTranslation } from 'react-i18next';
 import routes from '../routes';
 import { addUser } from '../store/userSlice';
 import instance from '../utils/axios';
 
 const LoginForm = () => {
   const navigate = useNavigate();
+  const { t, i18n } = useTranslation();
   const [invalid, setInvalid] = useState(false);
   const dipatch = useDispatch();
   const formik = useFormik({
@@ -38,31 +40,31 @@ const LoginForm = () => {
   return (
     <Form onSubmit={formik.handleSubmit} className="col-md-5 mx-auto ">
       <Form.Group className="mb-3">
-        <Form.Label>Ваш ник</Form.Label>
+        <Form.Label>{t('interface.nickName')}</Form.Label>
         <Form.Control
           type="text"
           id="username"
           name="username"
           onChange={formik.handleChange}
           value={formik.values.username}
-          placeholder="Ваш ник"
+          placeholder={t('interface.placholderNickname')}
         />
       </Form.Group>
       <Form.Group className="mb-3">
-        <Form.Label>Пароль</Form.Label>
+        <Form.Label>{t('interface.password')}</Form.Label>
         <Form.Control
           type="password"
           id="password"
           name="password"
           onChange={formik.handleChange}
           value={formik.values.password}
-          placeholder="Пароль"
+          placeholder={t('interface.password')}
         />
       </Form.Group>
-      <Button className="mx-auto" type="submit" variant="outline-primary">Войти</Button>
+      <Button className="mx-auto" type="submit" variant="outline-primary">{t('interface.logInButton')}</Button>
       {invalid && (
       <Alert variant="danger" className="mb-3">
-        qwe
+          {t('errors.usernameExists')}
       </Alert>
       )}
     </Form>

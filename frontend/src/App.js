@@ -2,6 +2,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import {
   createBrowserRouter,
   RouterProvider,
+  redirect,
 } from 'react-router-dom';
 import './App.css';
 import React, { useEffect } from 'react';
@@ -12,23 +13,32 @@ import NotFoundPage from './components/NotFoundPage';
 import routes from './routes';
 import { addUser } from './store/userSlice';
 import SignupForm from './components/SignupPage';
+import PageLayout from './components/PageLayout';
 
+const protetedLoader = () => {
+  const userString = localStorage.getItem('user_data');
+  if (userString) {
+    return null;
+  }
+  return redirect(routes.loginPagePath());
+};
 const router = createBrowserRouter([
   {
     path: '/',
-    element: <ChatPage />,
+    element: <PageLayout authrized><ChatPage /></PageLayout>,
+    loader: protetedLoader,
   },
   {
     path: routes.loginPagePath(),
-    element: <LoginPage />,
+    element: <PageLayout><LoginPage /></PageLayout>,
   },
   {
     path: routes.notFoundPage(),
-    element: <NotFoundPage />,
+    element: <PageLayout><NotFoundPage /></PageLayout>,
   },
   {
     path: routes.signupPagePath(),
-    element: <SignupForm />,
+    element: <PageLayout><SignupForm /></PageLayout>,
   },
 ]);
 

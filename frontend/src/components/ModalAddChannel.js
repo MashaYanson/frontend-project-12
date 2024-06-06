@@ -2,9 +2,10 @@ import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
+import { useTranslation } from 'react-i18next';
 
 const ModalAddChannel = ({
-  show, onHide, existingChannelNames, onSubmitChannel,
+  show, onHide, existingChannelNames, onSubmitChannel, t,
 }) => {
   const AddChannelSchema = Yup.object().shape({
     name: Yup.string()
@@ -13,6 +14,7 @@ const ModalAddChannel = ({
       .test('unique', 'Имя канала должно быть уникальным', (value) => !existingChannelNames.includes(value)),
 
   });
+  // const { t, i18n } = useTranslation();
   const formik = useFormik({
     initialValues: {
       name: '',
@@ -30,12 +32,18 @@ const ModalAddChannel = ({
     <Modal show={show} onHide={onHide}>
       <form className="" onSubmit={formik.handleSubmit}>
         <Modal.Header closeButton>
-          <Modal.Title>Добавить канал</Modal.Title>
+          <Modal.Title>
+            {' '}
+            {t('test')}
+          </Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <div>
             {/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
-            <label htmlFor="name">Имя:</label>
+            <label htmlFor="name">
+              {t('interface.name')}
+              :
+            </label>
             <input
               name="name"
               id="name"
@@ -50,10 +58,10 @@ const ModalAddChannel = ({
         </Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" onClick={onHide}>
-            Отменить
+            {t('interface.cancel')}
           </Button>
           <Button variant="primary" type="submit">
-            Отправить
+            {t('interface.sendButton')}
           </Button>
         </Modal.Footer>
       </form>
