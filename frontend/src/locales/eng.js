@@ -11,7 +11,9 @@ export default {
     // require: "Не должно быть пустым",
   },
   interface: {
+    name: 'Имя',
     channels: 'Каналы',
+    addChannel: 'Добавить канал',
     loadSuccess: 'RSS успешно загружен',
     emptyField: 'Не должно быть пустым',
     preview: 'Просмотр',

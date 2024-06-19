@@ -4,7 +4,7 @@ import { useFormik } from 'formik';
 import * as Yup from 'yup';
 
 const ModalChangeChannelName = ({
-  show, onHide, existingChannelNames, onSubmitChannel,
+  show, onHide, existingChannelNames, onSubmitChannel, t,
 }) => {
   const AddChannelSchema = Yup.object().shape({
     name: Yup.string()
@@ -52,10 +52,10 @@ const ModalChangeChannelName = ({
         </Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" onClick={onHide}>
-            Отменить
+            {t('interface.cancel')}
           </Button>
           <Button variant="primary" type="submit">
-            Отправить
+            {t('interface.sendButton')}
           </Button>
         </Modal.Footer>
       </form>

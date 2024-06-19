@@ -2,7 +2,7 @@ import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
 import instance from '../utils/axios';
 
-const ModalRemoveChannel = ({ show, onHide }) => {
+const ModalRemoveChannel = ({ show, onHide, t }) => {
   // const dispatch = useDispatch();
   //
   // const handleSubmitDelete = async () => {
@@ -26,17 +26,17 @@ const ModalRemoveChannel = ({ show, onHide }) => {
   return (
     <Modal show={show} onHide={onHide}>
       <Modal.Header closeButton>
-        <Modal.Title>Удалить канал</Modal.Title>
+        <Modal.Title>{t('interface.deleteChannel')}</Modal.Title>
       </Modal.Header>
       <Modal.Body>
-        Уверены?
+        {t('interface.submitDelete')}
       </Modal.Body>
       <Modal.Footer>
         <Button variant="secondary" onClick={onHide}>
-          Отменить
+          {t('interface.cancel')}
         </Button>
         <Button variant="danger" type="submit" onClick={handleSubmitDelete}>
-          Удалить
+          {t('interface.deleteButton')}
         </Button>
       </Modal.Footer>
     </Modal>

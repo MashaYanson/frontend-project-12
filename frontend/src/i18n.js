@@ -5,10 +5,10 @@ import translationENG from './locales/eng.js';
 
 const resources = {
   en: {
-    translation: translationRU,
+    translation: translationENG,
   },
   ru: {
-    translation: translationENG,
+    translation: translationRU,
   },
 };
 

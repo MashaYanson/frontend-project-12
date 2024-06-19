@@ -12,9 +12,11 @@ export default {
   interface: {
     channels: 'Каналы',
     addChannel: 'Добавить канал',
+    deleteChannel: 'Удалить канал',
     deleteButton: 'Удалить',
     sendButton: 'Отправить',
     renameButton: 'Переименовать',
+    submitDelete: ' Уверены?',
     logOutButton: 'Выйти',
     nickName: 'Ваш ник',
     password: 'Пароль',
@@ -25,7 +27,9 @@ export default {
     cancel: 'Отменить',
     confirmPassword: 'Подтвердите пароль',
     registrationButton: 'Зарегистрироваться',
+    placeholderEnterMessage: 'Введите сообщение...',
     placholderNickname: 'Ваш ник',
+    notFoundMessage: 'Страница не найдена',
   },
   test: 'test_works',
 };

@@ -56,7 +56,7 @@ const ChatWindow = ({ channel }) => {
             <input
               name="body"
               aria-label="Новое сообщение"
-              placeholder="Введите сообщение..."
+              placeholder={t('interface.placeholderEnterMessage')}
               className="border-0 p-0 ps-2 form-control"
               value={message}
               onChange={(e) => setMessage(e.target.value)}

@@ -3,6 +3,8 @@ import Modal from 'react-bootstrap/Modal';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import { useTranslation } from 'react-i18next';
+import { useEffect } from 'react';
+import i18n from '../i18n';
 
 const ModalAddChannel = ({
   show, onHide, existingChannelNames, onSubmitChannel, t,
@@ -14,6 +16,7 @@ const ModalAddChannel = ({
       .test('unique', 'Имя канала должно быть уникальным', (value) => !existingChannelNames.includes(value)),
 
   });
+  const { t: t2 } = useTranslation();
   // const { t, i18n } = useTranslation();
   const formik = useFormik({
     initialValues: {
@@ -28,13 +31,13 @@ const ModalAddChannel = ({
       });
     },
   });
+
   return (
     <Modal show={show} onHide={onHide}>
       <form className="" onSubmit={formik.handleSubmit}>
         <Modal.Header closeButton>
           <Modal.Title>
-            {' '}
-            {t('test')}
+            {t('interface.addChannel')}
           </Modal.Title>
         </Modal.Header>
         <Modal.Body>
