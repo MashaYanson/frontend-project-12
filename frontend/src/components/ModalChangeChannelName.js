@@ -31,7 +31,7 @@ const ModalChangeChannelName = ({
       <form className="" onSubmit={formik.handleSubmit}>
         <Modal.Header closeButton>
           <Modal.Title>
-            Переименовать канал
+            {t('interface.renameChannel')}
           </Modal.Title>
         </Modal.Header>
         <Modal.Body>

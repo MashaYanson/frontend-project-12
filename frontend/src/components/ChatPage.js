@@ -7,6 +7,7 @@ import {
 import Dropdown from 'react-bootstrap/Dropdown';
 import Button from 'react-bootstrap/Button';
 import { useTranslation } from 'react-i18next';
+import { toast } from 'react-toastify';
 import instance from '../utils/axios';
 import {
   addChannel, editChannel, removeChannel, setChannel, updateChannels,
@@ -48,6 +49,9 @@ const ChatPage = () => {
     instance.post('/channels', newChannel).then((res) => {
       dispatch(addChannel(res.data));
       dispatch(setChannel(res.data.id));
+      toast.success(t('interface.renameSuccess'), {
+        position: 'top-right',
+      });
       callBack();
     });
   };
@@ -55,6 +59,9 @@ const ChatPage = () => {
     const editedChannel = { name: values.name };
     instance.patch(`/channels/${values.id}`, editedChannel).then((res) => {
       dispatch(editChannel(res.data));
+      toast.success(t('interface.renameSuccess'), {
+        position: 'top-right',
+      });
       callBack();
     });
   };

@@ -27,6 +27,7 @@
     "i18next": "^23.11.5",
     "lorem-ipsum": "^2.0.8",
     "react-i18next": "^14.1.2",
+    "react-toastify": "^10.0.5",
     "socket.io-client": "^4.7.5",
     "yup": "^1.4.0"
   },
