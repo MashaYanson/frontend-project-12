@@ -1,7 +1,11 @@
-import i18n from 'i18next';
-import { initReactI18next } from 'react-i18next';
+import i18next from 'i18next';
+import { I18nextProvider, initReactI18next } from 'react-i18next';
+import { Provider } from 'react-redux';
+import React from 'react';
 import translationRU from './locales/ru.js';
 import translationENG from './locales/eng.js';
+import store from './store/store';
+import App from './App';
 
 const resources = {
   en: {
@@ -12,14 +16,23 @@ const resources = {
   },
 };
 
-i18n
-  .use(initReactI18next) // passes i18n down to react-i18next
-  .init({
-    resources,
-    lng: 'ru',
-    interpolation: {
-      escapeValue: false, // react already safes from xss
-    },
-  });
+const init = async () => {
+  const i18n = i18next.createInstance();
 
-export default i18n;
+  await i18n
+    .use(initReactI18next)
+    .init({
+      resources,
+      fallbackLng: 'ru',
+    });
+
+  return (
+    <I18nextProvider i18n={i18n}>
+      <Provider store={store}>
+        <App />
+      </Provider>
+    </I18nextProvider>
+  );
+};
+
+export default init;

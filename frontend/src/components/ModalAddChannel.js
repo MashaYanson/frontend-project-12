@@ -3,9 +3,6 @@ import Modal from 'react-bootstrap/Modal';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import { useTranslation } from 'react-i18next';
-import { toast } from 'react-toastify';
-import { useEffect } from 'react';
-import i18n from '../i18n';
 
 const ModalAddChannel = ({
   show, onHide, existingChannelNames, onSubmitChannel, t,
@@ -18,7 +15,6 @@ const ModalAddChannel = ({
 
   });
   const { t: t2 } = useTranslation();
-  // const { t, i18n } = useTranslation();
   const formik = useFormik({
     initialValues: {
       name: '',
@@ -72,10 +68,5 @@ const ModalAddChannel = ({
     </Modal>
   );
 };
-
-// const [show, setShow] = useState(false);
-
-// const handleClose = () => setShow(false);
-// const handleShow = () => setShow(true);
 
 export default ModalAddChannel;

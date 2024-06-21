@@ -15,7 +15,7 @@ import {
 import ChatWindow from './ChatWindow';
 import socketIo from '../utils/socket';
 import { addMessage, deleteChannelMessages } from '../store/messageSlice';
-import AddButton from './AddButton';
+import AddButton from './Buttons/AddButton';
 import ModalAddChannel from './ModalAddChannel';
 import ModalRemoveChannel from './ModalRemoveChannel';
 import ModalChangeChannelName from './ModalChangeChannelName';
@@ -32,6 +32,7 @@ const ChatPage = () => {
   const dispatch = useDispatch();
   // const user = useSelector((state) => state.user);
   const channels = useSelector((state) => state.channels.data);
+  const existingNames = Object.values(channels.map((channel) => channel.name));
   // eslint-disable-next-line max-len
   const selectedChannel = useMemo(() => channels.find((item) => item.id === channelId), [channelId, channels]);
   const handleAddButton = () => {
@@ -150,7 +151,7 @@ const ChatPage = () => {
           t={t}
           show={showModal}
           onHide={handleCloseModal}
-          existingChannelNames={channels}
+          existingChannelNames={existingNames}
           onSubmitChannel={onSubmitChannel}
         />
         <ModalRemoveChannel
@@ -162,7 +163,7 @@ const ChatPage = () => {
           t={t}
           show={showModalChange}
           onHide={handleCloseModalChange}
-          existingChannelNames={channels}
+          existingChannelNames={existingNames}
           onSubmitChannel={onSubmitChangeChannel}
         />
       </div>
