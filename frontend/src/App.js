@@ -7,12 +7,12 @@ import {
 import './App.css';
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import ChatPage from './components/ChatPage';
-import LoginPage from './components/LoginPage';
-import NotFoundPage from './components/NotFoundPage';
+import ChatPage from './components/Pages/ChatPage';
+import LoginPage from './components/Pages/LoginPage';
+import NotFoundPage from './components/Pages/NotFoundPage';
 import routes from './routes';
 import { addUser } from './store/userSlice';
-import SignupForm from './components/SignupPage';
+import SignupForm from './components/Pages/SignupPage';
 import PageLayout from './components/PageLayout';
 
 const protetedLoader = () => {

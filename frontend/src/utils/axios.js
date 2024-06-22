@@ -22,10 +22,13 @@ instance.interceptors.response.use(
     // Здесь можно добавить дополнительную логику обработки ответов
     // eslint-disable-next-line implicit-arrow-linebreak
     response,
-  (error) =>
+  (error) => {
+    console.log(error);
+    return Promise.reject(error);
+  },
   // Здесь можно обрабатывать ошибки, например, обновлять токен при получении 401 ошибки
   // eslint-disable-next-line implicit-arrow-linebreak
-    Promise.reject(error),
+
 );
 
 // Теперь вы можете делать запросы через этот экземпляр

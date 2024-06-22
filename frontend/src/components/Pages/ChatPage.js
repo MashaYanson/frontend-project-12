@@ -8,17 +8,17 @@ import Dropdown from 'react-bootstrap/Dropdown';
 import Button from 'react-bootstrap/Button';
 import { useTranslation } from 'react-i18next';
 import { toast } from 'react-toastify';
-import instance from '../utils/axios';
+import instance from '../../utils/axios';
 import {
   addChannel, editChannel, removeChannel, setChannel, updateChannels,
-} from '../store/channelSlice';
-import ChatWindow from './ChatWindow';
-import socketIo from '../utils/socket';
-import { addMessage, deleteChannelMessages } from '../store/messageSlice';
-import AddButton from './Buttons/AddButton';
-import ModalAddChannel from './ModalAddChannel';
-import ModalRemoveChannel from './ModalRemoveChannel';
-import ModalChangeChannelName from './ModalChangeChannelName';
+} from '../../store/channelSlice';
+import ChatWindow from '../ChatWindow';
+import socketIo from '../../utils/socket';
+import { addMessage, deleteChannelMessages } from '../../store/messageSlice';
+import AddButton from '../Buttons/AddButton';
+import ModalAddChannel from '../Modals/ModalAddChannel';
+import ModalRemoveChannel from '../Modals/ModalRemoveChannel';
+import ModalChangeChannelName from '../Modals/ModalChangeChannelName';
 
 const ChatPage = () => {
   const { t, i18n } = useTranslation();
@@ -50,7 +50,8 @@ const ChatPage = () => {
     instance.post('/channels', newChannel).then((res) => {
       dispatch(addChannel(res.data));
       dispatch(setChannel(res.data.id));
-      toast.success(t('interface.renameSuccess'), {
+      console.log('toast');
+      toast.success(t('interface.addSuccess'), {
         position: 'top-right',
       });
       callBack();
@@ -64,6 +65,12 @@ const ChatPage = () => {
         position: 'top-right',
       });
       callBack();
+    });
+  };
+
+  const handleSubmitDelete = () => {
+    instance.delete(`/channels/${showModalChange}`).then(() => {
+      handleCloseDeleteModal();
     });
   };
   useEffect(() => {
@@ -158,6 +165,7 @@ const ChatPage = () => {
           t={t}
           show={showModalDelete}
           onHide={handleCloseDeleteModal}
+          handleSubmitDelete={handleSubmitDelete}
         />
         <ModalChangeChannelName
           t={t}

@@ -6,9 +6,9 @@ import { Alert } from 'react-bootstrap';
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useTranslation } from 'react-i18next';
-import routes from '../routes';
-import { addUser } from '../store/userSlice';
-import instance from '../utils/axios';
+import routes from '../../routes';
+import { addUser } from '../../store/userSlice';
+import instance from '../../utils/axios';
 
 const LoginForm = () => {
   const navigate = useNavigate();

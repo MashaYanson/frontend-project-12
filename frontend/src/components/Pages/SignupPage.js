@@ -10,9 +10,9 @@ import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import FloatingLabel from 'react-bootstrap/FloatingLabel';
 import * as Yup from 'yup';
-import routes from '../routes';
-import { addUser } from '../store/userSlice';
-import instance from '../utils/axios';
+import routes from '../../routes';
+import { addUser } from '../../store/userSlice';
+import instance from '../../utils/axios';
 
 const SignupForm = () => {
   const [namesInUse, setNamesInUse] = React.useState([]);
