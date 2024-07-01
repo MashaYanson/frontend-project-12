@@ -180,7 +180,6 @@ const ChatPage = () => {
           onSubmitChannel={onSubmitChangeChannel}
         />
       </div>
-      <TestError />
     </div>
   );
 };
