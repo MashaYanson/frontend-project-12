@@ -5,19 +5,13 @@ lint:
 	npx eslint .
 
 install:
-	npm ci
+	npm ci && npm ci --prefix frontend
 
 start-frontend:
 	cd frontend && npm start
 
-start-backend:
+start:
 	npm start
 
-deploy:
-	git push heroku main
-
-start:
-	make start-backend & make start-frontend
-
 build:
-	npm run build
+	npm run build --prefix frontend
