@@ -38,37 +38,67 @@ const LoginForm = () => {
   // alert(JSON.stringify(values, null, 2));
 
   return (
+    <div className="row justify-content-center align-content-center h-100">
 
-    <Form onSubmit={formik.handleSubmit} className="col-md-5 mx-auto ">
-      <Form.Group className="mb-3">
-        <Form.Label>{t('interface.nickName')}</Form.Label>
-        <Form.Control
-          type="text"
-          id="username"
-          name="username"
-          onChange={formik.handleChange}
-          value={formik.values.username}
-          placeholder={t('interface.placholderNickname')}
-        />
-      </Form.Group>
-      <Form.Group className="mb-3">
-        <Form.Label>{t('interface.password')}</Form.Label>
-        <Form.Control
-          type="password"
-          id="password"
-          name="password"
-          onChange={formik.handleChange}
-          value={formik.values.password}
-          placeholder={t('interface.password')}
-        />
-      </Form.Group>
-      <Button className="mx-auto" type="submit" variant="outline-primary">{t('interface.logInButton')}</Button>
-      {invalid && (
-      <Alert variant="danger" className="mb-3">
-        {t('errors.usernameExists')}
-      </Alert>
-      )}
-    </Form>
+      <div className="col-12 col-md-8 col-xxl-6">
+        <div className="card shadow-sm">
+          <div className="card-body row ">
+            <div className="col-20 col-md-6 d-flex justify-content-center">
+              <img
+                alt="Страница не найдена"
+                className="img-fluid"
+                src="https://frontend-chat-ru.hexlet.app/static/media/404.38677c8fa96b7e2b6537040f39020684.svg"
+              />
+            </div>
+            <Form onSubmit={formik.handleSubmit} className="col-md-5 mx-auto ">
+              <h1 className="text-center mb-3">Войти</h1>
+              <Form.Group className="mb-3">
+                <Form.Label>{t('interface.nickName')}</Form.Label>
+                <Form.Control
+                  type="text"
+                  id="username"
+                  name="username"
+                  onChange={formik.handleChange}
+                  value={formik.values.username}
+                  placeholder={t('interface.placholderNickname')}
+                />
+              </Form.Group>
+              <Form.Group className="mb-3">
+                <Form.Label>{t('interface.password')}</Form.Label>
+                <Form.Control
+                  type="password"
+                  id="password"
+                  name="password"
+                  onChange={formik.handleChange}
+                  value={formik.values.password}
+                  placeholder={t('interface.password')}
+                />
+              </Form.Group>
+              <div className="mb-2">
+                <Button
+                  className="mx-auto w-100 mb-3 btn btn-outline-primary"
+                  type="submit"
+                  variant="outline-primary"
+                >
+                  {t('interface.logInButton')}
+                </Button>
+                {invalid && (
+                <Alert variant="danger" className="mb-3">
+                  {t('errors.usernameExists')}
+                </Alert>
+                )}
+              </div>
+            </Form>
+            <div className="card-footer p-4" style={{ marginBottom: '-15px' }}>
+              <div className="text-center">
+                <span>Нет аккаунта? </span>
+                <a href="/signup">Регистрация</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
 
   );
 };
