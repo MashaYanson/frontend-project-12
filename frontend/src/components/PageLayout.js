@@ -17,7 +17,7 @@ const PageLayout = ({ children, authrized }) => {
     <Stack className="h-100">
       <Navbar className="bg-body-tertiary p-2 shadow-sm navbar navbar-expand-lg navbar-light bg-white">
         <Container>
-          <Navbar.Brand href="/">Yanson Chat</Navbar.Brand>
+          <Navbar.Brand href="/">Hexlet Chat</Navbar.Brand>
           {authrized && (
           <button
             onClick={handleLogOut}

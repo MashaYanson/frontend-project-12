@@ -20,7 +20,6 @@ import AddButton from '../Buttons/AddButton';
 import ModalAddChannel from '../Modals/ModalAddChannel';
 import ModalRemoveChannel from '../Modals/ModalRemoveChannel';
 import ModalChangeChannelName from '../Modals/ModalChangeChannelName';
-import TestError from '../../Error';
 
 filter.loadDictionary('ru');
 
@@ -107,7 +106,7 @@ const ChatPage = () => {
   }, [channels]);
   return (
     <div className="h-100 p-5">
-      <div className="container overflow-hidden rounded shadow p-2 d-flex flex-column h-100">
+      <div className="container overflow-hidden rounded shadow d-flex flex-column h-100">
         <div className="row h-100 bg-white flex-md-row">
           <Col sm={4} className="col-4  border-end px-0 bg-light flex-column h-100 d-flex">
             <div className="d-flex mt-1 justify-content-between mb-2 ps-4 pe-2 p-4">

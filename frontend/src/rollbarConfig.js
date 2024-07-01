@@ -1,5 +1,7 @@
 export const rollbarConfig = {
-  accessToken: 'fdc53248f9c74c1381930c5037445009',
-  environment: 'production',
-  // другие параметры конфигурации
+  accessToken: process.env.REACT_APP_ROLLBAR_ACCESS_TOKEN,
+  captureUncaught: true,
+  captureUnhandledRejections: true,
+  environment: process.env.NODE_ENV === 'production' ? 'production' : 'development',
+  code_version: '0.13.7',
 };

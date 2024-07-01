@@ -32,12 +32,10 @@ const init = async () => {
     <RollbarProvider config={rollbarConfig}>
       <ErrorBoundary>
         <I18nextProvider i18n={i18n}>
-
           <Provider store={store}>
             <App />
             <ToastContainer />
           </Provider>
-
         </I18nextProvider>
       </ErrorBoundary>
     </RollbarProvider>

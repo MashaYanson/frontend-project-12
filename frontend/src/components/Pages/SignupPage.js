@@ -61,12 +61,7 @@ const SignupForm = () => {
   return (
 
     <Stack className="h-100">
-      <Navbar className="bg-body-tertiary p-2 shadow-sm navbar navbar-expand-lg navbar-light bg-white">
-        <Container>
-          <Navbar.Brand href="#home">Yanson Chat</Navbar.Brand>
-
-        </Container>
-      </Navbar>
+      <Navbar className="bg-body-tertiary p-2 shadow-sm navbar navbar-expand-lg navbar-light bg-white" />
       <div className="container-fluid h-100">
         <div className="row justify-content-center align-content-center h-100">
           <div className="col-12 col-md-6 col-xxl-6">
