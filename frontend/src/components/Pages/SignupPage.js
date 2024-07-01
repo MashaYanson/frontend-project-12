@@ -61,12 +61,16 @@ const SignupForm = () => {
   return (
 
     <Stack className="h-100">
-      <Navbar className="bg-body-tertiary p-2 shadow-sm navbar navbar-expand-lg navbar-light bg-white" />
       <div className="container-fluid h-100">
         <div className="row justify-content-center align-content-center h-100">
-          <div className="col-12 col-md-6 col-xxl-6">
+          <div className="col-12 col-md-8 col-xxl-6">
             <div className="card shadow-sm">
               <div className="card-body d-flex flex-column flex-md-row justify-content-around align-items-center p-5">
+                <img
+                  className="rounded-circle"
+                  src="https://frontend-chat-ru.hexlet.app/static/media/avatar_1.6084447160acc893a24d.jpg"
+                  alt="Регистрация"
+                />
                 <Form onSubmit={formik.handleSubmit} className="mx-auto col-6">
                   <Stack gap={3}>
                     <h1 className="text-center">
@@ -136,7 +140,7 @@ const SignupForm = () => {
                         </Form.Control.Feedback>
                       </FloatingLabel>
                     </Form.Group>
-                    <Button className="mx-auto" type="submit" variant="outline-primary">Зарегистрироваться</Button>
+                    <Button className="w-100 btn btn-outline-primary" type="submit" variant="outline-primary">Зарегистрироваться</Button>
                   </Stack>
                 </Form>
               </div>
