@@ -120,6 +120,7 @@ const ChatPage = () => {
                     <Button
                       className="w-100 rounded-0 text-start"
                       variant="light"
+                      name={channel.name}
                       onClick={() => dispatch(setChannel(channel.id))}
                     >
                       {'# '}
