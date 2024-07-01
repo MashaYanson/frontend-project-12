@@ -1,6 +1,5 @@
 import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
-import instance from '../../utils/axios';
 
 const ModalRemoveChannel = ({
   handleSubmitDelete, t, onHide, show,

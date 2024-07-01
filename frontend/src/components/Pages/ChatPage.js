@@ -8,6 +8,7 @@ import Dropdown from 'react-bootstrap/Dropdown';
 import Button from 'react-bootstrap/Button';
 import { useTranslation } from 'react-i18next';
 import { toast } from 'react-toastify';
+import filter from 'leo-profanity';
 import instance from '../../utils/axios';
 import {
   addChannel, editChannel, removeChannel, setChannel, updateChannels,
@@ -19,6 +20,8 @@ import AddButton from '../Buttons/AddButton';
 import ModalAddChannel from '../Modals/ModalAddChannel';
 import ModalRemoveChannel from '../Modals/ModalRemoveChannel';
 import ModalChangeChannelName from '../Modals/ModalChangeChannelName';
+
+filter.loadDictionary('ru');
 
 const ChatPage = () => {
   const { t, i18n } = useTranslation();
@@ -82,7 +85,8 @@ const ChatPage = () => {
     // получение сообщений
     // новое сообщение
     socketIo.on('newMessage', (payload) => {
-      dispatch(addMessage({ channelId: payload.channelId, message: payload }));
+      console.log(payload);
+      dispatch(addMessage({ channelId: payload.channelId, message: { ...payload } }));
     });
     socketIo.on('newChannel', (payload) => {
       dispatch(addChannel(payload));
@@ -119,7 +123,7 @@ const ChatPage = () => {
                       onClick={() => dispatch(setChannel(channel.id))}
                     >
                       {'# '}
-                      {channel.name}
+                      {filter.clean(channel.name)}
                     </Button>
                     {channel.removable ? (
                       <DropdownButton

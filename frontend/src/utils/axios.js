@@ -1,7 +1,9 @@
 import axios from 'axios';
+import { toast } from 'react-toastify';
+import { i18n } from '../i18n';
 
 const instance = axios.create({
-  baseURL: '/api/v1', // Замените на вашу базовую URL
+  baseURL: '/api/v1',
   timeout: 5000, // Время ожидания ответа в миллисекундах
 });
 
@@ -19,18 +21,39 @@ instance.interceptors.request.use((config) => {
 // Добавление interceptor для ответов
 instance.interceptors.response.use(
   (response) =>
-    // Здесь можно добавить дополнительную логику обработки ответов
     // eslint-disable-next-line implicit-arrow-linebreak
     response,
   (error) => {
+    if (!error.response || !error.response?.status) {
+      // Ошибка сети или таймаут
+      toast.error('нет статуса', {
+        position: 'top-right',
+      });
+      return Promise.reject(error);
+    }
+    // Ошибки ответа сервера
+    const { status } = error.response;
+    if (status === 401) {
+      toast.error(i18n.t('errors.unauthorizedAccess'), {
+        position: 'top-right',
+      });
+    } else if (status === 403) {
+      toast.error(i18n.t('errors.forbidden'), {
+        position: 'top-right',
+      });
+    } else if (status === 404) {
+      toast.error(i18n.t('errors.resourceNotFound'), {
+        position: 'top-right',
+      });
+    } else {
+      toast.error(i18n.t('errors.errorOccurred'), {
+        position: 'top-right',
+      });
+    }
+
     console.log(error);
     return Promise.reject(error);
   },
-  // Здесь можно обрабатывать ошибки, например, обновлять токен при получении 401 ошибки
-  // eslint-disable-next-line implicit-arrow-linebreak
-
 );
-
-// Теперь вы можете делать запросы через этот экземпляр
 
 export default instance;

@@ -1,11 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useTranslation } from 'react-i18next';
+import filter from 'leo-profanity';
+
 import instance from '../utils/axios';
 import { addAllMessages } from '../store/messageSlice';
 import getMessageCountText from '../utils/getMessageCountText';
 import SubmitButton from './Buttons/SubmitButton';
 
+filter.loadDictionary('ru');
 const ChatWindow = ({ channel }) => {
   const { name } = channel;
   const { t, i18n } = useTranslation();
@@ -47,7 +50,7 @@ const ChatWindow = ({ channel }) => {
             <b>{msg.username}</b>
             :
             {' '}
-            {msg.body}
+            {filter.clean(msg.body)}
           </div>
         ))}
       </div>
