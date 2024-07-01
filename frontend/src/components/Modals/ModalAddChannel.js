@@ -41,7 +41,7 @@ const ModalAddChannel = ({
           <div>
             {/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
             <label htmlFor="name">
-              {t('interface.name')}
+              {t('interface.channelName')}
               :
             </label>
             <input

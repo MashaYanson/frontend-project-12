@@ -84,7 +84,7 @@ const LoginForm = () => {
                 </Button>
                 {invalid && (
                 <Alert variant="danger" className="mb-3">
-                  {t('errors.usernameExists')}
+                  {t('interface.invalidCredentials')}
                 </Alert>
                 )}
               </div>
