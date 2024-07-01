@@ -20,6 +20,7 @@ import AddButton from '../Buttons/AddButton';
 import ModalAddChannel from '../Modals/ModalAddChannel';
 import ModalRemoveChannel from '../Modals/ModalRemoveChannel';
 import ModalChangeChannelName from '../Modals/ModalChangeChannelName';
+import TestError from '../../Error';
 
 filter.loadDictionary('ru');
 
@@ -179,6 +180,7 @@ const ChatPage = () => {
           onSubmitChannel={onSubmitChangeChannel}
         />
       </div>
+      <TestError />
     </div>
   );
 };
