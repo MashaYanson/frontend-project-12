@@ -6,10 +6,11 @@ import { useNavigate } from 'react-router-dom';
 import {
   Container, Navbar, Stack,
 } from 'react-bootstrap';
-import React, { useState } from 'react';
+import React, { useState, useTransition } from 'react';
 import { useDispatch } from 'react-redux';
 import FloatingLabel from 'react-bootstrap/FloatingLabel';
 import * as Yup from 'yup';
+import { useTranslation } from 'react-i18next';
 import routes from '../../routes';
 import { addUser } from '../../store/userSlice';
 import instance from '../../utils/axios';
@@ -30,6 +31,7 @@ const SignupForm = () => {
 
   const navigate = useNavigate();
   const [invalid, setInvalid] = useState(false);
+  const { t, i18n } = useTranslation();
   const dipatch = useDispatch();
   const formik = useFormik({
     initialValues: {
@@ -51,8 +53,7 @@ const SignupForm = () => {
         .catch((err) => {
           console.dir(err);
           if (err.response.status === 409) {
-            console.log('erroe');
-            setFieldError('username', 'такой пользователь уже существует');
+            setFieldError('username', t('interface.invalidCredentials'));
           }
         });
     },
@@ -74,12 +75,12 @@ const SignupForm = () => {
                 <Form onSubmit={formik.handleSubmit} className="mx-auto col-6">
                   <Stack gap={3}>
                     <h1 className="text-center">
-                      Регистрация
+                      {t('interface.registration')}
                     </h1>
                     <Form.Group>
                       <FloatingLabel
                         controlId="username"
-                        label="Имя пользователя"
+                        label={t('interface.username')}
                         className="mb-3"
                       >
                         <Form.Control
@@ -89,7 +90,7 @@ const SignupForm = () => {
                           onChange={formik.handleChange}
                           onBlur={formik.handleBlur}
                           value={formik.values.username}
-                          placeholder="Имя пользователя"
+                          placeholder={t('interface.username')}
                           isInvalid={!!formik.errors.username && !!formik.touched.username}
                         />
                         <Form.Control.Feedback type="invalid">
@@ -101,7 +102,7 @@ const SignupForm = () => {
                     <Form.Group>
                       <FloatingLabel
                         controlId="password"
-                        label="Пароль"
+                        label={t('interface.password')}
                         className="mb-3"
                       >
                         <Form.Control
@@ -111,7 +112,7 @@ const SignupForm = () => {
                           onChange={formik.handleChange}
                           value={formik.values.password}
                           onBlur={formik.handleBlur}
-                          placeholder="Пароль"
+                          placeholder={t('interface.password')}
                           isInvalid={!!formik.errors.password && !!formik.touched.password}
                         />
                         <Form.Control.Feedback type="invalid">
@@ -122,7 +123,7 @@ const SignupForm = () => {
                     <Form.Group>
                       <FloatingLabel
                         controlId="confirm-password"
-                        label="Подтвердите пароль"
+                        label={t('interface.confirmPassword')}
                         className="mb-3"
                       >
                         <Form.Control
@@ -132,7 +133,7 @@ const SignupForm = () => {
                           onChange={formik.handleChange}
                           onBlur={formik.handleBlur}
                           value={formik.values.confirm_password}
-                          placeholder="Подтвердите пароль"
+                          placeholder={t('interface.confirmPassword')}
                           isInvalid={!!formik.errors.confirm_password && formik.touched.confirm_password}
                         />
                         <Form.Control.Feedback type="invalid">
@@ -140,7 +141,7 @@ const SignupForm = () => {
                         </Form.Control.Feedback>
                       </FloatingLabel>
                     </Form.Group>
-                    <Button className="w-100 btn btn-outline-primary" type="submit" variant="outline-primary">Зарегистрироваться</Button>
+                    <Button className="w-100 btn btn-outline-primary" type="submit" name="general" variant="outline-primary">{t('interface.registrationButton')}</Button>
                   </Stack>
                 </Form>
               </div>
