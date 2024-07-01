@@ -40,6 +40,10 @@ const router = createBrowserRouter([
     path: routes.signupPagePath(),
     element: <PageLayout><SignupForm /></PageLayout>,
   },
+  {
+    path: '*',
+    element: <PageLayout><NotFoundPage /></PageLayout>,
+  },
 ]);
 
 const App = () => {
