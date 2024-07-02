@@ -62,6 +62,7 @@ const ChatPage = () => {
       callBack();
     });
   };
+
   const onSubmitChangeChannel = (values, callBack) => {
     const editedChannel = { name: values.name };
     instance.patch(`/channels/${values.id}`, editedChannel).then((res) => {
