@@ -1,9 +1,9 @@
-/* eslint-disable react/no-unstable-nested-components */
+/* eslint-disable react/no-unstable-nested-components,max-len */
 import React, { useEffect, useMemo, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import {
   ButtonGroup,
-  Col, DropdownButton, DropdownItem, ListGroup,
+  Col, ListGroup,
 } from 'react-bootstrap';
 import Dropdown from 'react-bootstrap/Dropdown';
 import Button from 'react-bootstrap/Button';
@@ -28,7 +28,7 @@ filter.add(filter.getDictionary('en'));
 filter.add('boop');
 
 const ChatPage = () => {
-  const { t, i18n } = useTranslation();
+  const { t } = useTranslation();
   const channelId = useSelector((state) => state.channels.channelId);
   const [showModal, setShowModal] = useState(false);
   const [showModalDelete, setShowModalDelete] = useState(false);
@@ -104,7 +104,7 @@ const ChatPage = () => {
     socketIo.on('renameChannel', (payload) => {
       dispatch(editChannel(payload));
     });
-  }, []);
+  }, [dispatch]);
   useEffect(() => {
   }, [channels]);
   return (

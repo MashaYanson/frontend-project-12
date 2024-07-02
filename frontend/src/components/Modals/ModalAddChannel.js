@@ -2,7 +2,6 @@ import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
-import { useTranslation } from 'react-i18next';
 
 const ModalAddChannel = ({
   show, onHide, existingChannelNames, onSubmitChannel, t,
@@ -14,7 +13,6 @@ const ModalAddChannel = ({
       .test('unique', 'Имя канала должно быть уникальным', (value) => !existingChannelNames.includes(value)),
 
   });
-  const { t: t2 } = useTranslation();
   const formik = useFormik({
     initialValues: {
       name: '',

@@ -4,9 +4,9 @@ import Button from 'react-bootstrap/Button';
 import { useFormik } from 'formik';
 import { useNavigate } from 'react-router-dom';
 import {
-  Container, Navbar, Stack,
+  Stack,
 } from 'react-bootstrap';
-import React, { useState, useTransition } from 'react';
+import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import FloatingLabel from 'react-bootstrap/FloatingLabel';
 import * as Yup from 'yup';
@@ -16,8 +16,7 @@ import { addUser } from '../../store/userSlice';
 import instance from '../../utils/axios';
 
 const SignupForm = () => {
-  const { t, i18n } = useTranslation();
-  const [namesInUse, setNamesInUse] = React.useState([]);
+  const { t } = useTranslation();
   const SignupSchema = Yup.object().shape({
     username: Yup.string()
       .min(3, t('errors.invalidField'))
@@ -31,7 +30,7 @@ const SignupForm = () => {
   });
 
   const navigate = useNavigate();
-  const [invalid, setInvalid] = useState(false);
+  const [setInvalid] = useState(false);
   const dipatch = useDispatch();
   const formik = useFormik({
     initialValues: {
@@ -144,7 +143,14 @@ const SignupForm = () => {
                         </Form.Control.Feedback>
                       </FloatingLabel>
                     </Form.Group>
-                    <Button className="w-100 btn btn-outline-primary" type="submit" name="general" variant="outline-primary">{t('interface.registrationButton')}</Button>
+                    <Button
+                      className="w-100 btn btn-outline-primary"
+                      type="submit"
+                      name="general"
+                      variant="outline-primary"
+                    >
+                      {t('interface.registrationButton')}
+                    </Button>
                   </Stack>
                 </Form>
               </div>

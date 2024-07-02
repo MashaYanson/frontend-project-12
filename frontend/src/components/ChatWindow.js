@@ -12,7 +12,7 @@ filter.loadDictionary('ru');
 filter.loadDictionary('en');
 const ChatWindow = ({ channel }) => {
   const { name } = channel;
-  const { t, i18n } = useTranslation();
+  const { t } = useTranslation();
   const [message, setMessage] = useState('');
   const userName = useSelector((state) => state.user.username);
   const dispatch = useDispatch();
@@ -28,10 +28,9 @@ const ChatWindow = ({ channel }) => {
 
   useEffect(() => {
     instance.get('/messages').then((response) => {
-      console.log(response.data);
       dispatch(addAllMessages({ channelId: channel.id, messages: response.data }));
     });
-  }, []);
+  }, [channel.id, dispatch]);
   return (
     <div className="d-flex flex-column h-100">
       <div className="bg-light mb-4 p-3 shadow-sm small">

@@ -55,7 +55,7 @@ const App = () => {
       const userData = JSON.parse(userString);
       dispatch(addUser((userData)));
     }
-  }, []);
+  }, [userName, dispatch]);
   return (
     <RouterProvider router={router} />
   );

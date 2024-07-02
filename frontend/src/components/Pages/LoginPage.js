@@ -20,7 +20,7 @@ const LoginForm = () => {
       .required('Обязальное поле'),
   });
   const navigate = useNavigate();
-  const { t, i18n } = useTranslation();
+  const { t } = useTranslation();
   const [invalid, setInvalid] = useState(false);
   const dipatch = useDispatch();
   const formik = useFormik({
