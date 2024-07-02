@@ -30,7 +30,7 @@ export default {
     username: 'Имя пользователя',
     name: 'Имя',
     addSuccess: 'Канал создан',
-    deleteSuccess: 'Канал удален',
+    deleteSuccess: 'Канал удалён',
     renameSuccess: 'Канал переименован',
     cancel: 'Отменить',
     confirmPassword: 'Подтвердите пароль',
