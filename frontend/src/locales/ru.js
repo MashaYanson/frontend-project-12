@@ -2,7 +2,7 @@ export default {
   errors: {
     fieldRequired: 'Обязательное поле',
     invalidField: 'От 3 до 20 символов',
-    usernameExists: 'Пользователь с таким именем уже существует',
+    usernameExists: 'Такой пользователь уже существует',
     rssExists: 'RSS уже существует',
     networkError: 'Ошибка сети',
     unknownError: 'Неизвестная ошибка',

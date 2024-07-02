@@ -53,7 +53,7 @@ const SignupForm = () => {
         .catch((err) => {
           console.dir(err);
           if (err.response.status === 409) {
-            setFieldError('username', t('interface.invalidCredentials'));
+            setFieldError('username', t('errors.usernameExists'));
           }
         });
     },
