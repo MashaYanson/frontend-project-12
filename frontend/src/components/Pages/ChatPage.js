@@ -1,3 +1,4 @@
+/* eslint-disable react/no-unstable-nested-components */
 import React, { useEffect, useMemo, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import {
@@ -129,16 +130,24 @@ const ChatPage = () => {
                     >
                       {'# '}
                       {filter.clean(channel.name)}
+
                     </Button>
+
                     {channel.removable ? (
                       <DropdownButton
-                        as={ButtonGroup}
+                        as={({ children }) => (
+                          <ButtonGroup>
+                            <span className="dropdown-toggle visually-hidden">Управление каналом</span>
+                            {children}
+                          </ButtonGroup>
+                        )}
                         variant="light"
                         title=""
                         id="bg-nested-dropdown"
-                        className="rounded-0"
+                        className="rounded-0 dropdown-toggle-split"
                       >
-                        <span className="visually-hidden">Управление каналом</span>
+
+                        <span className="dropdown-toggle visually-hidden">Управление каналом</span>
                         <Dropdown.Item
                           onClick={() => handleDeleteChannelButton(channel.id)}
                           eventKey="1"
@@ -149,6 +158,7 @@ const ChatPage = () => {
                           onClick={() => handleChangeChannelName(channel.id)}
                           eventKey="1"
                         >
+                          <span className="visually-hidden">Управление каналом</span>
                           {t('interface.renameButton')}
                         </Dropdown.Item>
 
