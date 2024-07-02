@@ -4,10 +4,12 @@ import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { deleteUser } from '../store/userSlice';
 import routes from '../routes';
+import useInterceptors from '../hooks/useInterceptors';
 
 const PageLayout = ({ children, authrized }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  useInterceptors();
   const handleLogOut = () => {
     localStorage.removeItem('user_data');
     dispatch(deleteUser());
