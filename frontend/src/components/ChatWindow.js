@@ -9,7 +9,6 @@ const ChatWindow = ({ channel }) => {
   const { name } = channel;
   const [message, setMessage] = useState('');
   const userName = useSelector((state) => state.user.username);
-  const dispatch = useDispatch();
   const messages = useSelector((state) => state.messages.data[channel.id] || []);
 
   const handleSubmit = (e) => {
@@ -20,11 +19,6 @@ const ChatWindow = ({ channel }) => {
     });
   };
 
-  useEffect(() => {
-    instance.get('/messages').then((response) => {
-      dispatch(addAllMessages(response.data));
-    });
-  }, [dispatch]);
   return (
     <div className="d-flex flex-column h-100">
       <div className="bg-light mb-4 p-3 shadow-sm small">

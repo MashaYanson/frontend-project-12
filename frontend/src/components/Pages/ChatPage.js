@@ -16,7 +16,7 @@ import {
 } from '../../store/channelSlice';
 import ChatWindow from '../ChatWindow';
 import socketIo from '../../utils/socket';
-import { addMessage, deleteChannelMessages } from '../../store/messageSlice';
+import { addAllMessages, addMessage, deleteChannelMessages } from '../../store/messageSlice';
 import AddButton from '../Buttons/AddButton';
 import ModalAddChannel from '../Modals/ModalAddChannel';
 import ModalRemoveChannel from '../Modals/ModalRemoveChannel';
@@ -88,6 +88,9 @@ const ChatPage = () => {
     instance.get('/channels', {
     }).then((response) => {
       dispatch(updateChannels(response.data));
+    });
+    instance.get('/messages').then((response) => {
+      dispatch(addAllMessages(response.data));
     });
 
     // получение сообщений
