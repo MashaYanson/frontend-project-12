@@ -9,6 +9,7 @@ import getMessageCountText from '../utils/getMessageCountText';
 import SubmitButton from './Buttons/SubmitButton';
 
 filter.loadDictionary('ru');
+filter.loadDictionary('en');
 const ChatWindow = ({ channel }) => {
   const { name } = channel;
   const { t, i18n } = useTranslation();

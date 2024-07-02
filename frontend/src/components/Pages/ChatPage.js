@@ -21,7 +21,10 @@ import ModalAddChannel from '../Modals/ModalAddChannel';
 import ModalRemoveChannel from '../Modals/ModalRemoveChannel';
 import ModalChangeChannelName from '../Modals/ModalChangeChannelName';
 
-filter.loadDictionary('ru');
+filter.clearList();
+filter.add(filter.getDictionary('ru'));
+filter.add(filter.getDictionary('en'));
+filter.add('boop');
 
 const ChatPage = () => {
   const { t, i18n } = useTranslation();
@@ -76,6 +79,7 @@ const ChatPage = () => {
       handleCloseDeleteModal();
     });
   };
+
   useEffect(() => {
     instance.get('/channels', {
     }).then((response) => {
