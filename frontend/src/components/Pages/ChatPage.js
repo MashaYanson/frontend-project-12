@@ -37,7 +37,6 @@ const ChatPage = () => {
   const handleCloseModalChange = () => setShowModalChange(false);
   const handleCloseDeleteModal = () => setShowModalDelete(false);
   const dispatch = useDispatch();
-  // const user = useSelector((state) => state.user);
   const channels = useSelector((state) => state.channels.data);
   const existingNames = Object.values(channels.map((channel) => channel.name));
   // eslint-disable-next-line max-len
@@ -158,7 +157,6 @@ const ChatPage = () => {
                           onClick={() => handleChangeChannelName(channel.id)}
                           eventKey="1"
                         >
-                          <span className="visually-hidden">Управление каналом</span>
                           {t('interface.renameButton')}
                         </Dropdown.Item>
 
