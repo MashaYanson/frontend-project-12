@@ -16,8 +16,13 @@ export const messageSlice = createSlice({
       }
     },
     addAllMessages: (state, action) => {
-      const { channelId, messages } = action.payload;
-      state.data[channelId] = messages;
+      const messages = action.payload;
+      messages.forEach((message) => {
+        if (!state.data[message.channelId]) {
+          state.data[message.channelId] = [];
+        }
+        state.data[message.channelId].push(message);
+      });
     },
     deleteChannelMessages: (state, action) => {
       // state.data[action.payload] = [];

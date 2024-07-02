@@ -93,6 +93,7 @@ const ChatPage = () => {
     // получение сообщений
     // новое сообщение
     socketIo.on('newMessage', (payload) => {
+      console.log('socet');
       dispatch(addMessage({ channelId: payload.channelId, message: { ...payload } }));
     });
     socketIo.on('newChannel', (payload) => {
@@ -105,9 +106,8 @@ const ChatPage = () => {
     socketIo.on('renameChannel', (payload) => {
       dispatch(editChannel(payload));
     });
-  }, [dispatch]);
-  useEffect(() => {
-  }, [channels]);
+  }, []);
+
   return (
     <div className="h-100 p-5">
       <div className="container overflow-hidden rounded shadow d-flex flex-column h-100">
