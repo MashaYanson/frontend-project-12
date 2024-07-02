@@ -75,8 +75,12 @@ const ChatPage = () => {
   };
 
   const handleSubmitDelete = () => {
-    instance.delete(`/channels/${showModalChange}`).then(() => {
+    console.log('delete');
+    instance.delete(`/channels/${showModalDelete}`).then(() => {
       handleCloseDeleteModal();
+      toast.success(t('interface.deleteSuccess'), {
+        position: 'top-right',
+      });
     });
   };
 
@@ -89,20 +93,18 @@ const ChatPage = () => {
     // получение сообщений
     // новое сообщение
     socketIo.on('newMessage', (payload) => {
-      console.log(payload);
       dispatch(addMessage({ channelId: payload.channelId, message: { ...payload } }));
     });
     socketIo.on('newChannel', (payload) => {
       dispatch(addChannel(payload));
     });
     socketIo.on('removeChannel', (payload) => {
-      console.log(payload); // { id: 6 };
       dispatch(removeChannel(payload.id));
       dispatch(deleteChannelMessages(payload.id));
     });
     socketIo.on('renameChannel', (payload) => {
       dispatch(editChannel(payload));
-      console.log(payload); // { id: 7, name: "new name channel", removable: true }
+      console.log(payload);
     });
   }, []);
   useEffect(() => {
@@ -129,7 +131,6 @@ const ChatPage = () => {
                     >
                       {'# '}
                       {filter.clean(channel.name)}
-
                     </Button>
 
                     {channel.removable ? (
@@ -139,7 +140,7 @@ const ChatPage = () => {
                         </Dropdown.Toggle>
                         <Dropdown.Menu>
                           <Dropdown.Item eventKey="1" onClick={() => handleDeleteChannelButton(channel.id)}>{t('interface.deleteButton')}</Dropdown.Item>
-                          <Dropdown.Item eventKey="2" onClick={() => handleChangeChannelName(channel.id)}>{t('interface.renameButton')}</Dropdown.Item>
+                          <Dropdown.Item eventKey="1" onClick={() => handleChangeChannelName(channel.id)}>{t('interface.renameButton')}</Dropdown.Item>
                         </Dropdown.Menu>
                       </Dropdown>
                     ) : null }
