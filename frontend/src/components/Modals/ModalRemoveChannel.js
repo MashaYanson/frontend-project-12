@@ -20,7 +20,7 @@ const ModalRemoveChannel = ({
         <Button variant="secondary" onClick={onHide}>
           {t('interface.cancel')}
         </Button>
-        <Button variant="danger" type="submit" onClick={handleSubmitDelete}>
+        <Button className="btn btn-danger" variant="danger" type="submit" onClick={handleSubmitDelete}>
           {t('interface.deleteButton')}
         </Button>
       </Modal.Footer>
