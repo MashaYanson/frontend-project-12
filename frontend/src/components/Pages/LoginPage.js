@@ -6,11 +6,18 @@ import { Alert } from 'react-bootstrap';
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useTranslation } from 'react-i18next';
+import * as Yup from 'yup';
 import routes from '../../routes';
 import { addUser } from '../../store/userSlice';
 import instance from '../../utils/axios';
 
 const LoginForm = () => {
+  const validationLoginSchema = Yup.object().shape({
+    username: Yup.string()
+      .required('Обязальное поле'),
+    password: Yup.string()
+      .required('Обязальное поле'),
+  });
   const navigate = useNavigate();
   const { t, i18n } = useTranslation();
   const [invalid, setInvalid] = useState(false);
@@ -20,6 +27,8 @@ const LoginForm = () => {
       username: '',
       password: '',
     },
+    validationSchema: validationLoginSchema,
+
     onSubmit: async (values) => {
       instance.post('/login', values)
         .then((res) => {
@@ -79,7 +88,6 @@ const LoginForm = () => {
                   className="mx-auto w-100 mb-3 btn btn-outline-primary"
                   type="submit"
                   variant="outline-primary"
-                  disabled={!formik.values.password || !formik.values.username}
                 >
                   {t('interface.logInButton')}
                 </Button>
