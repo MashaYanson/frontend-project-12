@@ -34,7 +34,7 @@ instance.interceptors.response.use(
     // Ошибки ответа сервера
     const { status } = error.response;
     if (status === 401) {
-      toast.error(i18n.t('interface.invalidCredentials'), {
+      toast.error(i18n.t('errors.unauthorizedAccess'), {
         position: 'top-right',
       });
     } else if (status === 403) {
