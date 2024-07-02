@@ -7,6 +7,7 @@ import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useTranslation } from 'react-i18next';
 import * as Yup from 'yup';
+import FloatingLabel from 'react-bootstrap/FloatingLabel';
 import routes from '../../routes';
 import { addUser } from '../../store/userSlice';
 import instance from '../../utils/axios';
@@ -65,26 +66,34 @@ const LoginForm = () => {
             <Form onSubmit={formik.handleSubmit} className="col-md-5 mx-auto ">
               <h1 className="text-center mb-3">Войти</h1>
               <Form.Group className="mb-3">
-                <Form.Label>{t('interface.nickName')}</Form.Label>
-                <Form.Control
-                  type="text"
-                  id="username"
-                  name="username"
-                  onChange={formik.handleChange}
-                  value={formik.values.username}
-                  placeholder={t('interface.placholderNickname')}
-                />
+                <FloatingLabel
+                  label={t('interface.nickName')}
+                >
+
+                  <Form.Control
+                    type="text"
+                    id="username"
+                    name="username"
+                    label={t('interface.placholderNickname')}
+                    onChange={formik.handleChange}
+                    value={formik.values.username}
+                    placeholder={t('interface.placholderNickname')}
+                  />
+                </FloatingLabel>
               </Form.Group>
               <Form.Group className="mb-3">
-                <Form.Label>{t('interface.password')}</Form.Label>
-                <Form.Control
-                  type="password"
-                  id="password"
-                  name="password"
-                  onChange={formik.handleChange}
-                  value={formik.values.password}
-                  placeholder={t('interface.password')}
-                />
+                <FloatingLabel
+                  label={t('interface.password')}
+                >
+                  <Form.Control
+                    type="password"
+                    id="password"
+                    name="password"
+                    onChange={formik.handleChange}
+                    value={formik.values.password}
+                    placeholder={t('interface.password')}
+                  />
+                </FloatingLabel>
               </Form.Group>
               <div className="mb-2">
                 <Button
