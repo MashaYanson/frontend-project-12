@@ -30,7 +30,6 @@ const SignupForm = () => {
   });
 
   const navigate = useNavigate();
-  const [setInvalid] = useState(false);
   const dipatch = useDispatch();
   const formik = useFormik({
     initialValues: {
@@ -43,18 +42,16 @@ const SignupForm = () => {
     onSubmit: async (values, { setFieldError }) => {
       instance.post('/signup', values)
         .then((res) => {
-          console.log(res);
-          setInvalid(false);
           localStorage.setItem('user_data', JSON.stringify(res.data));
           dipatch(addUser(res.data));
           navigate(routes.chatPagePath());
         })
         .catch((err) => {
           console.dir(err);
-          if (err.response.status === 409) {
+          if (err.response?.status === 409) {
             setFieldError('username', t('errors.usernameExists'));
           }
-          if (err.response.status === 401) {
+          if (err.response?.status === 401) {
             setFieldError('username', t('interface.invalidCredentials'));
           }
         });
@@ -81,7 +78,7 @@ const SignupForm = () => {
                     </h1>
                     <Form.Group>
                       <FloatingLabel
-                        controlId="username"
+                        // controlId="username"
                         label={t('interface.username')}
                         className="mb-3"
                       >
@@ -103,7 +100,7 @@ const SignupForm = () => {
                     </Form.Group>
                     <Form.Group>
                       <FloatingLabel
-                        controlId="password"
+                        // controlId="password"
                         label={t('interface.password')}
                         className="mb-3"
                       >
@@ -124,7 +121,7 @@ const SignupForm = () => {
                     </Form.Group>
                     <Form.Group>
                       <FloatingLabel
-                        controlId="confirm_password"
+                        // controlId="confirm_password"
                         label={t('interface.confirmPassword')}
                         className="mb-3"
                       >

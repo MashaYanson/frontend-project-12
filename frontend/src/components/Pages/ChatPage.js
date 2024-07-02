@@ -141,6 +141,7 @@ const ChatPage = () => {
                           split
                           className="class=flex-grow-0 dropdown-toggle dropdown-toggle-split btn btn-secondary"
                           variant={channel.id === channelId ? 'secondary' : 'light'}
+                          style={{ borderRadius: '0px 8px 8px 0px' }}
                         >
                           <span className="visually-hidden">{t('interface.make')}</span>
                         </Dropdown.Toggle>
