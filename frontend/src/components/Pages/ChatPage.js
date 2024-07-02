@@ -138,6 +138,7 @@ const ChatPage = () => {
                         id="bg-nested-dropdown"
                         className="rounded-0"
                       >
+                        <span className="visually-hidden">Управление каналом</span>
                         <Dropdown.Item
                           onClick={() => handleDeleteChannelButton(channel.id)}
                           eventKey="1"
@@ -150,6 +151,7 @@ const ChatPage = () => {
                         >
                           {t('interface.renameButton')}
                         </Dropdown.Item>
+
                       </DropdownButton>
                     ) : null }
                   </ButtonGroup>
