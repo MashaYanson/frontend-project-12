@@ -106,7 +106,7 @@ const ChatPage = () => {
     socketIo.on('renameChannel', (payload) => {
       dispatch(editChannel(payload));
     });
-  }, []);
+  }, [dispatch]);
 
   return (
     <div className="h-100 p-5">
