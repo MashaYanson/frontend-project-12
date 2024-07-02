@@ -132,7 +132,7 @@ const ChatPage = () => {
                     <Button
                       className="w-100 rounded-0 text-start text-truncate"
                       variant={channel.id === channelId ? 'secondary' : 'light'}
-                      name={channel.name}
+                      name={filter.clean(channel.name)}
                       onClick={() => dispatch(setChannel(channel.id))}
                     >
                       {'# '}
