@@ -31,13 +31,13 @@ const ModalChangeChannelName = ({
       <form className="" onSubmit={formik.handleSubmit}>
         <Modal.Header closeButton>
           <Modal.Title>
-            {t('interface.renameChannel')}
+            {t('interface.renemeChannel')}
           </Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <div>
             {/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
-            <label htmlFor="name">Имя:</label>
+            <label className="visually-hidden" htmlFor="name">Имя канала</label>
             <input
               name="name"
               id="name"
