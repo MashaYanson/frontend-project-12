@@ -79,6 +79,7 @@ const LoginForm = () => {
                   className="mx-auto w-100 mb-3 btn btn-outline-primary"
                   type="submit"
                   variant="outline-primary"
+                  disabled={!formik.values.password || !formik.values.username}
                 >
                   {t('interface.logInButton')}
                 </Button>
