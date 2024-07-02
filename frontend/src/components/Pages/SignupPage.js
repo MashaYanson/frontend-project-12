@@ -122,7 +122,7 @@ const SignupForm = () => {
                     </Form.Group>
                     <Form.Group>
                       <FloatingLabel
-                        controlId="confirm-password"
+                        controlId="confirm_password"
                         label={t('interface.confirmPassword')}
                         className="mb-3"
                       >
