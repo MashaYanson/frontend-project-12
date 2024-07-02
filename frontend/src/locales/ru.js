@@ -32,6 +32,7 @@ export default {
     addSuccess: 'Канал создан',
     deleteSuccess: 'Канал удалён',
     renameSuccess: 'Канал переименован',
+    make: 'Управление каналом',
     cancel: 'Отменить',
     confirmPassword: 'Подтвердите пароль',
     invalidCredentials: 'Неверные имя пользователя или пароль',

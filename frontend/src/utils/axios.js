@@ -51,7 +51,6 @@ instance.interceptors.response.use(
       });
     }
 
-    console.log(error);
     return Promise.reject(error);
   },
 );

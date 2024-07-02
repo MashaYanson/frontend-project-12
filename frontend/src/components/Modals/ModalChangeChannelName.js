@@ -28,7 +28,7 @@ const ModalChangeChannelName = ({
   });
   return (
     <Modal show={show} onHide={onHide}>
-      <form className="" onSubmit={formik.handleSubmit}>
+      <form onSubmit={formik.handleSubmit}>
         <Modal.Header closeButton>
           <Modal.Title>
             {t('interface.renemeChannel')}

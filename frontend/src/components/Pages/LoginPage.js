@@ -33,7 +33,6 @@ const LoginForm = () => {
     onSubmit: async (values, { setFieldError }) => {
       instance.post('/login', values)
         .then((res) => {
-          console.log(res);
           setInvalid(false);
           localStorage.setItem('user_data', JSON.stringify(res.data));
           dipatch(addUser(res.data));
@@ -48,11 +47,8 @@ const LoginForm = () => {
     },
   });
 
-  // alert(JSON.stringify(values, null, 2));
-
   return (
     <div className="row justify-content-center align-content-center h-100">
-
       <div className="col-12 col-md-8 col-xxl-6">
         <div className="card shadow-sm">
           <div className="card-body row ">

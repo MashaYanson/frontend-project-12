@@ -16,22 +16,22 @@ import { addUser } from '../../store/userSlice';
 import instance from '../../utils/axios';
 
 const SignupForm = () => {
+  const { t, i18n } = useTranslation();
   const [namesInUse, setNamesInUse] = React.useState([]);
   const SignupSchema = Yup.object().shape({
     username: Yup.string()
-      .min(3, 'От 3 до 20 символов')
-      .max(20, 'От 3 до 20 символов')
-      .required('Обязальное поле'),
+      .min(3, t('errors.invalidField'))
+      .max(20, t('errors.invalidField'))
+      .required(t('errors.fieldRequired')),
     password: Yup.string()
-      .min(6, 'Не менее 6 символов')
-      .required('Обязальное поле'),
-    confirm_password: Yup.string().required('Обязальное поле')
-      .oneOf([Yup.ref('password'), null], 'Пароли должны совпадать'),
+      .min(6, t('interface.invalidFieldShort'))
+      .required(t('errors.fieldRequired')),
+    confirm_password: Yup.string().required(t('errors.fieldRequired'))
+      .oneOf([Yup.ref('password'), null], t('errors.passwordConfirmationError')),
   });
 
   const navigate = useNavigate();
   const [invalid, setInvalid] = useState(false);
-  const { t, i18n } = useTranslation();
   const dipatch = useDispatch();
   const formik = useFormik({
     initialValues: {

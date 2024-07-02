@@ -48,7 +48,6 @@ const ChatPage = () => {
     setShowModalDelete(id);
   };
   const handleChangeChannelName = (id) => {
-    console.log(id);
     setShowModalChange(id);
   };
   const onSubmitChannel = (values, callBack) => {
@@ -104,11 +103,9 @@ const ChatPage = () => {
     });
     socketIo.on('renameChannel', (payload) => {
       dispatch(editChannel(payload));
-      console.log(payload);
     });
   }, []);
   useEffect(() => {
-    console.log(channels);
   }, [channels]);
   return (
     <div className="h-100 p-5">
@@ -117,15 +114,20 @@ const ChatPage = () => {
           <Col sm={4} className="col-4  border-end px-0 bg-light flex-column h-100 d-flex">
             <div className="d-flex mt-1 justify-content-between mb-2 ps-4 pe-2 p-4">
               <b>{t('interface.channels')}</b>
-              <AddButton onClick={handleAddButton} />
+              <AddButton
+                onClick={handleAddButton}
+              />
             </div>
             <ListGroup variant="flush">
               {channels.map((channel) => (
-                <ListGroup.Item variant="light" key={channel.id}>
+                <ListGroup.Item
+                  variant="light"
+                  key={channel.id}
+                >
                   <ButtonGroup className="w-100">
                     <Button
-                      className="w-100 rounded-0 text-start"
-                      variant="light"
+                      className="w-100 rounded-0 text-start text-truncate"
+                      variant={channel.id === channelId ? 'secondary' : 'light'}
                       name={channel.name}
                       onClick={() => dispatch(setChannel(channel.id))}
                     >
@@ -135,8 +137,12 @@ const ChatPage = () => {
 
                     {channel.removable ? (
                       <Dropdown>
-                        <Dropdown.Toggle split className="flex-grow-0" variant="light">
-                          <span className="visually-hidden">Управление каналом</span>
+                        <Dropdown.Toggle
+                          split
+                          className="class=flex-grow-0 dropdown-toggle dropdown-toggle-split btn btn-secondary"
+                          variant={channel.id === channelId ? 'secondary' : 'light'}
+                        >
+                          <span className="visually-hidden">{t('interface.make')}</span>
                         </Dropdown.Toggle>
                         <Dropdown.Menu>
                           <Dropdown.Item eventKey="1" onClick={() => handleDeleteChannelButton(channel.id)}>{t('interface.deleteButton')}</Dropdown.Item>
@@ -151,7 +157,10 @@ const ChatPage = () => {
             </ListGroup>
 
           </Col>
-          <Col sm={8} className="col p-0 h-100">
+          <Col
+            sm={8}
+            className="col p-0 h-100"
+          >
             {selectedChannel && <ChatWindow channel={selectedChannel} />}
           </Col>
         </div>
