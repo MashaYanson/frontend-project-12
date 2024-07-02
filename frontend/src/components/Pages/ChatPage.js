@@ -146,7 +146,6 @@ const ChatPage = () => {
                         className="rounded-0 dropdown-toggle-split"
                       >
 
-                        <span className="dropdown-toggle visually-hidden">Управление каналом</span>
                         <Dropdown.Item
                           onClick={() => handleDeleteChannelButton(channel.id)}
                           eventKey="1"
