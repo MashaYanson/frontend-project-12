@@ -67,9 +67,10 @@ const LoginForm = () => {
               <h1 className="text-center mb-3">Войти</h1>
               <Form.Group className="mb-3">
                 <FloatingLabel
+                  controlId="username"
+                  className="mb-3"
                   label={t('interface.nickName')}
                 >
-
                   <Form.Control
                     type="text"
                     id="username"
@@ -83,6 +84,8 @@ const LoginForm = () => {
               </Form.Group>
               <Form.Group className="mb-3">
                 <FloatingLabel
+                  controlId="password"
+                  className="mb-3"
                   label={t('interface.password')}
                 >
                   <Form.Control
