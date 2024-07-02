@@ -29,7 +29,7 @@ const LoginForm = () => {
     },
     validationSchema: validationLoginSchema,
 
-    onSubmit: async (values) => {
+    onSubmit: async (values, { setFieldError }) => {
       instance.post('/login', values)
         .then((res) => {
           console.log(res);
@@ -38,7 +38,10 @@ const LoginForm = () => {
           dipatch(addUser(res.data));
           navigate(routes.chatPagePath());
         })
-        .catch(() => {
+        .catch((err) => {
+          if (err.response.status === 401) {
+            setFieldError('username', t('interface.invalidCredentials'));
+          }
           setInvalid(true);
         });
     },
