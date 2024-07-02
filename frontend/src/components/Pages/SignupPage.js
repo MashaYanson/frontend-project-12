@@ -78,7 +78,7 @@ const SignupForm = () => {
                     </h1>
                     <Form.Group>
                       <FloatingLabel
-                        // controlId="username"
+                        controlId="username"
                         label={t('interface.username')}
                         className="mb-3"
                       >
@@ -100,7 +100,7 @@ const SignupForm = () => {
                     </Form.Group>
                     <Form.Group>
                       <FloatingLabel
-                        // controlId="password"
+                        controlId="password"
                         label={t('interface.password')}
                         className="mb-3"
                       >
@@ -121,7 +121,7 @@ const SignupForm = () => {
                     </Form.Group>
                     <Form.Group>
                       <FloatingLabel
-                        // controlId="confirm_password"
+                        controlId="confirm_password"
                         label={t('interface.confirmPassword')}
                         className="mb-3"
                       >
