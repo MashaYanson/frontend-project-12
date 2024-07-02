@@ -25,7 +25,7 @@ import ModalChangeChannelName from '../Modals/ModalChangeChannelName';
 filter.clearList();
 filter.add(filter.getDictionary('ru'));
 filter.add(filter.getDictionary('en'));
-filter.add('boop');
+filter.add('boobs');
 
 const ChatPage = () => {
   const { t } = useTranslation();

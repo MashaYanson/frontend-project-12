@@ -1,8 +1,8 @@
 /* eslint-disable max-len */
-import React, { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import React, { useState } from 'react';
+import { useSelector } from 'react-redux';
+import filter from 'leo-profanity';
 import instance from '../utils/axios';
-import { addAllMessages } from '../store/messageSlice';
 import getMessageCountText from '../utils/getMessageCountText';
 
 const ChatWindow = ({ channel }) => {
@@ -38,7 +38,7 @@ const ChatWindow = ({ channel }) => {
             <b>{msg.username}</b>
             :
             {' '}
-            {msg.body}
+            {filter.clean(msg.body)}
           </div>
         ))}
       </div>
