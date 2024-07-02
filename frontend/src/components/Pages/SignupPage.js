@@ -133,7 +133,9 @@ const SignupForm = () => {
                           onBlur={formik.handleBlur}
                           value={formik.values.confirm_password}
                           placeholder={t('interface.confirmPassword')}
-                          isInvalid={!!formik.errors.confirm_password && formik.touched.confirm_password}
+                          isInvalid={
+                          !!formik.errors.confirm_password && formik.touched.confirm_password
+                        }
                         />
                         <Form.Control.Feedback type="invalid">
                           {formik.errors.confirm_password}

@@ -1,4 +1,3 @@
-/* eslint-disable react/no-unstable-nested-components,max-len */
 import React, { useEffect, useMemo, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import {

@@ -17,10 +17,7 @@ import PageLayout from './components/PageLayout';
 
 const protetedLoader = () => {
   const userString = localStorage.getItem('user_data');
-  if (userString) {
-    return null;
-  }
-  return redirect(routes.loginPagePath());
+  return userString ? null : redirect(routes.loginPagePath());
 };
 const router = createBrowserRouter([
   {

@@ -1,12 +1,10 @@
-/* eslint-disable import/no-cycle */
-
 import i18next from 'i18next';
 import { I18nextProvider, initReactI18next } from 'react-i18next';
 import { Provider } from 'react-redux';
 import React from 'react';
 import { ToastContainer } from 'react-toastify';
 import { Provider as RollbarProvider, ErrorBoundary } from '@rollbar/react';
-import { rollbarConfig } from './rollbarConfig';
+import rollbarConfig from './rollbarConfig';
 import translationRU from './locales/ru.js';
 import translationENG from './locales/eng.js';
 import store from './store/store';
