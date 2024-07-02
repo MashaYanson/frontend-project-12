@@ -55,6 +55,9 @@ const SignupForm = () => {
           if (err.response.status === 409) {
             setFieldError('username', t('errors.usernameExists'));
           }
+          if (err.response.status === 401) {
+            setFieldError('username', t('interface.invalidCredentials'));
+          }
         });
     },
   });
