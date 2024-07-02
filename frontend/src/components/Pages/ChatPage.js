@@ -3,7 +3,7 @@ import React, { useEffect, useMemo, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import {
   ButtonGroup,
-  Col, DropdownButton, ListGroup,
+  Col, DropdownButton, DropdownItem, ListGroup,
 } from 'react-bootstrap';
 import Dropdown from 'react-bootstrap/Dropdown';
 import Button from 'react-bootstrap/Button';
@@ -133,33 +133,18 @@ const ChatPage = () => {
                     </Button>
 
                     {channel.removable ? (
-                      <DropdownButton
-                        as={({ children }) => (
-                          <ButtonGroup>
-                            <span className="dropdown-toggle visually-hidden">Управление каналом</span>
-                            {children}
-                          </ButtonGroup>
-                        )}
-                        variant="light"
-                        title=""
-                        id="bg-nested-dropdown"
-                        className="rounded-0 dropdown-toggle-split"
-                      >
-
-                        <Dropdown.Item
-                          onClick={() => handleDeleteChannelButton(channel.id)}
-                          eventKey="1"
-                        >
-                          {t('interface.deleteButton')}
-                        </Dropdown.Item>
-                        <Dropdown.Item
-                          onClick={() => handleChangeChannelName(channel.id)}
-                          eventKey="1"
-                        >
-                          {t('interface.renameButton')}
-                        </Dropdown.Item>
-
-                      </DropdownButton>
+                      <Dropdown>
+                        <Dropdown.Toggle split className="flex-grow-0" variant="light">
+                          <span className="visually-hidden">Управление каналом</span>
+                        </Dropdown.Toggle>
+                        <Dropdown.Menu>
+                          <Dropdown.Item eventKey="1" onClick={() => handleDeleteChannelButton(channel.id)}>{t('interface.deleteButton')}</Dropdown.Item>
+                          <Dropdown.Item eventKey="2" onClick={() => handleChangeChannelName(channel.id)}>
+                            {' '}
+                            {t('interface.renameButton')}
+                          </Dropdown.Item>
+                        </Dropdown.Menu>
+                      </Dropdown>
                     ) : null }
                   </ButtonGroup>
                 </ListGroup.Item>
