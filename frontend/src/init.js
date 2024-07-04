@@ -18,9 +18,10 @@ const resources = {
     translation: translationRU,
   },
 };
-export const i18n = i18next.createInstance();
 
 const init = async () => {
+  const i18n = i18next.createInstance();
+
   await i18n
     .use(initReactI18next)
     .init({
@@ -31,7 +32,7 @@ const init = async () => {
   return (
     <RollbarProvider config={rollbarConfig}>
       <ErrorBoundary>
-        <I18nextProvider i18n={i18n}>
+        <I18nextProvider i18n={init}>
           <Provider store={store}>
             <App />
             <ToastContainer />
