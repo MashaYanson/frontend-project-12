@@ -1,9 +1,10 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { toast } from 'react-toastify';
 import instance from '../utils/axios';
 
-export default function useInterceptors() {
+const InterceptorsProvider = ({ children }) => {
+  const [init, setInit] = useState(false);
   const { t } = useTranslation();
   useEffect(() => {
     instance.interceptors.request.use((config) => {
@@ -16,9 +17,7 @@ export default function useInterceptors() {
       return config;
     }, (error) => Promise.reject(error));
     instance.interceptors.response.use(
-      (response) =>
-      // eslint-disable-next-line implicit-arrow-linebreak
-        response,
+      (response) => response,
       (error) => {
         if (!error.response || !error.response?.status) {
           // Ошибка сети или таймаут
@@ -49,5 +48,9 @@ export default function useInterceptors() {
         return Promise.reject(error);
       },
     );
+    setInit(true);
   }, [t]);
-}
+  return init ? children : null;
+};
+
+export default InterceptorsProvider;
