@@ -95,7 +95,7 @@ const ChatPage = () => {
     // получение сообщений
     // новое сообщение
     socketIo.on('newMessage', (payload) => {
-      console.log('socet');
+      console.log('socket');
       dispatch(addMessage({ channelId: payload.channelId, message: { ...payload } }));
     });
     socketIo.on('newChannel', (payload) => {
@@ -108,7 +108,8 @@ const ChatPage = () => {
     socketIo.on('renameChannel', (payload) => {
       dispatch(editChannel(payload));
     });
-  }, [dispatch]);
+    return () => { console.log('return'); };
+  }, []);
 
   return (
     <div className="h-100 p-5">

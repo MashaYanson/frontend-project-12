@@ -9,7 +9,6 @@ import translationRU from './locales/ru.js';
 import translationENG from './locales/eng.js';
 import store from './store/store';
 import App from './App';
-import InterceptorsProvider from './components/InterceptorsProvider';
 
 const resources = {
   en: {
@@ -33,12 +32,10 @@ const init = async () => {
   return (
     <RollbarProvider config={rollbarConfig}>
       <ErrorBoundary>
-        <I18nextProvider i18n={i18n}>
+        <I18nextProvider i18n={init}>
           <Provider store={store}>
-            <InterceptorsProvider>
-              <App />
-              <ToastContainer />
-            </InterceptorsProvider>
+            <App />
+            <ToastContainer />
           </Provider>
         </I18nextProvider>
       </ErrorBoundary>

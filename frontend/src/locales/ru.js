@@ -43,5 +43,10 @@ export default {
     placholderNickname: 'Ваш ник',
     notFoundMessage: 'Страница не найдена',
   },
+  messagesCounter: {
+    count_one: '{{count}} сообщение',
+    count_few: '{{count}} сообщения',
+    count_many: '{{count}} сообщений',
+  },
   test: 'test_works',
 };

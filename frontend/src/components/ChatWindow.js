@@ -2,10 +2,11 @@
 import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
 import filter from 'leo-profanity';
+import { useTranslation } from 'react-i18next';
 import instance from '../utils/axios';
-import getMessageCountText from '../utils/getMessageCountText';
 
 const ChatWindow = ({ channel }) => {
+  const { t } = useTranslation();
   const { name } = channel;
   const [message, setMessage] = useState('');
   const userName = useSelector((state) => state.user.username);
@@ -27,9 +28,7 @@ const ChatWindow = ({ channel }) => {
           {name}
         </b>
         <div>
-          {messages.length}
-          {' '}
-          {getMessageCountText(messages.length)}
+          {t('messagesCounter.count', { count: messages.length })}
         </div>
       </div>
       <div className="chat-messages overflow-auto px-5">
