@@ -15,7 +15,6 @@ import {
   addChannel, editChannel, removeChannel, setChannel, updateChannels,
 } from '../../store/channelSlice';
 import ChatWindow from '../ChatWindow';
-import socketIo from '../../utils/socket';
 import { addAllMessages, addMessage, deleteChannelMessages } from '../../store/messageSlice';
 import AddButton from '../Buttons/AddButton';
 import ModalAddChannel from '../Modals/ModalAddChannel';
@@ -24,7 +23,7 @@ import ModalChangeChannelName from '../Modals/ModalChangeChannelName';
 import DataContext from '../DataContext';
 
 const ChatPage = () => {
-  const { filter } = useContext(DataContext);
+  const { filter, socket } = useContext(DataContext);
   const { t } = useTranslation();
   const channelId = useSelector((state) => state.channels.channelId);
   const [showModal, setShowModal] = useState(false);
@@ -92,18 +91,18 @@ const ChatPage = () => {
 
     // получение сообщений
     // новое сообщение
-    socketIo.on('newMessage', (payload) => {
+    socket.on('newMessage', (payload) => {
       console.log('socket');
       dispatch(addMessage({ channelId: payload.channelId, message: { ...payload } }));
     });
-    socketIo.on('newChannel', (payload) => {
+    socket.on('newChannel', (payload) => {
       dispatch(addChannel(payload));
     });
-    socketIo.on('removeChannel', (payload) => {
+    socket.on('removeChannel', (payload) => {
       dispatch(removeChannel(payload.id));
       dispatch(deleteChannelMessages(payload.id));
     });
-    socketIo.on('renameChannel', (payload) => {
+    socket.on('renameChannel', (payload) => {
       dispatch(editChannel(payload));
     });
     return () => { console.log('return'); };

@@ -5,6 +5,7 @@ import React from 'react';
 import { ToastContainer } from 'react-toastify';
 import { Provider as RollbarProvider, ErrorBoundary } from '@rollbar/react';
 import filter from 'leo-profanity';
+import { io } from 'socket.io-client';
 import rollbarConfig from './rollbarConfig';
 import translationRU from './locales/ru.js';
 import translationENG from './locales/eng.js';
@@ -17,6 +18,8 @@ filter.clearList();
 filter.add(filter.getDictionary('ru'));
 filter.add(filter.getDictionary('en'));
 filter.add('boobs');
+
+const socket = io();
 
 const resources = {
   en: {
@@ -41,7 +44,7 @@ const init = async () => {
     <RollbarProvider config={rollbarConfig}>
       <ErrorBoundary>
         <I18nextProvider i18n={i18n}>
-          <DataContext.Provider value={{ filter }}>
+          <DataContext.Provider value={{ filter, socket }}>
             <Provider store={store}>
               <InterceptorsProvider>
                 <App />
