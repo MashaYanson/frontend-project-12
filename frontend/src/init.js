@@ -4,12 +4,19 @@ import { Provider } from 'react-redux';
 import React from 'react';
 import { ToastContainer } from 'react-toastify';
 import { Provider as RollbarProvider, ErrorBoundary } from '@rollbar/react';
+import filter from 'leo-profanity';
 import rollbarConfig from './rollbarConfig';
 import translationRU from './locales/ru.js';
 import translationENG from './locales/eng.js';
 import store from './store/store';
 import App from './App';
 import InterceptorsProvider from './components/InterceptorsProvider';
+import DataContext from './components/DataContext';
+
+filter.clearList();
+filter.add(filter.getDictionary('ru'));
+filter.add(filter.getDictionary('en'));
+filter.add('boobs');
 
 const resources = {
   en: {
@@ -34,12 +41,14 @@ const init = async () => {
     <RollbarProvider config={rollbarConfig}>
       <ErrorBoundary>
         <I18nextProvider i18n={i18n}>
-          <Provider store={store}>
-            <InterceptorsProvider>
-              <App />
-              <ToastContainer />
-            </InterceptorsProvider>
-          </Provider>
+          <DataContext.Provider value={{ filter }}>
+            <Provider store={store}>
+              <InterceptorsProvider>
+                <App />
+                <ToastContainer />
+              </InterceptorsProvider>
+            </Provider>
+          </DataContext.Provider>
         </I18nextProvider>
       </ErrorBoundary>
     </RollbarProvider>

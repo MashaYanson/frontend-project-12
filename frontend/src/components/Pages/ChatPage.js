@@ -1,4 +1,6 @@
-import React, { useEffect, useMemo, useState } from 'react';
+import React, {
+  useContext, useEffect, useMemo, useState,
+} from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import {
   ButtonGroup,
@@ -8,7 +10,6 @@ import Dropdown from 'react-bootstrap/Dropdown';
 import Button from 'react-bootstrap/Button';
 import { useTranslation } from 'react-i18next';
 import { toast } from 'react-toastify';
-import filter from 'leo-profanity';
 import instance from '../../utils/axios';
 import {
   addChannel, editChannel, removeChannel, setChannel, updateChannels,
@@ -20,13 +21,10 @@ import AddButton from '../Buttons/AddButton';
 import ModalAddChannel from '../Modals/ModalAddChannel';
 import ModalRemoveChannel from '../Modals/ModalRemoveChannel';
 import ModalChangeChannelName from '../Modals/ModalChangeChannelName';
-
-filter.clearList();
-filter.add(filter.getDictionary('ru'));
-filter.add(filter.getDictionary('en'));
-filter.add('boobs');
+import DataContext from '../DataContext';
 
 const ChatPage = () => {
+  const { filter } = useContext(DataContext);
   const { t } = useTranslation();
   const channelId = useSelector((state) => state.channels.channelId);
   const [showModal, setShowModal] = useState(false);
