@@ -102,5 +102,4 @@ const App = () => {
     init ? <RouterProvider router={router} /> : null
   );
 };
-
 export default App;
