@@ -9,7 +9,7 @@ const ChatWindow = ({ channel }) => {
   const { t } = useTranslation();
   const { name } = channel;
   const [message, setMessage] = useState('');
-  const userName = useSelector((state) => state.user.username);
+  const userName = useSelector((state) => state.user.userData.username);
   const messages = useSelector((state) => state.messages.data[channel.id] || []);
 
   const handleSubmit = (e) => {

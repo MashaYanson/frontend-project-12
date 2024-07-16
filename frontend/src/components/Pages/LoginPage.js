@@ -9,7 +9,7 @@ import { useTranslation } from 'react-i18next';
 import * as Yup from 'yup';
 import FloatingLabel from 'react-bootstrap/FloatingLabel';
 import routes from '../../routes';
-import { addUser } from '../../store/userSlice';
+import { logIn } from '../../store/userSlice';
 import instance from '../../utils/axios';
 
 const LoginForm = () => {
@@ -35,7 +35,7 @@ const LoginForm = () => {
         .then((res) => {
           setInvalid(false);
           localStorage.setItem('user_data', JSON.stringify(res.data));
-          dipatch(addUser(res.data));
+          dipatch(logIn(res.data));
           navigate(routes.chatPagePath());
         })
         .catch((err) => {

@@ -12,8 +12,8 @@ import FloatingLabel from 'react-bootstrap/FloatingLabel';
 import * as Yup from 'yup';
 import { useTranslation } from 'react-i18next';
 import routes from '../../routes';
-import { addUser } from '../../store/userSlice';
 import instance from '../../utils/axios';
+import { logIn } from '../../store/userSlice';
 
 const SignupForm = () => {
   const { t } = useTranslation();
@@ -43,7 +43,7 @@ const SignupForm = () => {
       instance.post('/signup', values)
         .then((res) => {
           localStorage.setItem('user_data', JSON.stringify(res.data));
-          dipatch(addUser(res.data));
+          dipatch(logIn(res.data));
           navigate(routes.chatPagePath());
         })
         .catch((err) => {

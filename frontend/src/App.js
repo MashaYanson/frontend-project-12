@@ -2,31 +2,26 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import {
   createBrowserRouter,
   RouterProvider,
-  redirect,
 } from 'react-router-dom';
 import './App.css';
-import React, { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import React, { useEffect, useState } from 'react';
+import { useDispatch } from 'react-redux';
 import { toast } from 'react-toastify';
 import { useTranslation } from 'react-i18next';
 import ChatPage from './components/Pages/ChatPage';
 import LoginPage from './components/Pages/LoginPage';
 import NotFoundPage from './components/Pages/NotFoundPage';
 import routes from './routes';
-import { addUser } from './store/userSlice';
 import SignupForm from './components/Pages/SignupPage';
 import PageLayout from './components/PageLayout';
 import instance from './utils/axios';
+import PrivateRoute from './components/PrivateRoute';
+import { logIn } from './store/userSlice';
 
-const protetedLoader = () => {
-  const userString = localStorage.getItem('user_data');
-  return userString ? null : redirect(routes.loginPagePath());
-};
 const router = createBrowserRouter([
   {
     path: '/',
-    element: <PageLayout authrized><ChatPage /></PageLayout>,
-    loader: protetedLoader,
+    element: <PrivateRoute><PageLayout authrized><ChatPage /></PageLayout></PrivateRoute>,
   },
   {
     path: routes.loginPagePath(),
@@ -49,7 +44,7 @@ const router = createBrowserRouter([
 const App = () => {
   const { t } = useTranslation();
   const dispatch = useDispatch();
-  const userName = useSelector((state) => state.user.username);
+  const [init, setInit] = useState(false);
   useEffect(() => {
     instance.interceptors.request.use((config) => {
       const userData = localStorage.getItem('user_data');
@@ -97,13 +92,14 @@ const App = () => {
   }, [t]);
   useEffect(() => {
     const userString = localStorage.getItem('user_data');
-    if (!userName && userString) {
+    if (userString) {
       const userData = JSON.parse(userString);
-      dispatch(addUser((userData)));
+      dispatch(logIn(userData));
+      setInit(true);
     }
-  }, [userName, dispatch]);
+  }, [dispatch]);
   return (
-    <RouterProvider router={router} />
+    init ? <RouterProvider router={router} /> : null
   );
 };
 
