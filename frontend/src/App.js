@@ -95,8 +95,8 @@ const App = () => {
     if (userString) {
       const userData = JSON.parse(userString);
       dispatch(logIn(userData));
-      setInit(true);
     }
+    setInit(true);
   }, [dispatch]);
   return (
     init ? <RouterProvider router={router} /> : null
