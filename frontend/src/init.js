@@ -14,13 +14,6 @@ import App from './App';
 import InterceptorsProvider from './components/InterceptorsProvider';
 import DataContext from './components/DataContext';
 
-filter.clearList();
-filter.add(filter.getDictionary('ru'));
-filter.add(filter.getDictionary('en'));
-filter.add('boobs');
-
-const socket = io();
-
 const resources = {
   en: {
     translation: translationENG,
@@ -39,6 +32,13 @@ const init = async () => {
       resources,
       fallbackLng: 'ru',
     });
+
+  filter.clearList();
+  filter.add(filter.getDictionary('ru'));
+  filter.add(filter.getDictionary('en'));
+  filter.add('boobs');
+
+  const socket = io();
 
   return (
   // <RollbarProvider config={rollbarConfig}>
