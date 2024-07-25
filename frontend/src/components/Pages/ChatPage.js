@@ -93,7 +93,7 @@ const ChatPage = () => {
     // новое сообщение
     socket.on('newMessage', (payload) => {
       console.log('socket');
-      dispatch(addMessage({ channelId: payload.channelId, message: { ...payload } }));
+      dispatch(addMessage(payload));
     });
     socket.on('newChannel', (payload) => {
       dispatch(addChannel(payload));

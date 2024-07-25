@@ -1,29 +1,19 @@
 /* eslint-disable no-param-reassign */
 import { createSlice } from '@reduxjs/toolkit';
 
-const initialState = { data: {} };
+const initialState = { data: [] };
 
 export const messageSlice = createSlice({
   name: 'messages',
   initialState,
   reducers: {
     addMessage: (state, action) => {
-      const { channelId, message } = action.payload;
-      if (state.data[channelId]) {
-        state.data[channelId].push(message);
-      } else {
-        state.data[channelId] = [];
-        state.data[channelId].push(message);
-      }
+      state.data.push(action.payload);
     },
     addAllMessages: (state, action) => {
-      const messages = action.payload;
-      messages.forEach((message) => {
-        if (!state.data[message.channelId]) {
-          state.data[message.channelId] = [];
-        }
-        state.data[message.channelId].push(message);
-      });
+      console.log('!');
+      console.log(action);
+      state.data = action.payload;
     },
     deleteChannelMessages: (state, action) => {
       // state.data[action.payload] = [];

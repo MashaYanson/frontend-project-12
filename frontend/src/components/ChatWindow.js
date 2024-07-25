@@ -10,7 +10,7 @@ const ChatWindow = ({ channel }) => {
   const { name } = channel;
   const [message, setMessage] = useState('');
   const userName = useSelector((state) => state.user.userData.username);
-  const messages = useSelector((state) => state.messages.data[channel.id] || []);
+  const messages = useSelector((state) => state.messages.data.filter((msg) => channel.id === msg.channelId));
 
   const handleSubmit = (e) => {
     e.preventDefault();
