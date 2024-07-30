@@ -9,10 +9,10 @@ import { io } from 'socket.io-client';
 import rollbarConfig from './rollbarConfig';
 import translationRU from './locales/ru.js';
 import translationENG from './locales/eng.js';
-import store from './store/store';
 import App from './App';
 import InterceptorsProvider from './components/InterceptorsProvider';
 import DataContext from './components/DataContext';
+import createStore from './store/store';
 
 const resources = {
   en: {
@@ -24,6 +24,7 @@ const resources = {
 };
 
 const init = async () => {
+  const store = createStore();
   const i18n = i18next.createInstance();
 
   await i18n

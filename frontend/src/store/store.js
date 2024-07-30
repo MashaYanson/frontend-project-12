@@ -3,11 +3,11 @@ import userReducer from './userSlice';
 import channelReducer from './channelSlice';
 import messagesReducer from './messageSlice';
 
-const store = configureStore({
+const createStore = () => configureStore({
   reducer: {
     user: userReducer,
     channels: channelReducer,
     messages: messagesReducer,
   },
 });
-export default store;
+export default createStore;
