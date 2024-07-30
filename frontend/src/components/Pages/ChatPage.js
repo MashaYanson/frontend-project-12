@@ -1,5 +1,5 @@
 import React, {
-  useContext, useEffect, useMemo, useState,
+  useEffect, useMemo, useState,
 } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import {
@@ -20,10 +20,11 @@ import AddButton from '../Buttons/AddButton';
 import ModalAddChannel from '../Modals/ModalAddChannel';
 import ModalRemoveChannel from '../Modals/ModalRemoveChannel';
 import ModalChangeChannelName from '../Modals/ModalChangeChannelName';
-import DataContext from '../DataContext';
+import useFilter from '../../hooks/useFilter';
 
 const ChatPage = () => {
-  const { filter } = useContext(DataContext);
+  const filter = useFilter();
+
   const { t } = useTranslation();
   const channelId = useSelector((state) => state.channels.channelId);
   const [showModal, setShowModal] = useState(false);

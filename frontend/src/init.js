@@ -4,7 +4,7 @@ import { Provider } from 'react-redux';
 import React from 'react';
 import { ToastContainer } from 'react-toastify';
 import { Provider as RollbarProvider, ErrorBoundary } from '@rollbar/react';
-import filter from 'leo-profanity';
+// import filter from 'leo-profanity';
 import { io } from 'socket.io-client';
 import rollbarConfig from './rollbarConfig';
 import translationRU from './locales/ru.js';
@@ -13,10 +13,9 @@ import App from './App';
 import InterceptorsProvider from './components/InterceptorsProvider';
 import DataContext from './components/DataContext';
 import createStore from './store/store';
-import instance from './utils/axios';
-import { addAllMessages, addMessage, deleteChannelMessages } from './store/messageSlice';
+import { addMessage, deleteChannelMessages } from './store/messageSlice';
 import {
-  addChannel, editChannel, removeChannel, updateChannels,
+  addChannel, editChannel, removeChannel,
 } from './store/channelSlice';
 
 const resources = {
@@ -39,22 +38,22 @@ const init = async () => {
       fallbackLng: 'ru',
     });
 
-  filter.clearList();
-  filter.add(filter.getDictionary('ru'));
-  filter.add(filter.getDictionary('en'));
-  filter.add('boobs');
+  // filter.clearList();
+  // filter.add(filter.getDictionary('ru'));
+  // filter.add(filter.getDictionary('en'));
+  // filter.add('boobs');
 
   const socket = io();
 
-  instance.get('/channels')
-    .then((response) => {
-      store.dispatch(updateChannels(response.data));
-    });
-
-  instance.get('/messages')
-    .then((response) => {
-      store.dispatch(addAllMessages(response.data));
-    });
+  // instance.get('/channels')
+  //   .then((response) => {
+  //     store.dispatch(updateChannels(response.data));
+  //   });
+  //
+  // instance.get('/messages')
+  //   .then((response) => {
+  //     store.dispatch(addAllMessages(response.data));
+  //   });
 
   socket.on('newMessage', (payload) => {
     store.dispatch(addMessage(payload));
@@ -77,7 +76,7 @@ const init = async () => {
     <RollbarProvider config={rollbarConfig}>
       <ErrorBoundary>
         <I18nextProvider i18n={i18n}>
-          <DataContext.Provider value={{ filter, socket }}>
+          <DataContext.Provider value={{ socket }}>
             <Provider store={store}>
               <InterceptorsProvider>
                 <App />

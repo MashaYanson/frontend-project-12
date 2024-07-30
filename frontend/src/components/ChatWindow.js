@@ -1,11 +1,13 @@
 /* eslint-disable max-len */
 import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
-import filter from 'leo-profanity';
+// import filter from 'leo-profanity';
 import { useTranslation } from 'react-i18next';
 import instance from '../utils/axios';
+import useFilter from '../hooks/useFilter';
 
 const ChatWindow = ({ channel }) => {
+  const filter = useFilter();
   const { t } = useTranslation();
   const { name } = channel;
   const [message, setMessage] = useState('');
