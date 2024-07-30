@@ -12,10 +12,10 @@ import { useTranslation } from 'react-i18next';
 import { toast } from 'react-toastify';
 import instance from '../../utils/axios';
 import {
-  addChannel, editChannel, removeChannel, setChannel, updateChannels,
+  addChannel, editChannel, setChannel, updateChannels,
 } from '../../store/channelSlice';
 import ChatWindow from '../ChatWindow';
-import { addAllMessages, addMessage, deleteChannelMessages } from '../../store/messageSlice';
+import { addAllMessages } from '../../store/messageSlice';
 import AddButton from '../Buttons/AddButton';
 import ModalAddChannel from '../Modals/ModalAddChannel';
 import ModalRemoveChannel from '../Modals/ModalRemoveChannel';
@@ -23,7 +23,7 @@ import ModalChangeChannelName from '../Modals/ModalChangeChannelName';
 import DataContext from '../DataContext';
 
 const ChatPage = () => {
-  const { filter, socket } = useContext(DataContext);
+  const { filter } = useContext(DataContext);
   const { t } = useTranslation();
   const channelId = useSelector((state) => state.channels.channelId);
   const [showModal, setShowModal] = useState(false);
@@ -91,20 +91,20 @@ const ChatPage = () => {
 
     // получение сообщений
     // новое сообщение
-    socket.on('newMessage', (payload) => {
-      console.log('socket');
-      dispatch(addMessage(payload));
-    });
-    socket.on('newChannel', (payload) => {
-      dispatch(addChannel(payload));
-    });
-    socket.on('removeChannel', (payload) => {
-      dispatch(removeChannel(payload.id));
-      dispatch(deleteChannelMessages(payload.id));
-    });
-    socket.on('renameChannel', (payload) => {
-      dispatch(editChannel(payload));
-    });
+    // socket.on('newMessage', (payload) => {
+    //   console.log('socket');
+    //   dispatch(addMessage(payload));
+    // });
+    // socket.on('newChannel', (payload) => {
+    //   dispatch(addChannel(payload));
+    // });
+    // socket.on('removeChannel', (payload) => {
+    //   dispatch(removeChannel(payload.id));
+    //   dispatch(deleteChannelMessages(payload.id));
+    // });
+    // socket.on('renameChannel', (payload) => {
+    //   dispatch(editChannel(payload));
+    // });
     return () => { console.log('return'); };
   }, []);
 

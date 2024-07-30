@@ -13,6 +13,11 @@ import App from './App';
 import InterceptorsProvider from './components/InterceptorsProvider';
 import DataContext from './components/DataContext';
 import createStore from './store/store';
+import instance from './utils/axios';
+import { addAllMessages, addMessage, deleteChannelMessages } from './store/messageSlice';
+import {
+  addChannel, editChannel, removeChannel, updateChannels,
+} from './store/channelSlice';
 
 const resources = {
   en: {
@@ -40,6 +45,33 @@ const init = async () => {
   filter.add('boobs');
 
   const socket = io();
+
+  instance.get('/channels')
+    .then((response) => {
+      store.dispatch(updateChannels(response.data));
+    });
+
+  instance.get('/messages')
+    .then((response) => {
+      store.dispatch(addAllMessages(response.data));
+    });
+
+  socket.on('newMessage', (payload) => {
+    store.dispatch(addMessage(payload));
+  });
+
+  socket.on('newChannel', (payload) => {
+    store.dispatch(addChannel(payload));
+  });
+
+  socket.on('removeChannel', (payload) => {
+    store.dispatch(removeChannel(payload.id));
+    store.dispatch(deleteChannelMessages(payload.id));
+  });
+
+  socket.on('renameChannel', (payload) => {
+    store.dispatch(editChannel(payload));
+  });
 
   return (
     <RollbarProvider config={rollbarConfig}>
