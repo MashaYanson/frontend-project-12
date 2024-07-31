@@ -83,10 +83,6 @@ const ChatPage = () => {
   };
 
   useEffect(() => {
-    // instance.get('/channels', {
-    // }).then((response) => {
-    //   dispatch(updateChannels(response.data));
-    // });
     instance('get', '/channels').then((response) => {
       dispatch(updateChannels(response.data));
     });
