@@ -17,7 +17,7 @@ export const messageSlice = createSlice({
     },
     deleteChannelMessages: (state, action) => {
       // state.data[action.payload] = [];
-      delete state.data[action.payload];
+      state.data = state.data.filter((message) => action.channelId !== message.channelId);
     },
   },
 });

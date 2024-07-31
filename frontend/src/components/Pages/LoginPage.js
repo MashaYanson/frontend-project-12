@@ -10,7 +10,7 @@ import * as Yup from 'yup';
 import FloatingLabel from 'react-bootstrap/FloatingLabel';
 import routes from '../../routes';
 import { logIn } from '../../store/userSlice';
-import instance from '../../utils/axios';
+import { useInstance } from '../../utils/axios';
 
 const LoginForm = () => {
   const validationLoginSchema = Yup.object().shape({
@@ -21,6 +21,7 @@ const LoginForm = () => {
   });
   const navigate = useNavigate();
   const { t } = useTranslation();
+  const instance = useInstance();
   const [invalid, setInvalid] = useState(false);
   const dipatch = useDispatch();
   const formik = useFormik({
@@ -31,7 +32,7 @@ const LoginForm = () => {
     validationSchema: validationLoginSchema,
 
     onSubmit: async (values, { setFieldError }) => {
-      instance.post('/login', values)
+      instance('post', '/login', values)
         .then((res) => {
           setInvalid(false);
           localStorage.setItem('user_data', JSON.stringify(res.data));

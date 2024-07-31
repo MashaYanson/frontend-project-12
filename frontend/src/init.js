@@ -10,7 +10,6 @@ import rollbarConfig from './rollbarConfig';
 import translationRU from './locales/ru.js';
 import translationENG from './locales/eng.js';
 import App from './App';
-import InterceptorsProvider from './components/InterceptorsProvider';
 import DataContext from './components/DataContext';
 import createStore from './store/store';
 import { addMessage, deleteChannelMessages } from './store/messageSlice';
@@ -78,10 +77,8 @@ const init = async () => {
         <I18nextProvider i18n={i18n}>
           <DataContext.Provider value={{ socket }}>
             <Provider store={store}>
-              <InterceptorsProvider>
-                <App />
-                <ToastContainer />
-              </InterceptorsProvider>
+              <App />
+              <ToastContainer />
             </Provider>
           </DataContext.Provider>
         </I18nextProvider>

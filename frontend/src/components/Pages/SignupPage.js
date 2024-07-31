@@ -12,11 +12,12 @@ import FloatingLabel from 'react-bootstrap/FloatingLabel';
 import * as Yup from 'yup';
 import { useTranslation } from 'react-i18next';
 import routes from '../../routes';
-import instance from '../../utils/axios';
+import { useInstance } from '../../utils/axios';
 import { logIn } from '../../store/userSlice';
 
 const SignupForm = () => {
   const { t } = useTranslation();
+  const instance = useInstance();
   const SignupSchema = Yup.object().shape({
     username: Yup.string()
       .min(3, t('errors.invalidField'))
@@ -40,7 +41,7 @@ const SignupForm = () => {
     validationSchema: SignupSchema,
 
     onSubmit: async (values, { setFieldError }) => {
-      instance.post('/signup', values)
+      instance('post', '/signup', values)
         .then((res) => {
           localStorage.setItem('user_data', JSON.stringify(res.data));
           dipatch(logIn(res.data));

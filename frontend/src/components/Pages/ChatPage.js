@@ -10,7 +10,7 @@ import Dropdown from 'react-bootstrap/Dropdown';
 import Button from 'react-bootstrap/Button';
 import { useTranslation } from 'react-i18next';
 import { toast } from 'react-toastify';
-import instance from '../../utils/axios';
+import { useInstance } from '../../utils/axios';
 import {
   addChannel, editChannel, setChannel, updateChannels,
 } from '../../store/channelSlice';
@@ -26,6 +26,7 @@ const ChatPage = () => {
   const filter = useFilter();
 
   const { t } = useTranslation();
+  const instance = useInstance();
   const channelId = useSelector((state) => state.channels.channelId);
   const [showModal, setShowModal] = useState(false);
   const [showModalDelete, setShowModalDelete] = useState(false);
@@ -49,7 +50,7 @@ const ChatPage = () => {
   };
   const onSubmitChannel = (values, callBack) => {
     const newChannel = { name: values.name };
-    instance.post('/channels', newChannel).then((res) => {
+    instance('post', '/channels', newChannel).then((res) => {
       dispatch(addChannel(res.data));
       dispatch(setChannel(res.data.id));
       console.log('toast');
@@ -62,7 +63,7 @@ const ChatPage = () => {
 
   const onSubmitChangeChannel = (values, callBack) => {
     const editedChannel = { name: values.name };
-    instance.patch(`/channels/${values.id}`, editedChannel).then((res) => {
+    instance('patch', `/channels/${values.id}`, editedChannel).then((res) => {
       dispatch(editChannel(res.data));
       toast.success(t('interface.renameSuccess'), {
         position: 'top-right',
@@ -73,7 +74,7 @@ const ChatPage = () => {
 
   const handleSubmitDelete = () => {
     console.log('delete');
-    instance.delete(`/channels/${showModalDelete}`).then(() => {
+    instance('delete', `/channels/${showModalDelete}`).then(() => {
       handleCloseDeleteModal();
       toast.success(t('interface.deleteSuccess'), {
         position: 'top-right',
@@ -82,11 +83,16 @@ const ChatPage = () => {
   };
 
   useEffect(() => {
-    instance.get('/channels', {
-    }).then((response) => {
+    // instance.get('/channels', {
+    // }).then((response) => {
+    //   dispatch(updateChannels(response.data));
+    // });
+    instance('get', '/channels').then((response) => {
       dispatch(updateChannels(response.data));
     });
-    instance.get('/messages').then((response) => {
+    instance('get', '/messages').then((response) => {
+      console.log('!');
+      console.log(response);
       dispatch(addAllMessages(response.data));
     });
 
