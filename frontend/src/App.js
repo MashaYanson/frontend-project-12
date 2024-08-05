@@ -16,29 +16,23 @@ import PrivateRoute from './components/PrivateRoute';
 const router = createBrowserRouter([
   {
     path: '/',
-    element: <PageLayout />,
-    children: [
-      {
-        path: '',
-        element: <PrivateRoute><ChatPage /></PrivateRoute>,
-      },
-      {
-        path: routes.loginPagePath(),
-        element: <LoginPage />,
-      },
-      {
-        path: routes.notFoundPage(),
-        element: <NotFoundPage />,
-      },
-      {
-        path: routes.signupPagePath(),
-        element: <SignupForm />,
-      },
-      {
-        path: '*',
-        element: <NotFoundPage />,
-      },
-    ],
+    element: <PrivateRoute><PageLayout authrized><ChatPage /></PageLayout></PrivateRoute>,
+  },
+  {
+    path: routes.loginPagePath(),
+    element: <PageLayout><LoginPage /></PageLayout>,
+  },
+  {
+    path: routes.notFoundPage(),
+    element: <PageLayout><NotFoundPage /></PageLayout>,
+  },
+  {
+    path: routes.signupPagePath(),
+    element: <PageLayout><SignupForm /></PageLayout>,
+  },
+  {
+    path: '*',
+    element: <PageLayout><NotFoundPage /></PageLayout>,
   },
 ]);
 
