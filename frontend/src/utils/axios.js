@@ -39,19 +39,20 @@ export const useInstance = () => {
         toast.error(t('errors.unauthorizedAccess'), {
           position: 'top-right',
         });
-      } else if (status === 403) {
-        toast.error(t('errors.forbidden'), {
-          position: 'top-right',
-        });
-      } else if (status === 404) {
-        toast.error(t('errors.resourceNotFound'), {
-          position: 'top-right',
-        });
-      } else {
-        toast.error(t('errors.errorOccurred'), {
-          position: 'top-right',
-        });
       }
+      // else if (status === 403) {
+      //   toast.error(t('errors.forbidden'), {
+      //     position: 'top-right',
+      //   });
+      // } else if (status === 404) {
+      //   toast.error(t('errors.resourceNotFound'), {
+      //     position: 'top-right',
+      //   });
+      // } else {
+      //   toast.error(t('errors.errorOccurred'), {
+      //     position: 'top-right',
+      //   });
+      // }
       throw error;
     }
   };
