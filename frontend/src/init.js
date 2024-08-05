@@ -44,16 +44,6 @@ const init = async () => {
 
   const socket = io();
 
-  // instance.get('/channels')
-  //   .then((response) => {
-  //     store.dispatch(updateChannels(response.data));
-  //   });
-  //
-  // instance.get('/messages')
-  //   .then((response) => {
-  //     store.dispatch(addAllMessages(response.data));
-  //   });
-
   socket.on('newMessage', (payload) => {
     store.dispatch(addMessage(payload));
   });
