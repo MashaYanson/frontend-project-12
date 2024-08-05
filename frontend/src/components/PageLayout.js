@@ -2,7 +2,7 @@ import { Container, Navbar, Stack } from 'react-bootstrap';
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { deleteUser } from '../store/userSlice';
+import { deleteUser, logOut } from '../store/userSlice';
 import routes from '../routes';
 
 const PageLayout = ({ children }) => {
@@ -12,6 +12,7 @@ const PageLayout = ({ children }) => {
   const handleLogOut = () => {
     localStorage.removeItem('user_data');
     dispatch(deleteUser());
+    dispatch(logOut());
     navigate(routes.loginPagePath());
   };
   return (
