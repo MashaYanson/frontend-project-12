@@ -13,33 +13,9 @@ import SignupForm from './components/Pages/SignupPage';
 import PageLayout from './components/PageLayout';
 import PrivateRoute from './components/PrivateRoute';
 
-// const router = createBrowserRouter([
-//   {
-//     path: '/',
-//     element: <PrivateRoute><PageLayout authrized><ChatPage /></PageLayout></PrivateRoute>,
-//   },
-//   {
-//     path: routes.loginPagePath(),
-//     element: <PageLayout><LoginPage /></PageLayout>,
-//   },
-//   {
-//     path: routes.notFoundPage(),
-//     element: <PageLayout><NotFoundPage /></PageLayout>,
-//   },
-//   {
-//     path: routes.signupPagePath(),
-//     element: <PageLayout><SignupForm /></PageLayout>,
-//   },
-//   {
-//     path: '*',
-//     element: <PageLayout><NotFoundPage /></PageLayout>,
-//   },
-// ]);
-
 const App = () => {
   console.log('');
   return (
-  // <RouterProvider router={router} />
     <BrowserRouter>
       <PageLayout>
         <Routes>

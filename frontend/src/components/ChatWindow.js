@@ -1,7 +1,6 @@
 /* eslint-disable max-len */
 import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
-// import filter from 'leo-profanity';
 import { useTranslation } from 'react-i18next';
 import { useInstance } from '../utils/axios';
 import useFilter from '../hooks/useFilter';
@@ -18,7 +17,7 @@ const ChatWindow = ({ channel }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     const newMessage = { body: message, channelId: channel.id, username: userName };
-    instance('post', '/messages', newMessage).then(() => {
+    instance({ method: 'post', url: '/messages', data: newMessage }).then(() => {
       setMessage('');
     });
   };

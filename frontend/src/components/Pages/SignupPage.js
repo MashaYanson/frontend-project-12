@@ -41,7 +41,7 @@ const SignupForm = () => {
     validationSchema: SignupSchema,
 
     onSubmit: async (values, { setFieldError }) => {
-      instance('post', '/signup', values)
+      instance({ method: 'post', url: '/signup', data: values })
         .then((res) => {
           localStorage.setItem('user_data', JSON.stringify(res.data));
           dipatch(logIn(res.data));

@@ -50,7 +50,7 @@ const ChatPage = () => {
   };
   const onSubmitChannel = (values, callBack) => {
     const newChannel = { name: values.name };
-    instance('post', '/channels', newChannel).then((res) => {
+    instance({ method: 'post', url: '/channels', data: newChannel }).then((res) => {
       dispatch(addChannel(res.data));
       dispatch(setChannel(res.data.id));
       console.log('toast');
@@ -63,7 +63,7 @@ const ChatPage = () => {
 
   const onSubmitChangeChannel = (values, callBack) => {
     const editedChannel = { name: values.name };
-    instance('patch', `/channels/${values.id}`, editedChannel).then((res) => {
+    instance({ method: 'patch', url: `/channels/${values.id}`, data: editedChannel }).then((res) => {
       dispatch(editChannel(res.data));
       toast.success(t('interface.renameSuccess'), {
         position: 'top-right',
@@ -74,7 +74,7 @@ const ChatPage = () => {
 
   const handleSubmitDelete = () => {
     console.log('delete');
-    instance('delete', `/channels/${showModalDelete}`).then(() => {
+    instance({ method: 'delete', url: `/channels/${showModalDelete}` }).then(() => {
       handleCloseDeleteModal();
       toast.success(t('interface.deleteSuccess'), {
         position: 'top-right',
@@ -83,31 +83,14 @@ const ChatPage = () => {
   };
 
   useEffect(() => {
-    instance('get', '/channels').then((response) => {
+    instance({ method: 'get', url: '/channels' }).then((response) => {
       dispatch(updateChannels(response.data));
     });
-    instance('get', '/messages').then((response) => {
+    instance({ method: 'get', url: '/messages' }).then((response) => {
       console.log('!');
       console.log(response);
       dispatch(addAllMessages(response.data));
     });
-
-    // получение сообщений
-    // новое сообщение
-    // socket.on('newMessage', (payload) => {
-    //   console.log('socket');
-    //   dispatch(addMessage(payload));
-    // });
-    // socket.on('newChannel', (payload) => {
-    //   dispatch(addChannel(payload));
-    // });
-    // socket.on('removeChannel', (payload) => {
-    //   dispatch(removeChannel(payload.id));
-    //   dispatch(deleteChannelMessages(payload.id));
-    // });
-    // socket.on('renameChannel', (payload) => {
-    //   dispatch(editChannel(payload));
-    // });
     return () => { console.log('return'); };
   }, []);
 
