@@ -4,13 +4,12 @@ import { Provider } from 'react-redux';
 import React from 'react';
 import { ToastContainer } from 'react-toastify';
 import { Provider as RollbarProvider, ErrorBoundary } from '@rollbar/react';
-// import filter from 'leo-profanity';
+import filter from 'leo-profanity';
 import { io } from 'socket.io-client';
 import rollbarConfig from './rollbarConfig';
 import translationRU from './locales/ru.js';
 import translationENG from './locales/eng.js';
 import App from './App';
-import DataContext from './components/DataContext';
 import createStore from './store/store';
 import { addMessage, deleteChannelMessages } from './store/messageSlice';
 import {
@@ -37,10 +36,10 @@ const init = async () => {
       fallbackLng: 'ru',
     });
 
-  // filter.clearList();
-  // filter.add(filter.getDictionary('ru'));
-  // filter.add(filter.getDictionary('en'));
-  // filter.add('boobs');
+  filter.clearList();
+  filter.add(filter.getDictionary('ru'));
+  filter.add(filter.getDictionary('en'));
+  filter.add('boobs');
 
   const socket = io();
 
@@ -65,12 +64,10 @@ const init = async () => {
     <RollbarProvider config={rollbarConfig}>
       <ErrorBoundary>
         <I18nextProvider i18n={i18n}>
-          <DataContext.Provider value={{ socket }}>
-            <Provider store={store}>
-              <App />
-              <ToastContainer />
-            </Provider>
-          </DataContext.Provider>
+          <Provider store={store}>
+            <App />
+            <ToastContainer />
+          </Provider>
         </I18nextProvider>
       </ErrorBoundary>
     </RollbarProvider>
