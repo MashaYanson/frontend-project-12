@@ -1,13 +1,14 @@
 import { Container, Navbar, Stack } from 'react-bootstrap';
 import React from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { deleteUser } from '../store/userSlice';
 import routes from '../routes';
 
-const PageLayout = ({ children, authrized }) => {
+const PageLayout = ({ children }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const isLoggedIn = useSelector((state) => state.user.isLoggedIn);
   const handleLogOut = () => {
     localStorage.removeItem('user_data');
     dispatch(deleteUser());
@@ -18,7 +19,7 @@ const PageLayout = ({ children, authrized }) => {
       <Navbar className="bg-body-tertiary p-2 shadow-sm navbar navbar-expand-lg navbar-light bg-white">
         <Container>
           <Navbar.Brand href="/">Hexlet Chat</Navbar.Brand>
-          {authrized && (
+          {isLoggedIn && (
           <button
             onClick={handleLogOut}
             type="button"
