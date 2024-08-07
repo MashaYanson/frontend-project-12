@@ -1,4 +1,3 @@
-/* eslint-disable import/no-cycle */
 import axios from 'axios';
 import { useTranslation } from 'react-i18next';
 import { toast } from 'react-toastify';
@@ -12,24 +11,19 @@ export const useInstance = () => {
   const { t } = useTranslation();
 
   const newInstance = async (request) => {
-    const userData = localStorage.getItem('user_data');
-    const config = request.config ? request.config : {};
-    if (userData) {
-      const { token } = JSON.parse(userData);
-      config.headers = { Authorization: `Bearer ${token}` };
-    }
+    const userData = JSON.parse(localStorage.getItem('user_data'));
+    const authHeaders = userData
+      ? { Authorization: `Bearer ${userData.token}` }
+      : {};
     try {
-      const response = await instance({
-        method: request.method,
-        url: request.url,
-        data: request.data,
-        ...config,
+      return await instance({
+        ...request,
+        headers: { ...authHeaders, ...request.headers },
       });
-      return response;
     } catch (error) {
-      if (!error.response || !error.response?.status) {
+      if (!error.isAxiosError) {
         // Ошибка сети или таймаут
-        toast.error('нет статуса', {
+        toast.error(t('errors.unknownError'), {
           position: 'top-right',
         });
         return Promise.reject(error);
@@ -40,7 +34,6 @@ export const useInstance = () => {
           position: 'top-right',
         });
       }
-
       throw error;
     }
   };
