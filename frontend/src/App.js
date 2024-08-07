@@ -19,10 +19,9 @@ const App = () => {
     <BrowserRouter>
       <PageLayout>
         <Routes>
-          <Route path={routes.notFoundPage()} element={<NotFoundPage />} />
           <Route path={routes.signupPagePath()} element={<SignupForm />} />
           <Route path={routes.loginPagePath()} element={<LoginPage />} />
-          <Route path="/" element={<PrivateRoute><ChatPage /></PrivateRoute>} />
+          <Route path={routes.chatPagePath()} element={<PrivateRoute><ChatPage /></PrivateRoute>} />
           <Route path="*" element={<NotFoundPage />} />
         </Routes>
       </PageLayout>
