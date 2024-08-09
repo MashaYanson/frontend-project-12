@@ -51,7 +51,7 @@ const ChatWindow = ({ channel }) => {
               <div className="input-group has-validation">
                 <Field
                   name="message"
-                  aria-label={t('interface.placeholderEnterMessage')}
+                  aria-label={t('interface.ariaLabel')}
                   placeholder={t('interface.sendButton')}
                   className="border-0 p-0 ps-2 form-control"
                 />

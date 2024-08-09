@@ -42,6 +42,7 @@ export default {
     channelName: 'Имя канала',
     registrationButton: 'Зарегистрироваться',
     placeholderEnterMessage: 'Введите сообщение...',
+    ariaLabel: 'Новое сообщение',
     placholderNickname: 'Ваш ник',
     notFoundMessage: 'Страница не найдена',
   },
