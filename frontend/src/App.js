@@ -13,20 +13,17 @@ import SignupForm from './components/Pages/SignupPage';
 import PageLayout from './components/PageLayout';
 import PrivateRoute from './components/PrivateRoute';
 
-const App = () => {
-  console.log('');
-  return (
-    <BrowserRouter>
-      <PageLayout>
-        <Routes>
-          <Route path={routes.signupPagePath()} element={<SignupForm />} />
-          <Route path={routes.loginPagePath()} element={<LoginPage />} />
-          <Route path={routes.chatPagePath()} element={<PrivateRoute><ChatPage /></PrivateRoute>} />
-          <Route path="*" element={<NotFoundPage />} />
-        </Routes>
-      </PageLayout>
-    </BrowserRouter>
+const App = () => (
+  <BrowserRouter>
+    <PageLayout>
+      <Routes>
+        <Route path={routes.signupPagePath()} element={<SignupForm />} />
+        <Route path={routes.loginPagePath()} element={<LoginPage />} />
+        <Route path={routes.chatPagePath()} element={<PrivateRoute><ChatPage /></PrivateRoute>} />
+        <Route path="*" element={<NotFoundPage />} />
+      </Routes>
+    </PageLayout>
+  </BrowserRouter>
 
-  );
-};
+);
 export default App;
