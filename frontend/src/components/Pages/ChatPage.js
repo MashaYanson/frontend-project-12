@@ -9,12 +9,8 @@ import {
 import Dropdown from 'react-bootstrap/Dropdown';
 import Button from 'react-bootstrap/Button';
 import { useTranslation } from 'react-i18next';
-import { toast } from 'react-toastify';
 import { useInstance } from '../../utils/axios';
-import {
-  // addChannel,
-  editChannel, setChannel, updateChannels,
-} from '../../store/channelSlice';
+import { setChannel, updateChannels } from '../../store/channelSlice';
 import ChatWindow from '../ChatWindow';
 import { addAllMessages } from '../../store/messageSlice';
 import AddButton from '../Buttons/AddButton';
@@ -49,47 +45,12 @@ const ChatPage = () => {
   const handleChangeChannelName = (id) => {
     setShowModalChange(id);
   };
-  // const onSubmitChannel = (values, callBack) => {
-  //   const newChannel = { name: values.name };
-  //   instance({ method: 'post', url: '/channels', data: newChannel }).then((res) => {
-  //     dispatch(addChannel(res.data));
-  //     dispatch(setChannel(res.data.id));
-  //     console.log('toast');
-  //     toast.success(t('interface.addSuccess'), {
-  //       position: 'top-right',
-  //     });
-  //     callBack();
-  //   });
-  // };
-
-  const onSubmitChangeChannel = (values, callBack) => {
-    const editedChannel = { name: values.name };
-    instance({ method: 'patch', url: `/channels/${values.id}`, data: editedChannel }).then((res) => {
-      dispatch(editChannel(res.data));
-      toast.success(t('interface.renameSuccess'), {
-        position: 'top-right',
-      });
-      callBack();
-    });
-  };
-
-  const handleSubmitDelete = () => {
-    console.log('delete');
-    instance({ method: 'delete', url: `/channels/${showModalDelete}` }).then(() => {
-      handleCloseDeleteModal();
-      toast.success(t('interface.deleteSuccess'), {
-        position: 'top-right',
-      });
-    });
-  };
 
   useEffect(() => {
     instance({ method: 'get', url: '/channels' }).then((response) => {
       dispatch(updateChannels(response.data));
     });
     instance({ method: 'get', url: '/messages' }).then((response) => {
-      console.log('!');
-      console.log(response);
       dispatch(addAllMessages(response.data));
     });
     return () => { console.log('return'); };
@@ -158,20 +119,17 @@ const ChatPage = () => {
           show={showModal}
           onHide={handleCloseModal}
           existingChannelNames={existingNames}
-          // onSubmitChannel={onSubmitChannel}
         />
         <ModalRemoveChannel
           t={t}
           show={showModalDelete}
           onHide={handleCloseDeleteModal}
-          handleSubmitDelete={handleSubmitDelete}
         />
         <ModalChangeChannelName
           t={t}
           show={showModalChange}
           onHide={handleCloseModalChange}
           existingChannelNames={existingNames}
-          onSubmitChannel={onSubmitChangeChannel}
         />
       </div>
     </div>
