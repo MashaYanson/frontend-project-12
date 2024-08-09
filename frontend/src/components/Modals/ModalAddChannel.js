@@ -2,10 +2,28 @@ import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
+import { toast } from 'react-toastify';
+import { useDispatch } from 'react-redux';
+import { addChannel, setChannel } from '../../store/channelSlice';
+import instance from '../../utils/axios';
 
 const ModalAddChannel = ({
-  show, onHide, existingChannelNames, onSubmitChannel, t,
+  show, onHide, existingChannelNames, t,
 }) => {
+  const dispatch = useDispatch();
+
+  const onSubmitChannel = (values, callBack) => {
+    const newChannel = { name: values.name };
+    instance({ method: 'post', url: '/channels', data: newChannel }).then((res) => {
+      dispatch(addChannel(res.data));
+      dispatch(setChannel(res.data.id));
+      console.log('toast');
+      toast.success(t('interface.addSuccess'), {
+        position: 'top-right',
+      });
+      callBack();
+    });
+  };
   const AddChannelSchema = Yup.object().shape({
     name: Yup.string()
       .min(3, t('errors.invalidField'))

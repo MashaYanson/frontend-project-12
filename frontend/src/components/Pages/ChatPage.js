@@ -12,7 +12,7 @@ import { useTranslation } from 'react-i18next';
 import { toast } from 'react-toastify';
 import { useInstance } from '../../utils/axios';
 import {
-  addChannel, editChannel, setChannel, updateChannels,
+  editChannel, setChannel, updateChannels,
 } from '../../store/channelSlice';
 import ChatWindow from '../ChatWindow';
 import { addAllMessages } from '../../store/messageSlice';
@@ -48,18 +48,18 @@ const ChatPage = () => {
   const handleChangeChannelName = (id) => {
     setShowModalChange(id);
   };
-  const onSubmitChannel = (values, callBack) => {
-    const newChannel = { name: values.name };
-    instance({ method: 'post', url: '/channels', data: newChannel }).then((res) => {
-      dispatch(addChannel(res.data));
-      dispatch(setChannel(res.data.id));
-      console.log('toast');
-      toast.success(t('interface.addSuccess'), {
-        position: 'top-right',
-      });
-      callBack();
-    });
-  };
+  // const onSubmitChannel = (values, callBack) => {
+  //   const newChannel = { name: values.name };
+  //   instance({ method: 'post', url: '/channels', data: newChannel }).then((res) => {
+  //     dispatch(addChannel(res.data));
+  //     dispatch(setChannel(res.data.id));
+  //     console.log('toast');
+  //     toast.success(t('interface.addSuccess'), {
+  //       position: 'top-right',
+  //     });
+  //     callBack();
+  //   });
+  // };
 
   const onSubmitChangeChannel = (values, callBack) => {
     const editedChannel = { name: values.name };
@@ -157,7 +157,7 @@ const ChatPage = () => {
           show={showModal}
           onHide={handleCloseModal}
           existingChannelNames={existingNames}
-          onSubmitChannel={onSubmitChannel}
+          // onSubmitChannel={onSubmitChannel}
         />
         <ModalRemoveChannel
           t={t}
