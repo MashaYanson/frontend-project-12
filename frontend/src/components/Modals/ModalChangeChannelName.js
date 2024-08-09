@@ -36,8 +36,7 @@ const ModalChangeChannelName = ({
         </Modal.Header>
         <Modal.Body>
           <div>
-            {/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
-            <label className="visually-hidden" htmlFor="name">Имя канала</label>
+            <label className="visually-hidden" htmlFor="name">{t('interface.channelName')}</label>
             <input
               name="name"
               id="name"

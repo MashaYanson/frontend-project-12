@@ -112,8 +112,8 @@ const LoginForm = () => {
             </Form>
             <div className="card-footer p-4" style={{ marginBottom: '-15px' }}>
               <div className="text-center">
-                <span>Нет аккаунта? </span>
-                <Link to="/signup">Регистрация</Link>
+                <span>{t('interface.noAcc')}</span>
+                <Link to="/signup">{t('interface.registration')}</Link>
               </div>
             </div>
           </div>

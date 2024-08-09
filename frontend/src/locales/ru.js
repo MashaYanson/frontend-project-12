@@ -29,6 +29,7 @@ export default {
     logInButton: 'Войти',
     registration: 'Регистрация',
     username: 'Имя пользователя',
+    noAcc: 'Нет аккаунта? ',
     name: 'Имя',
     addSuccess: 'Канал создан',
     deleteSuccess: 'Канал удалён',
