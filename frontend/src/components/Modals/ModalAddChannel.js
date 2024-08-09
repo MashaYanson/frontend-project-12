@@ -8,9 +8,9 @@ const ModalAddChannel = ({
 }) => {
   const AddChannelSchema = Yup.object().shape({
     name: Yup.string()
-      .min(3, 'От 3 до 20 символов')
-      .max(20, 'От 3 до 20 символов')
-      .test('unique', 'Имя канала должно быть уникальным', (value) => !existingChannelNames.includes(value)),
+      .min(3, t('errors.invalidField'))
+      .max(20, t('errors.invalidField'))
+      .test('unique', t('errors.unique'), (value) => !existingChannelNames.includes(value)),
 
   });
   const formik = useFormik({

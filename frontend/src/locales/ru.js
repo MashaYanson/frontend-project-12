@@ -6,6 +6,7 @@ export default {
     rssExists: 'RSS уже существует',
     networkError: 'Ошибка сети',
     unknownError: 'Неизвестная ошибка',
+    unique: 'Имя канала должно быть уникальным',
     passwordConfirmationError: 'Пароли должны совпадать',
     networkErrorOrTimeout: 'Ошибка сети или истекло время ожидания. Пожалуйста, проверьте ваше соединение.',
     unauthorizedAccess: 'Несанкционированный доступ. Пожалуйста, войдите снова.',
