@@ -6,14 +6,16 @@ import { toast } from 'react-toastify';
 import { useDispatch } from 'react-redux';
 import { addChannel, setChannel } from '../../store/channelSlice';
 import instance from '../../utils/axios';
+import useFilter from '../../hooks/useFilter';
 
 const ModalAddChannel = ({
   show, onHide, existingChannelNames, t,
 }) => {
   const dispatch = useDispatch();
+  const filter = useFilter();
 
   const onSubmitChannel = (values, callBack) => {
-    const newChannel = { name: values.name };
+    const newChannel = { name: filter.clean(values.name) };
     instance({ method: 'post', url: '/channels', data: newChannel }).then((res) => {
       dispatch(addChannel(res.data));
       dispatch(setChannel(res.data.id));
