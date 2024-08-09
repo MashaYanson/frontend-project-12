@@ -7,23 +7,13 @@ import { Provider as RollbarProvider, ErrorBoundary } from '@rollbar/react';
 import filter from 'leo-profanity';
 import { io } from 'socket.io-client';
 import rollbarConfig from './rollbarConfig';
-import translationRU from './locales/ru.js';
-import translationENG from './locales/eng.js';
+import resources from './locales';
 import App from './App';
 import createStore from './store/store';
 import { addMessage, deleteChannelMessages } from './store/messageSlice';
 import {
   addChannel, editChannel, removeChannel,
 } from './store/channelSlice';
-
-const resources = {
-  en: {
-    translation: translationENG,
-  },
-  ru: {
-    translation: translationRU,
-  },
-};
 
 const init = async () => {
   const store = createStore();
