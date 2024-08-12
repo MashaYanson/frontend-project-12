@@ -3,11 +3,10 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 import { useTranslation } from 'react-i18next';
 import { Formik, Form, Field } from 'formik';
+import filter from 'leo-profanity';
 import { useInstance } from '../utils/axios';
-import useFilter from '../hooks/useFilter';
 
 const ChatWindow = ({ channel }) => {
-  const filter = useFilter();
   const { t } = useTranslation();
   const { name } = channel;
   const instance = useInstance();

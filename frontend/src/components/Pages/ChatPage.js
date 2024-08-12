@@ -9,6 +9,7 @@ import {
 import Dropdown from 'react-bootstrap/Dropdown';
 import Button from 'react-bootstrap/Button';
 import { useTranslation } from 'react-i18next';
+import filter from 'leo-profanity';
 import { useInstance } from '../../utils/axios';
 import { setChannel, updateChannels } from '../../store/channelSlice';
 import ChatWindow from '../ChatWindow';
@@ -17,11 +18,8 @@ import AddButton from '../Buttons/AddButton';
 import ModalAddChannel from '../Modals/ModalAddChannel';
 import ModalRemoveChannel from '../Modals/ModalRemoveChannel';
 import ModalChangeChannelName from '../Modals/ModalChangeChannelName';
-import useFilter from '../../hooks/useFilter';
 
 const ChatPage = () => {
-  const filter = useFilter();
-
   const { t } = useTranslation();
   const instance = useInstance();
   const channelId = useSelector((state) => state.channels.channelId);

@@ -4,18 +4,15 @@ import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import { toast } from 'react-toastify';
 import { useDispatch } from 'react-redux';
+import filter from 'leo-profanity';
 import { addChannel, setChannel } from '../../store/channelSlice';
 import { useInstance } from '../../utils/axios';
-import useFilter from '../../hooks/useFilter';
 
 const ModalAddChannel = ({
   show, onHide, existingChannelNames, t,
 }) => {
   const dispatch = useDispatch();
   const instance = useInstance();
-
-  const filter = useFilter();
-
   const onSubmitChannel = (values, callBack) => {
     const newChannel = { name: filter.clean(values.name) };
     instance({ method: 'post', url: '/channels', data: newChannel }).then((res) => {
