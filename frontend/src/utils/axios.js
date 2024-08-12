@@ -23,14 +23,14 @@ export const useInstance = () => {
     } catch (error) {
       if (!error.isAxiosError) {
         // Ошибка сети или таймаут
-        toast.error(t('errors.unknownError'), {
+        toast.error(t('unknownError'), {
           position: 'top-right',
         });
         return Promise.reject(error);
       }
       const { status } = error.response;
       if (status === 401) {
-        toast.error(t('errors.unauthorizedAccess'), {
+        toast.error(t('unauthorizedAccess'), {
           position: 'top-right',
         });
       }

@@ -22,7 +22,7 @@ const ModalAddChannel = ({
       dispatch(addChannel(res.data));
       dispatch(setChannel(res.data.id));
       console.log('toast');
-      toast.success(t('interface.addSuccess'), {
+      toast.success(t('addSuccess'), {
         position: 'top-right',
       });
       callBack();
@@ -30,9 +30,9 @@ const ModalAddChannel = ({
   };
   const AddChannelSchema = Yup.object().shape({
     name: Yup.string()
-      .min(3, t('errors.invalidField'))
-      .max(20, t('errors.invalidField'))
-      .test('unique', t('errors.unique'), (value) => !existingChannelNames.includes(value)),
+      .min(3, t('invalidField'))
+      .max(20, t('invalidField'))
+      .test('unique', t('unique'), (value) => !existingChannelNames.includes(value)),
 
   });
   const formik = useFormik({
@@ -54,13 +54,13 @@ const ModalAddChannel = ({
       <form className="" onSubmit={formik.handleSubmit}>
         <Modal.Header closeButton>
           <Modal.Title>
-            {t('interface.addChannel')}
+            {t('addChannel')}
           </Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <div>
             <label htmlFor="name">
-              {t('interface.channelName')}
+              {t('channelName')}
               :
             </label>
             <input
@@ -77,10 +77,10 @@ const ModalAddChannel = ({
         </Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" onClick={onHide}>
-            {t('interface.cancel')}
+            {t('cancel')}
           </Button>
           <Button variant="primary" type="submit">
-            {t('interface.sendButton')}
+            {t('sendButton')}
           </Button>
         </Modal.Footer>
       </form>

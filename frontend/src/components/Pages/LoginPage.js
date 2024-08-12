@@ -13,14 +13,15 @@ import { logIn } from '../../store/userSlice';
 import { useInstance } from '../../utils/axios';
 
 const LoginForm = () => {
+  const { t } = useTranslation();
+
   const validationLoginSchema = Yup.object().shape({
     username: Yup.string()
-      .required('Обязальное поле'),
+      .required(t('fieldRequired')),
     password: Yup.string()
-      .required('Обязальное поле'),
+      .required(t('fieldRequired')),
   });
   const navigate = useNavigate();
-  const { t } = useTranslation();
   const instance = useInstance();
   const [invalid, setInvalid] = useState(false);
   const dipatch = useDispatch();
@@ -41,7 +42,7 @@ const LoginForm = () => {
         })
         .catch((err) => {
           if (err.response.status === 401) {
-            setFieldError('username', t('interface.invalidCredentials'));
+            setFieldError('username', t('invalidCredentials'));
           }
           setInvalid(true);
         });
@@ -66,16 +67,16 @@ const LoginForm = () => {
                 <FloatingLabel
                   controlId="username"
                   className="mb-3"
-                  label={t('interface.nickName')}
+                  label={t('nickName')}
                 >
                   <Form.Control
                     type="text"
                     id="username"
                     name="username"
-                    label={t('interface.nickName')}
+                    label={t('nickName')}
                     onChange={formik.handleChange}
                     value={formik.values.username}
-                    placeholder={t('interface.nickName')}
+                    placeholder={t('nickName')}
                   />
                 </FloatingLabel>
               </Form.Group>
@@ -83,7 +84,7 @@ const LoginForm = () => {
                 <FloatingLabel
                   controlId="password"
                   className="mb-3"
-                  label={t('interface.password')}
+                  label={t('password')}
                 >
                   <Form.Control
                     type="password"
@@ -91,7 +92,7 @@ const LoginForm = () => {
                     name="password"
                     onChange={formik.handleChange}
                     value={formik.values.password}
-                    placeholder={t('interface.password')}
+                    placeholder={t('password')}
                   />
                 </FloatingLabel>
               </Form.Group>
@@ -101,19 +102,19 @@ const LoginForm = () => {
                   type="submit"
                   variant="outline-primary"
                 >
-                  {t('interface.logInButton')}
+                  {t('logInButton')}
                 </Button>
                 {invalid && (
                 <Alert variant="danger" className="mb-3">
-                  {t('interface.invalidCredentials')}
+                  {t('invalidCredentials')}
                 </Alert>
                 )}
               </div>
             </Form>
             <div className="card-footer p-4" style={{ marginBottom: '-15px' }}>
               <div className="text-center">
-                <span>{t('interface.noAcc')}</span>
-                <Link to="/signup">{t('interface.registration')}</Link>
+                <span>{t('noAcc')}</span>
+                <Link to="/signup">{t('registration')}</Link>
               </div>
             </div>
           </div>

@@ -62,7 +62,7 @@ const ChatPage = () => {
         <div className="row h-100 bg-white flex-md-row">
           <Col sm={4} className="col-4  border-end px-0 bg-light flex-column h-100 d-flex">
             <div className="d-flex mt-1 justify-content-between mb-2 ps-4 pe-2 p-4">
-              <b>{t('interface.channels')}</b>
+              <b>{t('channels')}</b>
               <AddButton
                 onClick={handleAddButton}
               />
@@ -92,11 +92,11 @@ const ChatPage = () => {
                           variant={channel.id === channelId ? 'secondary' : 'light'}
                           style={{ borderRadius: '0px 8px 8px 0px' }}
                         >
-                          <span className="visually-hidden">{t('interface.make')}</span>
+                          <span className="visually-hidden">{t('make')}</span>
                         </Dropdown.Toggle>
                         <Dropdown.Menu>
-                          <Dropdown.Item eventKey="1" onClick={() => handleDeleteChannelButton(channel.id)}>{t('interface.delete')}</Dropdown.Item>
-                          <Dropdown.Item eventKey="1" onClick={() => handleChangeChannelName(channel.id)}>{t('interface.rename')}</Dropdown.Item>
+                          <Dropdown.Item eventKey="1" onClick={() => handleDeleteChannelButton(channel.id)}>{t('delete')}</Dropdown.Item>
+                          <Dropdown.Item eventKey="1" onClick={() => handleChangeChannelName(channel.id)}>{t('rename')}</Dropdown.Item>
                         </Dropdown.Menu>
                       </Dropdown>
                     ) : null }

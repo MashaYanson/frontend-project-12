@@ -7,7 +7,7 @@ const ModalRemoveChannel = ({ t, onHide, show }) => {
   const instance = useInstance();
   const handleSubmitDelete = () => {
     instance({ method: 'delete', url: `/channels/${show}` }).then(() => {
-      toast.success(t('interface.deleteSuccess'), {
+      toast.success(t('deleteSuccess'), {
         position: 'top-right',
       });
       onHide();
@@ -16,17 +16,17 @@ const ModalRemoveChannel = ({ t, onHide, show }) => {
   return (
     <Modal show={show} onHide={onHide}>
       <Modal.Header closeButton>
-        <Modal.Title>{t('interface.deleteChannel')}</Modal.Title>
+        <Modal.Title>{t('deleteChannel')}</Modal.Title>
       </Modal.Header>
       <Modal.Body>
-        {t('interface.submitDelete')}
+        {t('submitDelete')}
       </Modal.Body>
       <Modal.Footer>
         <Button variant="secondary" onClick={onHide}>
-          {t('interface.cancel')}
+          {t('cancel')}
         </Button>
         <Button className="btn btn-danger" variant="danger" type="submit" onClick={handleSubmitDelete}>
-          {t('interface.delete')}
+          {t('delete')}
         </Button>
       </Modal.Footer>
     </Modal>

@@ -20,14 +20,14 @@ const SignupForm = () => {
   const instance = useInstance();
   const SignupSchema = Yup.object().shape({
     username: Yup.string()
-      .min(3, t('errors.invalidField'))
-      .max(20, t('errors.invalidField'))
-      .required(t('errors.fieldRequired')),
+      .min(3, t('invalidField'))
+      .max(20, t('invalidField'))
+      .required(t('fieldRequired')),
     password: Yup.string()
-      .min(6, t('interface.invalidFieldShort'))
-      .required(t('errors.fieldRequired')),
-    confirm_password: Yup.string().required(t('errors.fieldRequired'))
-      .oneOf([Yup.ref('password'), null], t('errors.passwordConfirmationError')),
+      .min(6, t('invalidFieldShort'))
+      .required(t('fieldRequired')),
+    confirm_password: Yup.string().required(t('fieldRequired'))
+      .oneOf([Yup.ref('password'), null], t('passwordConfirmationError')),
   });
 
   const navigate = useNavigate();
@@ -50,10 +50,10 @@ const SignupForm = () => {
         .catch((err) => {
           console.dir(err);
           if (err.response?.status === 409) {
-            setFieldError('username', t('errors.usernameExists'));
+            setFieldError('username', t('usernameExists'));
           }
           if (err.response?.status === 401) {
-            setFieldError('username', t('interface.invalidCredentials'));
+            setFieldError('username', t('invalidCredentials'));
           }
         });
     },
@@ -75,12 +75,12 @@ const SignupForm = () => {
                 <Form onSubmit={formik.handleSubmit} className="mx-auto col-6">
                   <Stack gap={3}>
                     <h1 className="text-center">
-                      {t('interface.registration')}
+                      {t('registration')}
                     </h1>
                     <Form.Group>
                       <FloatingLabel
                         controlId="username"
-                        label={t('interface.username')}
+                        label={t('username')}
                         className="mb-3"
                       >
                         <Form.Control
@@ -90,7 +90,7 @@ const SignupForm = () => {
                           onChange={formik.handleChange}
                           onBlur={formik.handleBlur}
                           value={formik.values.username}
-                          placeholder={t('interface.username')}
+                          placeholder={t('username')}
                           isInvalid={!!formik.errors.username && !!formik.touched.username}
                         />
                         <Form.Control.Feedback type="invalid">
@@ -102,7 +102,7 @@ const SignupForm = () => {
                     <Form.Group>
                       <FloatingLabel
                         controlId="password"
-                        label={t('interface.password')}
+                        label={t('password')}
                         className="mb-3"
                       >
                         <Form.Control
@@ -112,7 +112,7 @@ const SignupForm = () => {
                           onChange={formik.handleChange}
                           value={formik.values.password}
                           onBlur={formik.handleBlur}
-                          placeholder={t('interface.password')}
+                          placeholder={t('password')}
                           isInvalid={!!formik.errors.password && !!formik.touched.password}
                         />
                         <Form.Control.Feedback type="invalid">
@@ -123,7 +123,7 @@ const SignupForm = () => {
                     <Form.Group>
                       <FloatingLabel
                         controlId="confirm_password"
-                        label={t('interface.confirmPassword')}
+                        label={t('confirmPassword')}
                         className="mb-3"
                       >
                         <Form.Control
@@ -133,7 +133,7 @@ const SignupForm = () => {
                           onChange={formik.handleChange}
                           onBlur={formik.handleBlur}
                           value={formik.values.confirm_password}
-                          placeholder={t('interface.confirmPassword')}
+                          placeholder={t('confirmPassword')}
                           isInvalid={
                           !!formik.errors.confirm_password && formik.touched.confirm_password
                         }
@@ -149,7 +149,7 @@ const SignupForm = () => {
                       name="general"
                       variant="outline-primary"
                     >
-                      {t('interface.makeRegistration')}
+                      {t('makeRegistration')}
                     </Button>
                   </Stack>
                 </Form>

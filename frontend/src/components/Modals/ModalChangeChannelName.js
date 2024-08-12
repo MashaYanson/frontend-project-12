@@ -17,7 +17,7 @@ const ModalChangeChannelName = ({
     const editedChannel = { name: values.name };
     instance({ method: 'patch', url: `/channels/${values.id}`, data: editedChannel }).then((res) => {
       dispatch(editChannel(res.data));
-      toast.success(t('interface.renameSuccess'), {
+      toast.success(t('renameSuccess'), {
         position: 'top-right',
       });
       callBack();
@@ -25,9 +25,9 @@ const ModalChangeChannelName = ({
   };
   const AddChannelSchema = Yup.object().shape({
     name: Yup.string()
-      .min(3, t('errors.invalidField'))
-      .max(20, t('errors.invalidField'))
-      .test('unique', t('errors.unique'), (value) => !existingChannelNames.includes(value)),
+      .min(3, t('invalidField'))
+      .max(20, t('invalidField'))
+      .test('unique', t('unique'), (value) => !existingChannelNames.includes(value)),
 
   });
   const formik = useFormik({
@@ -48,12 +48,12 @@ const ModalChangeChannelName = ({
       <form onSubmit={formik.handleSubmit}>
         <Modal.Header closeButton>
           <Modal.Title>
-            {t('interface.renemeChannel')}
+            {t('renemeChannel')}
           </Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <div>
-            <label className="visually-hidden" htmlFor="name">{t('interface.channelName')}</label>
+            <label className="visually-hidden" htmlFor="name">{t('channelName')}</label>
             <input
               name="name"
               id="name"
@@ -68,10 +68,10 @@ const ModalChangeChannelName = ({
         </Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" onClick={onHide}>
-            {t('interface.cancel')}
+            {t('cancel')}
           </Button>
           <Button variant="primary" type="submit">
-            {t('interface.sendButton')}
+            {t('sendButton')}
           </Button>
         </Modal.Footer>
       </form>
