@@ -14,7 +14,6 @@ import { useInstance } from '../../utils/axios';
 
 const LoginForm = () => {
   const { t } = useTranslation();
-
   const validationLoginSchema = Yup.object().shape({
     username: Yup.string()
       .required(t('fieldRequired')),
