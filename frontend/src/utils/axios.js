@@ -4,13 +4,10 @@ import { toast } from 'react-toastify';
 
 const useInstance = () => {
   const { t } = useTranslation();
-
-  // Инициализация инстанса axios внутри хука
   const instance = axios.create({
     baseURL: '/api/v1',
     timeout: 5000, // Время ожидания ответа в миллисекундах
   });
-
   const newInstance = async (request) => {
     const userData = JSON.parse(localStorage.getItem('user_data'));
     const authHeaders = userData

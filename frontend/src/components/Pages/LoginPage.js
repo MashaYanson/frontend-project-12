@@ -10,7 +10,7 @@ import * as Yup from 'yup';
 import FloatingLabel from 'react-bootstrap/FloatingLabel';
 import routes from '../../routes';
 import { logIn } from '../../store/userSlice';
-import { useInstance } from '../../utils/axios';
+import useInstance from '../../utils/axios';
 
 const LoginForm = () => {
   const { t } = useTranslation();

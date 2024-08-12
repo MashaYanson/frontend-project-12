@@ -10,7 +10,7 @@ import Dropdown from 'react-bootstrap/Dropdown';
 import Button from 'react-bootstrap/Button';
 import { useTranslation } from 'react-i18next';
 import filter from 'leo-profanity';
-import { useInstance } from '../../utils/axios';
+import useInstance from '../../utils/axios';
 import { setChannel, updateChannels } from '../../store/channelSlice';
 import ChatWindow from '../ChatWindow';
 import { addAllMessages } from '../../store/messageSlice';
