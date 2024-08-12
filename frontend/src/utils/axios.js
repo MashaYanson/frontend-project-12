@@ -42,7 +42,7 @@ const useInstance = () => {
         dispatch(logOut());
         navigate(routes.loginPagePath());
       }
-      throw error;
+      return Promise.reject(error);
     }
   };
 
