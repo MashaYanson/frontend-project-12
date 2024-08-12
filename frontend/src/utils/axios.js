@@ -2,13 +2,14 @@ import axios from 'axios';
 import { useTranslation } from 'react-i18next';
 import { toast } from 'react-toastify';
 
-const instance = axios.create({
-  baseURL: '/api/v1',
-  timeout: 5000, // Время ожидания ответа в миллисекундах
-});
-
-export const useInstance = () => {
+const useInstance = () => {
   const { t } = useTranslation();
+
+  // Инициализация инстанса axios внутри хука
+  const instance = axios.create({
+    baseURL: '/api/v1',
+    timeout: 5000, // Время ожидания ответа в миллисекундах
+  });
 
   const newInstance = async (request) => {
     const userData = JSON.parse(localStorage.getItem('user_data'));
@@ -23,14 +24,14 @@ export const useInstance = () => {
     } catch (error) {
       if (!error.isAxiosError) {
         // Ошибка сети или таймаут
-        toast.error(t('unknownError'), {
+        toast.error(t('errors.unknownError'), {
           position: 'top-right',
         });
         return Promise.reject(error);
       }
       const { status } = error.response;
       if (status === 401) {
-        toast.error(t('unauthorizedAccess'), {
+        toast.error(t('errors.unauthorizedAccess'), {
           position: 'top-right',
         });
       }
@@ -41,4 +42,4 @@ export const useInstance = () => {
   return newInstance;
 };
 
-export default instance;
+export default useInstance;
