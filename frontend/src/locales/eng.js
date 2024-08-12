@@ -40,7 +40,6 @@ export default {
     confirmPassword: 'Confirm Password',
     registrationButton: 'Register',
     placeholderEnterMessage: 'Enter message...',
-    placholderNickname: 'Your nickname',
     notFoundMessage: 'Page not found',
   },
   test: 'test_works',

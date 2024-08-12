@@ -149,7 +149,7 @@ const SignupForm = () => {
                       name="general"
                       variant="outline-primary"
                     >
-                      {t('interface.registrationButton')}
+                      {t('interface.makeRegistration')}
                     </Button>
                   </Stack>
                 </Form>

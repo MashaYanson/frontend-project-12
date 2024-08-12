@@ -72,10 +72,10 @@ const LoginForm = () => {
                     type="text"
                     id="username"
                     name="username"
-                    label={t('interface.placholderNickname')}
+                    label={t('interface.nickName')}
                     onChange={formik.handleChange}
                     value={formik.values.username}
-                    placeholder={t('interface.placholderNickname')}
+                    placeholder={t('interface.nickName')}
                   />
                 </FloatingLabel>
               </Form.Group>

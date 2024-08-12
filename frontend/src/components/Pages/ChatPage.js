@@ -95,8 +95,8 @@ const ChatPage = () => {
                           <span className="visually-hidden">{t('interface.make')}</span>
                         </Dropdown.Toggle>
                         <Dropdown.Menu>
-                          <Dropdown.Item eventKey="1" onClick={() => handleDeleteChannelButton(channel.id)}>{t('interface.deleteButton')}</Dropdown.Item>
-                          <Dropdown.Item eventKey="1" onClick={() => handleChangeChannelName(channel.id)}>{t('interface.renameButton')}</Dropdown.Item>
+                          <Dropdown.Item eventKey="1" onClick={() => handleDeleteChannelButton(channel.id)}>{t('interface.delete')}</Dropdown.Item>
+                          <Dropdown.Item eventKey="1" onClick={() => handleChangeChannelName(channel.id)}>{t('interface.rename')}</Dropdown.Item>
                         </Dropdown.Menu>
                       </Dropdown>
                     ) : null }
