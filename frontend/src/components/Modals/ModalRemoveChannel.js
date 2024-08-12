@@ -1,7 +1,7 @@
 import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
 import { toast } from 'react-toastify';
-import { useInstance } from '../../utils/axios';
+import useInstance from '../../utils/axios';
 
 const ModalRemoveChannel = ({ t, onHide, show }) => {
   const instance = useInstance();

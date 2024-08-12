@@ -5,7 +5,7 @@ import * as Yup from 'yup';
 import { toast } from 'react-toastify';
 import { useDispatch } from 'react-redux';
 import { editChannel } from '../../store/channelSlice';
-import { useInstance } from '../../utils/axios';
+import useInstance from '../../utils/axios';
 
 const ModalChangeChannelName = ({
   show, onHide, existingChannelNames, t,
@@ -71,7 +71,7 @@ const ModalChangeChannelName = ({
             {t('cancel')}
           </Button>
           <Button variant="primary" type="submit">
-            {t('sendButton')}
+            {t('send')}
           </Button>
         </Modal.Footer>
       </form>

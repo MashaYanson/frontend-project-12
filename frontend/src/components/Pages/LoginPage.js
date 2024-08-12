@@ -101,7 +101,7 @@ const LoginForm = () => {
                   type="submit"
                   variant="outline-primary"
                 >
-                  {t('logInButton')}
+                  {t('logIn')}
                 </Button>
                 {invalid && (
                 <Alert variant="danger" className="mb-3">

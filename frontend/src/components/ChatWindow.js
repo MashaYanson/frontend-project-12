@@ -51,7 +51,7 @@ const ChatWindow = ({ channel }) => {
                 <Field
                   name="message"
                   aria-label={t('newMessage')}
-                  placeholder={t('sendButton')}
+                  placeholder={t('send')}
                   className="border-0 p-0 ps-2 form-control"
                 />
                 <button type="submit" disabled={isSubmitting} className="btn btn-group-vertical">

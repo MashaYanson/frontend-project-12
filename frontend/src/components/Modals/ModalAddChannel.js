@@ -6,7 +6,7 @@ import { toast } from 'react-toastify';
 import { useDispatch } from 'react-redux';
 import filter from 'leo-profanity';
 import { addChannel, setChannel } from '../../store/channelSlice';
-import { useInstance } from '../../utils/axios';
+import useInstance from '../../utils/axios';
 
 const ModalAddChannel = ({
   show, onHide, existingChannelNames, t,
@@ -77,7 +77,7 @@ const ModalAddChannel = ({
             {t('cancel')}
           </Button>
           <Button variant="primary" type="submit">
-            {t('sendButton')}
+            {t('send')}
           </Button>
         </Modal.Footer>
       </form>
