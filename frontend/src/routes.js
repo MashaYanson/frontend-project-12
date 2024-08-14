@@ -6,5 +6,7 @@ export default {
     loginPath: () => '/login',
     channelsPath: () => '/channels',
     messagesPath: () => '/messages',
+    channelPath: (id) => `/channels/${id}`,
+    signUpPath: () => '/signup',
   },
 };

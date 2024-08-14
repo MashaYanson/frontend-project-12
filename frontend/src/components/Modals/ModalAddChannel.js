@@ -8,6 +8,7 @@ import filter from 'leo-profanity';
 import { useTranslation } from 'react-i18next';
 import { addChannel, setChannel } from '../../store/channelSlice';
 import useInstance from '../../utils/axios';
+import routes from '../../routes';
 
 const ModalAddChannel = ({
   show, onHide, existingChannelNames,
@@ -17,7 +18,7 @@ const ModalAddChannel = ({
   const { t } = useTranslation();
   const onSubmitChannel = (values, callBack) => {
     const newChannel = { name: filter.clean(values.name) };
-    instance({ method: 'post', url: '/channels', data: newChannel }).then((res) => {
+    instance({ method: 'post', url: routes.api.channelsPath(), data: newChannel }).then((res) => {
       dispatch(addChannel(res.data));
       dispatch(setChannel(res.data.id));
       toast.success(t('addSuccess'), {
