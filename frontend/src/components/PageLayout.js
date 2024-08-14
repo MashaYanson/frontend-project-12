@@ -1,12 +1,13 @@
 import { Container, Navbar, Stack } from 'react-bootstrap';
-import React, { useTransition } from 'react';
+import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 import { deleteUser, logOut } from '../store/userSlice';
 import routes from '../routes';
 
 const PageLayout = ({ children }) => {
-  const t = useTransition();
+  const { t } = useTranslation();
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const isLoggedIn = useSelector((state) => state.user.isLoggedIn);
