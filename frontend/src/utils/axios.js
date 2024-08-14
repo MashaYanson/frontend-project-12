@@ -3,7 +3,7 @@ import { useTranslation } from 'react-i18next';
 import { toast } from 'react-toastify';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { deleteUser, logOut } from '../store/userSlice';
+import { logOut } from '../store/userSlice';
 import routes from '../routes';
 
 const useInstance = () => {
@@ -38,7 +38,6 @@ const useInstance = () => {
           position: 'top-right',
         });
         localStorage.removeItem('user_data');
-        dispatch(deleteUser());
         dispatch(logOut());
         navigate(routes.loginPagePath());
       }
