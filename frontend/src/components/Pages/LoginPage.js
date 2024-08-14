@@ -32,7 +32,7 @@ const LoginForm = () => {
     validationSchema: validationLoginSchema,
 
     onSubmit: async (values, { setFieldError }) => {
-      instance({ method: 'post', url: '/login', data: values })
+      instance({ method: 'post', url: routes.api.loginPath(), data: values })
         .then((res) => {
           setInvalid(false);
           localStorage.setItem('user_data', JSON.stringify(res.data));

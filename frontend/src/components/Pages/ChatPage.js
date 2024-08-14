@@ -18,6 +18,7 @@ import AddButton from '../Buttons/AddButton';
 import ModalAddChannel from '../Modals/ModalAddChannel';
 import ModalRemoveChannel from '../Modals/ModalRemoveChannel';
 import ModalChangeChannelName from '../Modals/ModalChangeChannelName';
+import routes from '../../routes';
 
 const ChatPage = () => {
   const { t } = useTranslation();
@@ -45,10 +46,10 @@ const ChatPage = () => {
   };
 
   useEffect(() => {
-    instance({ method: 'get', url: '/channels' }).then((response) => {
+    instance({ method: 'get', url: routes.api.channelsPath() }).then((response) => {
       dispatch(updateChannels(response.data));
     });
-    instance({ method: 'get', url: '/messages' }).then((response) => {
+    instance({ method: 'get', url: routes.api.messagesPath() }).then((response) => {
       dispatch(addAllMessages(response.data));
     });
     return () => { console.log('return'); };
