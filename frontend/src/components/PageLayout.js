@@ -1,11 +1,12 @@
 import { Container, Navbar, Stack } from 'react-bootstrap';
-import React from 'react';
+import React, { useTransition } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { deleteUser, logOut } from '../store/userSlice';
 import routes from '../routes';
 
 const PageLayout = ({ children }) => {
+  const t = useTransition();
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const isLoggedIn = useSelector((state) => state.user.isLoggedIn);
@@ -19,14 +20,14 @@ const PageLayout = ({ children }) => {
     <Stack className="h-100">
       <Navbar className="bg-body-tertiary p-2 shadow-sm navbar navbar-expand-lg navbar-light bg-white">
         <Container>
-          <Navbar.Brand href="/">Hexlet Chat</Navbar.Brand>
+          <Navbar.Brand href="/">{t('chatName')}</Navbar.Brand>
           {isLoggedIn && (
           <button
             onClick={handleLogOut}
             type="button"
             className="btn btn-primary"
           >
-            Выйти
+            {t('logOut')}
           </button>
           )}
         </Container>

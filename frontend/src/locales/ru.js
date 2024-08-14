@@ -17,6 +17,7 @@ export default {
   nickName: 'Ваш ник',
   password: 'Пароль',
   logIn: 'Войти',
+  logOut: 'Выйти',
   registration: 'Регистрация',
   username: 'Имя пользователя',
   noAcc: 'Нет аккаунта? ',
@@ -32,6 +33,10 @@ export default {
   channelName: 'Имя канала',
   makeRegistration: 'Зарегистрироваться',
   newMessage: 'Новое сообщение',
+  notFound: 'Страница не найдена',
+  directTo: 'Но вы можете перейти ',
+  mainPage: 'на главную страницу',
+  chatName: 'Hexlet Chat',
   messagesCounter: {
     count_one: '{{count}} сообщение',
     count_few: '{{count}} сообщения',

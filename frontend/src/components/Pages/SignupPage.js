@@ -70,7 +70,7 @@ const SignupForm = () => {
                 <img
                   className="rounded-circle"
                   src="https://frontend-chat-ru.hexlet.app/static/media/avatar_1.6084447160acc893a24d.jpg"
-                  alt="Регистрация"
+                  alt={t('registration')}
                 />
                 <Form onSubmit={formik.handleSubmit} className="mx-auto col-6">
                   <Stack gap={3}>

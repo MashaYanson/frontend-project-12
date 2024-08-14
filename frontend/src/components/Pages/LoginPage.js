@@ -55,13 +55,13 @@ const LoginForm = () => {
           <div className="card-body row ">
             <div className="col-20 col-md-6 d-flex justify-content-center">
               <img
-                alt="Страница не найдена"
+                alt={t('notFound')}
                 className="img-fluid"
                 src="https://frontend-chat-ru.hexlet.app/static/media/404.38677c8fa96b7e2b6537040f39020684.svg"
               />
             </div>
             <Form onSubmit={formik.handleSubmit} className="col-md-5 mx-auto ">
-              <h1 className="text-center mb-3">Войти</h1>
+              <h1 className="text-center mb-3">{t('logIn')}</h1>
               <Form.Group className="mb-3">
                 <FloatingLabel
                   controlId="username"
