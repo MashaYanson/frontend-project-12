@@ -3,7 +3,6 @@ import { useSelector } from 'react-redux';
 import { selectIsLoggedIn } from '../store/userSlice';
 
 const PrivateRoute = ({ children }) => {
-  // const { isLoggedIn } = useSelector((state) => state.user);
   const isLoggedIn = useSelector(selectIsLoggedIn);
 
   const location = useLocation();
