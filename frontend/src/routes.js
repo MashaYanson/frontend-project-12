@@ -3,8 +3,8 @@ export default {
   chatPagePath: () => '/',
   signupPagePath: () => '/signup',
   api: {
-    loginPath: () => '/api/v1/login',
-    channelsPath: () => '/api/v1/channels',
-    messagesPath: () => '/api/v1/messages',
+    loginPath: () => '/login',
+    channelsPath: () => '/channels',
+    messagesPath: () => '/messages',
   },
 };
