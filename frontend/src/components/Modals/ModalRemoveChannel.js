@@ -1,10 +1,13 @@
 import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
 import { toast } from 'react-toastify';
+import { useTranslation } from 'react-i18next';
 import useInstance from '../../utils/axios';
 
-const ModalRemoveChannel = ({ t, onHide, show }) => {
+const ModalRemoveChannel = ({ onHide, show }) => {
   const instance = useInstance();
+  const { t } = useTranslation();
+
   const handleSubmitDelete = () => {
     instance({ method: 'delete', url: `/channels/${show}` }).then(() => {
       toast.success(t('deleteSuccess'), {

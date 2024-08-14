@@ -5,20 +5,21 @@ import * as Yup from 'yup';
 import { toast } from 'react-toastify';
 import { useDispatch } from 'react-redux';
 import filter from 'leo-profanity';
+import { useTranslation } from 'react-i18next';
 import { addChannel, setChannel } from '../../store/channelSlice';
 import useInstance from '../../utils/axios';
 
 const ModalAddChannel = ({
-  show, onHide, existingChannelNames, t,
+  show, onHide, existingChannelNames,
 }) => {
   const dispatch = useDispatch();
   const instance = useInstance();
+  const { t } = useTranslation();
   const onSubmitChannel = (values, callBack) => {
     const newChannel = { name: filter.clean(values.name) };
     instance({ method: 'post', url: '/channels', data: newChannel }).then((res) => {
       dispatch(addChannel(res.data));
       dispatch(setChannel(res.data.id));
-      console.log('toast');
       toast.success(t('addSuccess'), {
         position: 'top-right',
       });

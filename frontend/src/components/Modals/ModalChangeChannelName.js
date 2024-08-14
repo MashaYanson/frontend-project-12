@@ -4,14 +4,16 @@ import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import { toast } from 'react-toastify';
 import { useDispatch } from 'react-redux';
+import { useTranslation } from 'react-i18next';
 import { editChannel } from '../../store/channelSlice';
 import useInstance from '../../utils/axios';
 
 const ModalChangeChannelName = ({
-  show, onHide, existingChannelNames, t,
+  show, onHide, existingChannelNames,
 }) => {
   const dispatch = useDispatch();
   const instance = useInstance();
+  const { t } = useTranslation();
 
   const onSubmitChangeChannel = (values, callBack) => {
     const editedChannel = { name: values.name };
