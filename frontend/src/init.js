@@ -11,7 +11,7 @@ import resources from './locales';
 import App from './App';
 import createStore from './store/store';
 import { addMessage } from './store/messageSlice';
-import { addChannel } from './store/channelSlice';
+// import { addChannel } from './store/channelSlice';
 
 const init = async () => {
   const store = createStore();
@@ -34,9 +34,9 @@ const init = async () => {
   socket.on('newMessage', (payload) => {
     store.dispatch(addMessage(payload));
   });
-  socket.on('newChannel', (payload) => {
-    store.dispatch(addChannel(payload));
-  });
+  // socket.on('newChannel', (payload) => {
+  //   store.dispatch(addChannel(payload));
+  // });
 
   // socket.on('removeChannel', (payload) => {
   //   store.dispatch(removeChannel(payload.id));
