@@ -10,8 +10,8 @@ import rollbarConfig from './rollbarConfig';
 import resources from './locales';
 import App from './App';
 import createStore from './store/store';
-import { addMessage, deleteChannelMessages } from './store/messageSlice';
-import { addChannel, editChannel, removeChannel } from './store/channelSlice';
+import { addMessage } from './store/messageSlice';
+// import { addChannel, editChannel, removeChannel } from './store/channelSlice';
 
 const init = async () => {
   const store = createStore();
@@ -34,18 +34,18 @@ const init = async () => {
   socket.on('newMessage', (payload) => {
     store.dispatch(addMessage(payload));
   });
-  socket.on('newChannel', (payload) => {
-    store.dispatch(addChannel(payload));
-  });
-
-  socket.on('removeChannel', (payload) => {
-    store.dispatch(removeChannel(payload.id));
-    store.dispatch(deleteChannelMessages(payload.id));
-  });
-
-  socket.on('renameChannel', (payload) => {
-    store.dispatch(editChannel(payload));
-  });
+  // socket.on('newChannel', (payload) => {
+  //   store.dispatch(addChannel(payload));
+  // });
+  //
+  // socket.on('removeChannel', (payload) => {
+  //   store.dispatch(removeChannel(payload.id));
+  //   store.dispatch(deleteChannelMessages(payload.id));
+  // });
+  //
+  // socket.on('renameChannel', (payload) => {
+  //   store.dispatch(editChannel(payload));
+  // });
 
   return (
     <RollbarProvider config={rollbarConfig}>

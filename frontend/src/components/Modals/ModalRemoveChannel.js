@@ -6,6 +6,7 @@ import { useDispatch } from 'react-redux';
 import useInstance from '../../utils/axios';
 import { removeChannel } from '../../store/channelSlice';
 import routes from '../../routes';
+import { deleteChannelMessages } from '../../store/messageSlice';
 
 const ModalRemoveChannel = ({ onHide, show }) => {
   const instance = useInstance();
@@ -14,7 +15,8 @@ const ModalRemoveChannel = ({ onHide, show }) => {
 
   const handleSubmitDelete = () => {
     instance({ method: 'delete', url: routes.api.channelPath(show) }).then((res) => {
-      dispatch(removeChannel(res.data));
+      dispatch(removeChannel(res.data.id));
+      dispatch(deleteChannelMessages(res.data.id));
       toast.success(t('deleteSuccess'), {
         position: 'top-right',
       });
