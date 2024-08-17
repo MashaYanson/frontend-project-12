@@ -18,34 +18,37 @@ const ModalChangeChannelName = ({
 
   const onSubmitChangeChannel = (values, callBack) => {
     const editedChannel = { name: values.name };
-    instance({ method: 'patch', url: routes.api.channelPath(values.id), data: editedChannel }).then((res) => {
-      dispatch(editChannel(res.data));
-      toast.success(t('renameSuccess'), {
-        position: 'top-right',
+    instance({ method: 'patch', url: routes.api.channelPath(values.id), data: editedChannel })
+      .then((res) => {
+        dispatch(editChannel(res.data));
+        toast.success(t('renameSuccess'), {
+          position: 'top-right',
+        });
+        callBack();
       });
-      callBack();
-    });
   };
+
   const AddChannelSchema = Yup.object().shape({
     name: Yup.string()
       .min(3, t('invalidField'))
       .max(20, t('invalidField'))
       .test('unique', t('unique'), (value) => !existingChannelNames.includes(value)),
-
   });
+
   const formik = useFormik({
     initialValues: {
       name: '',
     },
     validationSchema: AddChannelSchema,
-
-    onSubmit: (values) => {
+    onSubmit: (values, { setSubmitting, resetForm }) => {
       onSubmitChangeChannel({ ...values, id: show }, () => {
-        formik.handleReset();
+        resetForm();
+        setSubmitting(false);
         onHide();
       });
     },
   });
+
   return (
     <Modal show={show} onHide={onHide}>
       <form onSubmit={formik.handleSubmit}>
@@ -63,6 +66,7 @@ const ModalChangeChannelName = ({
               className={`mb-2 form-control ${formik.touched.name && formik.errors.name ? 'is-invalid' : ''}`}
               onChange={formik.handleChange}
               value={formik.values.name}
+              disabled={formik.isSubmitting}
             />
             {formik.touched.name && formik.errors.name ? (
               <div className="invalid-feedback">{formik.errors.name}</div>
@@ -70,10 +74,10 @@ const ModalChangeChannelName = ({
           </div>
         </Modal.Body>
         <Modal.Footer>
-          <Button variant="secondary" onClick={onHide}>
+          <Button variant="secondary" onClick={onHide} disabled={formik.isSubmitting}>
             {t('cancel')}
           </Button>
-          <Button variant="primary" type="submit">
+          <Button variant="primary" type="submit" disabled={formik.isSubmitting}>
             {t('send')}
           </Button>
         </Modal.Footer>

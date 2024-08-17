@@ -16,33 +16,37 @@ const ModalAddChannel = ({
   const dispatch = useDispatch();
   const instance = useInstance();
   const { t } = useTranslation();
+
   const onSubmitChannel = (values, callBack) => {
     const newChannel = { name: filter.clean(values.name) };
-    instance({ method: 'post', url: routes.api.channelsPath(), data: newChannel }).then((res) => {
-      dispatch(addChannel(res.data));
-      dispatch(setChannel(res.data.id));
-      toast.success(t('addSuccess'), {
-        position: 'top-right',
+    instance({ method: 'post', url: routes.api.channelsPath(), data: newChannel })
+      .then((res) => {
+        dispatch(addChannel(res.data));
+        dispatch(setChannel(res.data.id));
+        toast.success(t('addSuccess'), {
+          position: 'top-right',
+        });
+        callBack();
       });
-      callBack();
-    });
   };
+
   const AddChannelSchema = Yup.object().shape({
     name: Yup.string()
       .min(3, t('invalidField'))
       .max(20, t('invalidField'))
       .test('unique', t('unique'), (value) => !existingChannelNames.includes(value)),
-
   });
+
   const formik = useFormik({
     initialValues: {
       name: '',
     },
     validationSchema: AddChannelSchema,
 
-    onSubmit: (values) => {
+    onSubmit: (values, { setSubmitting, resetForm }) => {
       onSubmitChannel(values, () => {
-        formik.handleReset();
+        resetForm();
+        setSubmitting(false);
         onHide();
       });
     },
@@ -50,7 +54,7 @@ const ModalAddChannel = ({
 
   return (
     <Modal show={show} onHide={onHide}>
-      <form className="" onSubmit={formik.handleSubmit}>
+      <form onSubmit={formik.handleSubmit}>
         <Modal.Header closeButton>
           <Modal.Title>
             {t('addChannel')}
@@ -68,6 +72,7 @@ const ModalAddChannel = ({
               className={`mb-2 form-control ${formik.touched.name && formik.errors.name ? 'is-invalid' : ''}`}
               onChange={formik.handleChange}
               value={formik.values.name}
+              disabled={formik.isSubmitting}
             />
             {formik.touched.name && formik.errors.name ? (
               <div className="invalid-feedback">{formik.errors.name}</div>
@@ -75,10 +80,10 @@ const ModalAddChannel = ({
           </div>
         </Modal.Body>
         <Modal.Footer>
-          <Button variant="secondary" onClick={onHide}>
+          <Button variant="secondary" onClick={onHide} disabled={formik.isSubmitting}>
             {t('cancel')}
           </Button>
-          <Button variant="primary" type="submit">
+          <Button variant="primary" type="submit" disabled={formik.isSubmitting}>
             {t('send')}
           </Button>
         </Modal.Footer>
