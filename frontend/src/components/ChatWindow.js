@@ -5,6 +5,7 @@ import { useTranslation } from 'react-i18next';
 import { Formik, Form, Field } from 'formik';
 import filter from 'leo-profanity';
 import useInstance from '../utils/axios';
+import routes from '../routes';
 
 const ChatWindow = ({ channel }) => {
   const { t } = useTranslation();
@@ -39,7 +40,7 @@ const ChatWindow = ({ channel }) => {
           initialValues={{ message: '' }}
           onSubmit={(values, { resetForm }) => {
             const newMessage = { body: filter.clean(values.message), channelId: channel.id, username: userName };
-            instance({ method: 'post', url: '/messages', data: newMessage })
+            instance({ method: 'post', url: routes.api.messagesPath(), data: newMessage })
               .then(() => {
                 resetForm();
               });
