@@ -6,7 +6,7 @@ import { toast } from 'react-toastify';
 import { useDispatch } from 'react-redux';
 import filter from 'leo-profanity';
 import { useTranslation } from 'react-i18next';
-import { addChannel, setChannel } from '../../store/channelSlice';
+import { setChannel } from '../../store/channelSlice';
 import useInstance from '../../utils/axios';
 import routes from '../../routes';
 
@@ -21,7 +21,7 @@ const ModalAddChannel = ({
     const newChannel = { name: filter.clean(values.name) };
     instance({ method: 'post', url: routes.api.channelsPath(), data: newChannel })
       .then((res) => {
-        dispatch(addChannel(res.data));
+        // dispatch(addChannel(res.data));
         dispatch(setChannel(res.data.id));
         toast.success(t('addSuccess'), {
           position: 'top-right',

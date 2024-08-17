@@ -3,24 +3,24 @@ import Modal from 'react-bootstrap/Modal';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import { toast } from 'react-toastify';
-import { useDispatch } from 'react-redux';
+// import { useDispatch } from 'react-redux';
 import { useTranslation } from 'react-i18next';
-import { editChannel } from '../../store/channelSlice';
+// import { editChannel } from '../../store/channelSlice';
 import useInstance from '../../utils/axios';
 import routes from '../../routes';
 
 const ModalChangeChannelName = ({
   show, onHide, existingChannelNames,
 }) => {
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
   const instance = useInstance();
   const { t } = useTranslation();
 
   const onSubmitChangeChannel = (values, callBack) => {
     const editedChannel = { name: values.name };
     instance({ method: 'patch', url: routes.api.channelPath(values.id), data: editedChannel })
-      .then((res) => {
-        dispatch(editChannel(res.data));
+      .then(() => {
+        // dispatch(editChannel(res.data));
         toast.success(t('renameSuccess'), {
           position: 'top-right',
         });
