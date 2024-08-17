@@ -21,7 +21,7 @@ const PageLayout = ({ children }) => {
     <Stack className="h-100">
       <Navbar className="bg-body-tertiary p-2 shadow-sm navbar navbar-expand-lg navbar-light bg-white">
         <Container>
-          <Navbar.Brand href="/">{t('chatName')}</Navbar.Brand>
+          <Navbar.Brand href={routes.chatPagePath()}>{t('chatName')}</Navbar.Brand>
           {isLoggedIn && (
           <button
             onClick={handleLogOut}

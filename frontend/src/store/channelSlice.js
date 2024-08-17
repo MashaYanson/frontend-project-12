@@ -23,9 +23,7 @@ export const channelSlice = createSlice({
       }
     },
     editChannel: (state, action) => {
-      // найти индекс эл-та по id indexOf
       const elIndex = state.data.findIndex((item) => item.id === action.payload.id);
-      // заменить эл-т на новый
       state.data[elIndex] = action.payload;
     },
     setChannel: (state, action) => {

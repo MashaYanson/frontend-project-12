@@ -52,7 +52,6 @@ const ChatPage = () => {
     instance({ method: 'get', url: routes.api.messagesPath() }).then((response) => {
       dispatch(addAllMessages(response.data));
     });
-    return () => { console.log('return'); };
   }, []);
 
   return (
