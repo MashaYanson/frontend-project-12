@@ -15,6 +15,7 @@ const ModalRemoveChannel = ({ onHide, show }) => {
 
   const handleSubmitDelete = () => {
     instance({ method: 'delete', url: routes.api.channelPath(show) }).then((res) => {
+      console.log(res.data.id);
       dispatch(removeChannel(res.data.id));
       dispatch(deleteChannelMessages(res.data.id));
       toast.success(t('deleteSuccess'), {

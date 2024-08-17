@@ -11,7 +11,7 @@ import resources from './locales';
 import App from './App';
 import createStore from './store/store';
 import { addMessage, deleteChannelMessages } from './store/messageSlice';
-import { removeChannel } from './store/channelSlice';
+import { editChannel, removeChannel } from './store/channelSlice';
 
 const init = async () => {
   const store = createStore();
@@ -42,10 +42,10 @@ const init = async () => {
     store.dispatch(removeChannel(payload.id));
     store.dispatch(deleteChannelMessages(payload.id));
   });
-  //
-  // socket.on('renameChannel', (payload) => {
-  //   store.dispatch(editChannel(payload));
-  // });
+
+  socket.on('renameChannel', (payload) => {
+    store.dispatch(editChannel(payload));
+  });
 
   return (
     <RollbarProvider config={rollbarConfig}>
