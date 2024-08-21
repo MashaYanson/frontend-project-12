@@ -70,7 +70,6 @@ const LoginForm = () => {
                 >
                   <Form.Control
                     type="text"
-                    id="username"
                     name="username"
                     label={t('nickName')}
                     onChange={formik.handleChange}
@@ -87,7 +86,6 @@ const LoginForm = () => {
                 >
                   <Form.Control
                     type="password"
-                    id="password"
                     name="password"
                     onChange={formik.handleChange}
                     value={formik.values.password}

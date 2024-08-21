@@ -85,7 +85,6 @@ const SignupForm = () => {
                       >
                         <Form.Control
                           type="text"
-                          id="username"
                           name="username"
                           onChange={formik.handleChange}
                           onBlur={formik.handleBlur}
@@ -107,7 +106,6 @@ const SignupForm = () => {
                       >
                         <Form.Control
                           type="password"
-                          id="password"
                           name="password"
                           onChange={formik.handleChange}
                           value={formik.values.password}
@@ -128,7 +126,6 @@ const SignupForm = () => {
                       >
                         <Form.Control
                           type="password"
-                          id="confirm_password"
                           name="confirm_password"
                           onChange={formik.handleChange}
                           onBlur={formik.handleBlur}
