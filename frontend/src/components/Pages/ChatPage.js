@@ -1,5 +1,5 @@
 import React, {
-  useEffect, useMemo, useState,
+  useEffect, useState,
 } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import {
@@ -11,7 +11,9 @@ import Button from 'react-bootstrap/Button';
 import { useTranslation } from 'react-i18next';
 import filter from 'leo-profanity';
 import useInstance from '../../utils/axios';
-import { setChannel, updateChannels } from '../../store/channelSlice';
+import {
+  selectChannelById, selectChannelNames, setChannel, updateChannels,
+} from '../../store/channelSlice';
 import ChatWindow from '../ChatWindow';
 import { addAllMessages } from '../../store/messageSlice';
 import AddButton from '../Buttons/AddButton';
@@ -33,11 +35,18 @@ const ChatPage = () => {
   const dispatch = useDispatch();
 
   const channels = useSelector((state) => state.channels.data);
-  // eslint-disable-next-line max-len
-  const existingNames = useMemo(() => Object.values(channels.map((channel) => channel.name)), [channels]);
 
+  const existingNames = useSelector(selectChannelNames);
+
+  const selectedChannel = useSelector((state) => selectChannelById(state, channelId));
+
+  // // eslint-disable-next-line max-len
   // eslint-disable-next-line max-len
-  const selectedChannel = useMemo(() => channels.find((item) => item.id === channelId), [channelId, channels]);
+  // const existingNames = useMemo(() => Object.values(channels.map((channel) => channel.name)), [channels]);
+  //
+  // // eslint-disable-next-line max-len
+  // eslint-disable-next-line max-len
+  // const selectedChannel = useMemo(() => channels.find((item) => item.id === channelId), [channelId, channels]);
 
   const handleAddButton = () => {
     setShowModal(true);
