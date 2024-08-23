@@ -1,10 +1,11 @@
-import React, { useMemo } from 'react';
+import React from 'react';
 import { useSelector } from 'react-redux';
 import { useTranslation } from 'react-i18next';
 import { Formik, Form, Field } from 'formik';
 import filter from 'leo-profanity';
 import useInstance from '../utils/axios';
 import routes from '../routes';
+import { selectMessagesByChannelId } from '../store/messageSlice';
 
 const ChatWindow = ({ channel }) => {
   const { t } = useTranslation();
@@ -12,9 +13,7 @@ const ChatWindow = ({ channel }) => {
   const instance = useInstance();
   const userName = useSelector((state) => state.user.userData.username);
 
-  const messagesData = useSelector((state) => state.messages.data);
-  // eslint-disable-next-line max-len
-  const messages = useMemo(() => messagesData.filter((msg) => channel.id === msg.channelId), [channel.id, messagesData]);
+  const messages = useSelector((state) => selectMessagesByChannelId(state, channel.id));
 
   return (
     <div className="d-flex flex-column h-100">
