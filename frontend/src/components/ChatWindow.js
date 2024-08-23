@@ -12,7 +12,6 @@ const ChatWindow = ({ channel }) => {
   const { name } = channel;
   const instance = useInstance();
   const userName = useSelector((state) => state.user.userData.username);
-
   const messages = useSelector((state) => selectMessagesByChannelId(state, channel.id));
 
   return (

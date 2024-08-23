@@ -33,29 +33,15 @@ const ChatPage = () => {
   const handleCloseModalChange = () => setShowModalChange(false);
   const handleCloseDeleteModal = () => setShowModalDelete(false);
   const dispatch = useDispatch();
-
   const channels = useSelector((state) => state.channels.data);
-
   const existingNames = useSelector(selectChannelNames);
-
   const selectedChannel = useSelector((state) => selectChannelById(state, channelId));
-
-  // // eslint-disable-next-line max-len
-  // eslint-disable-next-line max-len
-  // const existingNames = useMemo(() => Object.values(channels.map((channel) => channel.name)), [channels]);
-  //
-  // // eslint-disable-next-line max-len
-  // eslint-disable-next-line max-len
-  // const selectedChannel = useMemo(() => channels.find((item) => item.id === channelId), [channelId, channels]);
-
   const handleAddButton = () => {
     setShowModal(true);
   };
-
   const handleDeleteChannelButton = (id) => {
     setShowModalDelete(id);
   };
-
   const handleChangeChannelName = (id) => {
     setShowModalChange(id);
   };

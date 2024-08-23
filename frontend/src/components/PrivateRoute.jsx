@@ -5,9 +5,7 @@ import routes from '../routes';
 
 const PrivateRoute = ({ children }) => {
   const isLoggedIn = useSelector(selectIsLoggedIn);
-
   const location = useLocation();
-
   return (
     isLoggedIn ? children : <Navigate to={routes.loginPagePath()} state={{ from: location }} />
   );
