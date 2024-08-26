@@ -52,7 +52,7 @@ const ChatWindow = ({ channel }) => {
               });
               resetForm();
             } catch (error) {
-              console.error('Error sending message:', error);
+              console.error(error);
             }
           }}
         >

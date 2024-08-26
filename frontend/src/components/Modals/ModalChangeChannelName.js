@@ -10,19 +10,23 @@ import routes from '../../routes';
 const ModalChangeChannelName = ({
   show, onHide, existingChannelNames,
 }) => {
-  // const dispatch = useDispatch();
   const instance = useInstance();
   const { t } = useTranslation();
 
-  const onSubmitChangeChannel = (values, callBack) => {
+  const onSubmitChangeChannel = async (values, callBack) => {
     const editedChannel = { name: values.name };
-    instance({ method: 'patch', url: routes.api.channelPath(values.id), data: editedChannel })
-      .then(() => {
-        toast.success(t('renameSuccess'), {
-          position: 'top-right',
-        });
-        callBack();
+    try {
+      await instance({ method: 'patch', url: routes.api.channelPath(values.id), data: editedChannel });
+      toast.success(t('renameSuccess'), {
+        position: 'top-right',
       });
+      callBack();
+    } catch (error) {
+      toast.error(t('error'), {
+        position: 'top-right',
+      });
+      console.error('Error renaming channel:', error);
+    }
   };
 
   const AddChannelSchema = Yup.object().shape({
@@ -37,8 +41,8 @@ const ModalChangeChannelName = ({
       name: '',
     },
     validationSchema: AddChannelSchema,
-    onSubmit: (values, { setSubmitting, resetForm }) => {
-      onSubmitChangeChannel({ ...values, id: show }, () => {
+    onSubmit: async (values, { setSubmitting, resetForm }) => {
+      await onSubmitChangeChannel({ ...values, id: show }, () => {
         resetForm();
         setSubmitting(false);
         onHide();
@@ -51,7 +55,7 @@ const ModalChangeChannelName = ({
       <form onSubmit={formik.handleSubmit}>
         <Modal.Header closeButton>
           <Modal.Title>
-            {t('renemeChannel')}
+            {t('renameChannel')}
           </Modal.Title>
         </Modal.Header>
         <Modal.Body>

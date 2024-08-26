@@ -17,17 +17,21 @@ const ModalAddChannel = ({
   const instance = useInstance();
   const { t } = useTranslation();
 
-  const onSubmitChannel = (values, callBack) => {
+  const onSubmitChannel = async (values, callBack) => {
     const newChannel = { name: filter.clean(values.name) };
-    instance({ method: 'post', url: routes.api.channelsPath(), data: newChannel })
-      .then((res) => {
-        // dispatch(addChannel(res.data));
-        dispatch(setChannel(res.data.id));
-        toast.success(t('addSuccess'), {
-          position: 'top-right',
-        });
-        callBack();
+    try {
+      const res = await instance({ method: 'post', url: routes.api.channelsPath(), data: newChannel });
+      dispatch(setChannel(res.data.id));
+      toast.success(t('addSuccess'), {
+        position: 'top-right',
       });
+      callBack();
+    } catch (error) {
+      toast.error(t('error'), {
+        position: 'top-right',
+      });
+      console.error('Error adding channel:', error);
+    }
   };
 
   const AddChannelSchema = Yup.object().shape({
@@ -43,8 +47,8 @@ const ModalAddChannel = ({
     },
     validationSchema: AddChannelSchema,
 
-    onSubmit: (values, { setSubmitting, resetForm }) => {
-      onSubmitChannel(values, () => {
+    onSubmit: async (values, { setSubmitting, resetForm }) => {
+      await onSubmitChannel(values, () => {
         resetForm();
         setSubmitting(false);
         onHide();
