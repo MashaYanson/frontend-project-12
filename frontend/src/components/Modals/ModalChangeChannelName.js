@@ -13,19 +13,20 @@ const ModalChangeChannelName = ({
   const instance = useInstance();
   const { t } = useTranslation();
 
-  const onSubmitChangeChannel = async (values, callBack) => {
+  const onSubmitChangeChannel = async (values) => {
     const editedChannel = { name: values.name };
     try {
-      await instance({ method: 'patch', url: routes.api.channelPath(values.id), data: editedChannel });
+      await instance({
+        method: 'patch',
+        url: routes.api.channelPath(values.id),
+        data: editedChannel,
+      });
       toast.success(t('renameSuccess'), {
         position: 'top-right',
       });
-      callBack();
-    } catch (error) {
-      toast.error(t('error'), {
-        position: 'top-right',
-      });
-      console.error('Error renaming channel:', error);
+    } catch (err) {
+      console.error(err);
+      toast.error(err.message);
     }
   };
 
@@ -42,11 +43,13 @@ const ModalChangeChannelName = ({
     },
     validationSchema: AddChannelSchema,
     onSubmit: async (values, { setSubmitting, resetForm }) => {
-      await onSubmitChangeChannel({ ...values, id: show }, () => {
+      try {
+        await onSubmitChangeChannel({ ...values, id: show });
         resetForm();
-        setSubmitting(false);
         onHide();
-      });
+      } finally {
+        setSubmitting(false);
+      }
     },
   });
 

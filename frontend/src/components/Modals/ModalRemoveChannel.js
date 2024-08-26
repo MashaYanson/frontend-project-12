@@ -11,16 +11,20 @@ const ModalRemoveChannel = ({ onHide, show }) => {
   const { t } = useTranslation();
   const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const handleSubmitDelete = () => {
+  const handleSubmitDelete = async () => {
     setIsSubmitting(true);
-    instance({ method: 'delete', url: routes.api.channelPath(show) }).then(() => {
+    try {
+      await instance({ method: 'delete', url: routes.api.channelPath(show) });
       toast.success(t('deleteSuccess'), {
         position: 'top-right',
       });
       onHide();
-    }).finally(() => {
+    } catch (err) {
+      console.error(err);
+      toast.error(err.message);
+    } finally {
       setIsSubmitting(false);
-    });
+    }
   };
 
   return (
