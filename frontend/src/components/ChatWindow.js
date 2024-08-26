@@ -38,16 +38,22 @@ const ChatWindow = ({ channel }) => {
       <div className="mt-auto px-5 py-3">
         <Formik
           initialValues={{ message: '' }}
-          onSubmit={(values, { resetForm }) => {
+          onSubmit={async (values, { resetForm }) => {
             const newMessage = {
               body: filter.clean(values.message),
               channelId: channel.id,
               username: userName,
             };
-            instance({ method: 'post', url: routes.api.messagesPath(), data: newMessage })
-              .then(() => {
-                resetForm();
+            try {
+              await instance({
+                method: 'post',
+                url: routes.api.messagesPath(),
+                data: newMessage,
               });
+              resetForm();
+            } catch (error) {
+              console.error('Error sending message:', error);
+            }
           }}
         >
           {({ handleSubmit, isSubmitting }) => (
