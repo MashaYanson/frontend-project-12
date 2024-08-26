@@ -13,9 +13,9 @@ export const messageSlice = createSlice({
     addAllMessages: (state, action) => {
       state.data = action.payload;
     },
-    deleteChannelMessages: (state, action) => {
-      state.data = state.data.filter((message) => action.channelId !== message.channelId);
-    },
+    // deleteChannelMessages: (state, action) => {
+    //   state.data = state.data.filter((message) => action.channelId !== message.channelId);
+    // },
   },
 });
 export const selectMessagesByChannelId = createSelector(
@@ -24,6 +24,6 @@ export const selectMessagesByChannelId = createSelector(
   (messagesData, channelId) => messagesData.filter((msg) => msg.channelId === channelId),
 );
 
-export const { addMessage, addAllMessages, deleteChannelMessages } = messageSlice.actions;
+export const { addMessage, addAllMessages } = messageSlice.actions;
 
 export default messageSlice.reducer;
