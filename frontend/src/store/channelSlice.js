@@ -2,7 +2,9 @@
 import { createSelector, createSlice } from '@reduxjs/toolkit';
 import { deleteChannelMessages } from './messageSlice';
 
-const initialState = { data: [], channelId: '1' };
+const DEFAULT_CHANNEL_ID = '1';
+
+const initialState = { data: [], channelId: DEFAULT_CHANNEL_ID };
 
 export const channelSlice = createSlice({
   name: 'channels',
@@ -22,7 +24,7 @@ export const channelSlice = createSlice({
       deleteChannelMessages(state, action);
       // state.data = state.data.filter((message) => action.channelId !== message.channelId);
       if (state.channelId === action.payload) {
-        state.channelId = '1';
+        state.channelId = DEFAULT_CHANNEL_ID;
       }
     },
     editChannel: (state, action) => {
