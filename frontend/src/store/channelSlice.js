@@ -20,8 +20,6 @@ export const channelSlice = createSlice({
     },
     removeChannel: (state, action) => {
       state.data = state.data.filter((channel) => channel.id !== action.payload);
-      // deleteChannelMessages(state, action);
-      // state.data = state.data.filter((message) => action.channelId !== message.channelId);
       if (state.channelId === action.payload) {
         state.channelId = DEFAULT_CHANNEL_ID;
       }
