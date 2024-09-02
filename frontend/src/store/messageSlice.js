@@ -1,5 +1,6 @@
 /* eslint-disable no-param-reassign */
 import { createSelector, createSlice } from '@reduxjs/toolkit';
+import { removeChannel } from './channelSlice';
 
 // Начальное состояние
 const initialState = { data: [] };
@@ -20,7 +21,7 @@ export const messageSlice = createSlice({
     },
   },
   extraReducers: (builder) => {
-    builder.addCase('channels/removeChannel', (state, action) => {
+    builder.addCase(removeChannel, (state, action) => {
       const channelId = action.payload;
       state.data = state.data.filter((message) => message.channelId !== channelId);
     });
